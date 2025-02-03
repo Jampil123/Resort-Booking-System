@@ -39,10 +39,10 @@ public class Guest {
                     viewGuest();
                     break;
                 case "3":
-                    // Handle updating guests (not yet implemented)
+                    updateGuest();
                     break;
                 case "4":
-                    // Handle deleting guests (not yet implemented)
+                    deleteGuest();
                     break;
                 case "5":
                     System.out.println("Returning to Main Menu...\n");
@@ -100,4 +100,44 @@ public class Guest {
         
         conf.viewRecords(sqlQuery, columnHeaders, columnNames);
     }
+    public void updateGuest() {
+        System.out.println("Enter Guest ID to update: ");
+        int guestId = sc.nextInt();
+        sc.nextLine(); // Consume the remaining newline
+
+        System.out.println("Enter new name (leave blank to keep unchanged): ");
+        String gname = sc.nextLine();
+
+        System.out.println("Enter new address (leave blank to keep unchanged): ");
+        String gaddress = sc.nextLine();
+
+        System.out.println("Enter new contact number (leave blank to keep unchanged): ");
+        String gcontactnumber = sc.nextLine();
+
+        System.out.println("Enter new email (leave blank to keep unchanged): ");
+        String gemail = sc.nextLine();
+
+        // Construct the update SQL query
+        String sql = "UPDATE tbl_guest SET g_name = ?, g_address = ?, g_contactnumber = ?, g_email = ? WHERE guest_id = ?";
+        conf.updateRecord(sql, gname, gaddress, gcontactnumber, gemail, guestId);
+        
+        System.out.println("Guest updated successfully!");
+    }
+    public void deleteGuest() {
+        System.out.println("Enter Guest ID to delete: ");
+        int guestId = sc.nextInt();
+        sc.nextLine(); // Consume the remaining newline
+
+        System.out.println("Are you sure you want to delete this guest? (yes/no): ");
+        String confirm = sc.nextLine();
+
+        if (confirm.equalsIgnoreCase("yes")) {
+            String sql = "DELETE FROM tbl_guest WHERE guest_id = ?";
+            conf.deleteRecord(sql, guestId);
+            System.out.println("Guest deleted successfully!");
+        } else {
+            System.out.println("Deletion canceled.");
+        }
+    }
+
 }

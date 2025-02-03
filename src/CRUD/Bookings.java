@@ -50,7 +50,7 @@ public class Bookings {
                     cancelBooking();
                     break;
                 case "5":
-                    System.out.println("Returning to Main Menu...\n");
+                    System.out.println("Returning to Staff task Menu...\n");
                     break;
                 default:
                     System.out.println("Invalid action! Please select again.");
