@@ -39,6 +39,8 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         reportsPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        reportsPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         mainDesktop = new javax.swing.JDesktopPane();
@@ -132,10 +134,28 @@ public class AdminPanel extends javax.swing.JFrame {
         reportsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setText("Reports & Revenue");
-        reportsPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        jLabel7.setText("Log out");
+        reportsPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jPanel1.add(reportsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 140, 40));
+        jPanel1.add(reportsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, 40));
+
+        reportsPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        reportsPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, new java.awt.Color(0, 102, 102)));
+        reportsPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                reportsPanel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                reportsPanel1MouseExited(evt);
+            }
+        });
+        reportsPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel8.setText("Reports & Revenue");
+        reportsPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        jPanel1.add(reportsPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 140, 40));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 380));
 
@@ -226,6 +246,14 @@ public class AdminPanel extends javax.swing.JFrame {
         mainDesktop.add(pr).setVisible(true);
     }//GEN-LAST:event_bookingPanelMouseClicked
 
+    private void reportsPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanel1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reportsPanel1MouseEntered
+
+    private void reportsPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanel1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reportsPanel1MouseExited
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -267,12 +295,14 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JDesktopPane mainDesktop;
     private javax.swing.JPanel propertiesPanel;
     private javax.swing.JPanel reportsPanel;
+    private javax.swing.JPanel reportsPanel1;
     private javax.swing.JPanel staffPanel;
     // End of variables declaration//GEN-END:variables
 }
