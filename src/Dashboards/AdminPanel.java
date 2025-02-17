@@ -1,65 +1,105 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Dashboards;
 
 import AdminInternalPage.*;
+import Authentication.login;
 import java.awt.Color;
-/**
- *
- * @author Esconde
- */
-public class AdminPanel extends javax.swing.JFrame {
+import javax.swing.JOptionPane;
 
-    /**
-     * Creates new form admin
-     */
+public class AdminPanel extends javax.swing.JFrame {
+    
     public AdminPanel() {
         initComponents();
+        showHomePage();
     }
-    
-    Color navcolor = new Color(102,102,102);
-    Color headcolor = new Color(0,0,0);
-    Color bodycolor = new Color(204,255,255);
-   
+        Color navcolor = new Color(51,51,51);
+        Color headcolor = new Color(0,0,0);
+        Color bodycolor = new Color(102,102,102);
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        propertiesPanel = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        bookingPanel = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        staffPanel = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        reportsPanel = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        reportsPanel1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        usersPanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        bookingsPanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        propertiesPanel = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        reportsPanel = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        homePanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         mainDesktop = new javax.swing.JDesktopPane();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Dashboard");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 130, 30));
+        usersPanel.setBackground(new java.awt.Color(51, 51, 51));
+        usersPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                usersPanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                usersPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                usersPanelMouseExited(evt);
+            }
+        });
+        usersPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        propertiesPanel.setBackground(new java.awt.Color(102, 102, 102));
-        propertiesPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, new java.awt.Color(0, 102, 102)));
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Users");
+        usersPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        usersPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+
+        jPanel1.add(usersPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 140, 40));
+
+        bookingsPanel.setBackground(new java.awt.Color(51, 51, 51));
+        bookingsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bookingsPanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bookingsPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bookingsPanelMouseExited(evt);
+            }
+        });
+        bookingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Bookings");
+        bookingsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book.png"))); // NOI18N
+        bookingsPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+
+        jPanel1.add(bookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 40));
+
+        propertiesPanel.setBackground(new java.awt.Color(51, 51, 51));
         propertiesPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 propertiesPanelMouseClicked(evt);
@@ -73,57 +113,21 @@ public class AdminPanel extends javax.swing.JFrame {
         });
         propertiesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setText("Properties");
-        propertiesPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Properties");
+        propertiesPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
 
-        jPanel1.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 140, 40));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-button.png"))); // NOI18N
+        propertiesPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
 
-        bookingPanel.setBackground(new java.awt.Color(102, 102, 102));
-        bookingPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, new java.awt.Color(0, 102, 102)));
-        bookingPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bookingPanelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                bookingPanelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                bookingPanelMouseExited(evt);
-            }
-        });
-        bookingPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 140, 40));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel4.setText("Booking Request");
-        bookingPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jPanel1.add(bookingPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 140, 40));
-
-        staffPanel.setBackground(new java.awt.Color(102, 102, 102));
-        staffPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, new java.awt.Color(0, 102, 102)));
-        staffPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                staffPanelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                staffPanelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                staffPanelMouseExited(evt);
-            }
-        });
-        staffPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel6.setText("Manage Staff");
-        staffPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        jPanel1.add(staffPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 140, 40));
-
-        reportsPanel.setBackground(new java.awt.Color(102, 102, 102));
-        reportsPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, new java.awt.Color(0, 102, 102)));
+        reportsPanel.setBackground(new java.awt.Color(51, 51, 51));
         reportsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportsPanelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 reportsPanelMouseEntered(evt);
             }
@@ -133,56 +137,92 @@ public class AdminPanel extends javax.swing.JFrame {
         });
         reportsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel7.setText("Log out");
-        reportsPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Reports");
+        reportsPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
 
-        jPanel1.add(reportsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, 40));
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document.png"))); // NOI18N
+        reportsPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
 
-        reportsPanel1.setBackground(new java.awt.Color(102, 102, 102));
-        reportsPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, new java.awt.Color(0, 102, 102)));
-        reportsPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jPanel1.add(reportsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo icon.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 60));
+
+        homePanel.setBackground(new java.awt.Color(51, 51, 51));
+        homePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                homePanelMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                reportsPanel1MouseEntered(evt);
+                homePanelMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                reportsPanel1MouseExited(evt);
+                homePanelMouseExited(evt);
             }
         });
-        reportsPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        homePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel8.setText("Reports & Revenue");
-        reportsPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Home");
+        homePanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
 
-        jPanel1.add(reportsPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 140, 40));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-button.png"))); // NOI18N
+        homePanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
 
-        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 380));
+        jPanel1.add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 140, 40));
 
-        jPanel7.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton1.setText("Sign out");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 120, 30));
 
-        jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Approving Manager");
-        jPanel7.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 230, -1));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 440));
 
-        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 460, 70));
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        jLabel1.setText("Dashboard");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 130, 30));
 
-        mainDesktop.setBackground(new java.awt.Color(204, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jLabel4.setText("ADMIN PANEL");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
+
+        mainDesktop.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout mainDesktopLayout = new javax.swing.GroupLayout(mainDesktop);
         mainDesktop.setLayout(mainDesktopLayout);
         mainDesktopLayout.setHorizontalGroup(
             mainDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
         mainDesktopLayout.setVerticalGroup(
             mainDesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
         );
 
-        jPanel2.add(mainDesktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 460, 310));
+        jPanel2.add(mainDesktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 640, 380));
+
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 640, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,16 +238,41 @@ public class AdminPanel extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+     
+    private void showHomePage() {
+        Home home = new Home();
+        mainDesktop.add(home);
+        home.setVisible(true);
+    }
+    private void usersPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersPanelMouseClicked
+        ManageStaff ms = new ManageStaff();
+        mainDesktop.add(ms).setVisible(true);
+    }//GEN-LAST:event_usersPanelMouseClicked
+ 
+    private void usersPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersPanelMouseEntered
+        usersPanel.setBackground(bodycolor);
+    }//GEN-LAST:event_usersPanelMouseEntered
+
+    private void usersPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersPanelMouseExited
+        usersPanel.setBackground(navcolor);
+    }//GEN-LAST:event_usersPanelMouseExited
+
+    private void bookingsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingsPanelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bookingsPanelMouseClicked
+
+    private void bookingsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingsPanelMouseEntered
+        bookingsPanel.setBackground(bodycolor);
+    }//GEN-LAST:event_bookingsPanelMouseEntered
+
+    private void bookingsPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingsPanelMouseExited
+        bookingsPanel.setBackground(navcolor);
+    }//GEN-LAST:event_bookingsPanelMouseExited
 
     private void propertiesPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propertiesPanelMouseClicked
-        Properties pr = new Properties();
-        mainDesktop.add(pr).setVisible(true);
+        Properties pt = new Properties();
+        mainDesktop.add(pt).setVisible(true);
     }//GEN-LAST:event_propertiesPanelMouseClicked
-
-    private void staffPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffPanelMouseClicked
-       ManageStaff md = new ManageStaff();
-       mainDesktop.add(md).setVisible(true);
-    }//GEN-LAST:event_staffPanelMouseClicked
 
     private void propertiesPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propertiesPanelMouseEntered
         propertiesPanel.setBackground(bodycolor);
@@ -217,21 +282,9 @@ public class AdminPanel extends javax.swing.JFrame {
         propertiesPanel.setBackground(navcolor);
     }//GEN-LAST:event_propertiesPanelMouseExited
 
-    private void bookingPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingPanelMouseEntered
-        bookingPanel.setBackground(bodycolor);
-    }//GEN-LAST:event_bookingPanelMouseEntered
+    private void reportsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanelMouseClicked
 
-    private void bookingPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingPanelMouseExited
-        bookingPanel.setBackground(navcolor);
-    }//GEN-LAST:event_bookingPanelMouseExited
-
-    private void staffPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffPanelMouseEntered
-        staffPanel.setBackground(bodycolor);
-    }//GEN-LAST:event_staffPanelMouseEntered
-
-    private void staffPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staffPanelMouseExited
-        staffPanel.setBackground(navcolor);
-    }//GEN-LAST:event_staffPanelMouseExited
+    }//GEN-LAST:event_reportsPanelMouseClicked
 
     private void reportsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanelMouseEntered
         reportsPanel.setBackground(bodycolor);
@@ -241,18 +294,25 @@ public class AdminPanel extends javax.swing.JFrame {
         reportsPanel.setBackground(navcolor);
     }//GEN-LAST:event_reportsPanelMouseExited
 
-    private void bookingPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingPanelMouseClicked
-        Bookings pr = new Bookings();
-        mainDesktop.add(pr).setVisible(true);
-    }//GEN-LAST:event_bookingPanelMouseClicked
+    private void homePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homePanelMouseClicked
+        Home hm = new Home();
+        mainDesktop.add(hm).setVisible(true);
+    }//GEN-LAST:event_homePanelMouseClicked
 
-    private void reportsPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanel1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reportsPanel1MouseEntered
+    private void homePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homePanelMouseEntered
+        homePanel.setBackground(bodycolor);
+    }//GEN-LAST:event_homePanelMouseEntered
 
-    private void reportsPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanel1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_reportsPanel1MouseExited
+    private void homePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homePanelMouseExited
+        homePanel.setBackground(navcolor);
+    }//GEN-LAST:event_homePanelMouseExited
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        login login = new login();
+        JOptionPane.showMessageDialog(null, "Logging out", "Log", JOptionPane.INFORMATION_MESSAGE);
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -288,21 +348,28 @@ public class AdminPanel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bookingPanel;
+    private javax.swing.JPanel bookingsPanel;
+    private javax.swing.JPanel homePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JDesktopPane mainDesktop;
     private javax.swing.JPanel propertiesPanel;
     private javax.swing.JPanel reportsPanel;
-    private javax.swing.JPanel reportsPanel1;
-    private javax.swing.JPanel staffPanel;
+    private javax.swing.JPanel usersPanel;
     // End of variables declaration//GEN-END:variables
 }

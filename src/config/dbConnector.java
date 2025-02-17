@@ -1,13 +1,14 @@
 
 package config;
 
+import AdminInternalPage.ManageStaff;
 import java.sql.*;
 
-public class dbconnector {
+public class dbConnector {
     
     private Connection connect;
     
-    public dbconnector(){
+    public dbConnector(){
         try {
             connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/resort_booking_system", "root", "");
         } 
@@ -39,5 +40,4 @@ public class dbconnector {
         }
         return result;
     }
-    
 }
