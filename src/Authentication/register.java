@@ -4,7 +4,10 @@ package Authentication;
 import config.dbConnector;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.border.LineBorder;
 
 public class register extends javax.swing.JFrame {
     
@@ -126,6 +129,10 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(show_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, 30));
 
+        confirmpassword_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        confirmpassword_input.setForeground(new java.awt.Color(153, 153, 153));
+        confirmpassword_input.setText(" Confirm password...");
+        confirmpassword_input.setEchoChar('\u0000');
         confirmpassword_input.setText(" Confirm password...");
         confirmpassword_input.setEchoChar((char) 0);
         confirmpassword_input.setForeground(Color.GRAY);
@@ -168,6 +175,11 @@ public class register extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 firstname_inputFocusLost(evt);
+            }
+        });
+        firstname_input.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstname_inputActionPerformed(evt);
             }
         });
         jPanel1.add(firstname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 160, 30));
@@ -214,6 +226,10 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, -1, 30));
 
+        password_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        password_input.setForeground(new java.awt.Color(153, 153, 153));
+        password_input.setText(" Create password...");
+        password_input.setEchoChar('\u0000');
         password_input.setText(" Create password...");
         password_input.setEchoChar((char) 0);
         password_input.setForeground(Color.GRAY);
@@ -258,37 +274,95 @@ public class register extends javax.swing.JFrame {
 
     private void signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupActionPerformed
 
-         if (firstname_input.getText().isEmpty() 
-           || lastname_input.getText().isEmpty()
-           || username_input.getText().isEmpty()
-           || email_input.getText().isEmpty()
-           || password_input.getText().isEmpty()
-           || confirmpassword_input.getText().isEmpty()) {
-
-           JOptionPane.showMessageDialog(null, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
-        } 
-        else {
-            // Validate email format
+            String fname = firstname_input.getText();
+            String lname = lastname_input.getText();
+            String uname = username_input.getText();
             String email = email_input.getText();
+            String pass1 = password_input.getText();
+            String pass2 = confirmpassword_input.getText();
+        
+        
+        JComponent[] fields = {firstname_input, lastname_input,username_input, email_input, password_input, confirmpassword_input};
+        for(JComponent field : fields){
+            field.setBorder(UIManager.getLookAndFeel().getDefaults().getBorder("TextField.border"));            
+        }
+
+            boolean Error = false;
+            StringBuilder eMsg = new StringBuilder();
+            
+            if(fname.isEmpty() || fname.equals("Enter first name...")){
+                eMsg.append("- First name field cannot be empty!\n");
+                firstname_input.setBorder(new LineBorder(Color.RED, 1));
+                Error = true;
+            }
+            
+            if(lname.isEmpty() || lname.equals("Enter last name...")){
+                eMsg.append("- Last name field cannot be empty!\n");
+                lastname_input.setBorder(new LineBorder(Color.RED, 1));
+                Error = true;
+            }
+            
+            if(uname.isEmpty() || uname.equals("Enter username...")){
+                eMsg.append("- Username field cannot be empty!\n");
+                username_input.setBorder(new LineBorder(Color.RED, 1));
+                Error = true;
+            }
+            
+            if(email.isEmpty() || email.equals("name@example.com")){
+                eMsg.append("- Email field cannot be empty!\n");
+                email_input.setBorder(new LineBorder(Color.RED, 1));
+                Error = true;
+            }
+            
+            if(pass1.isEmpty() || pass1.equals(" Create password...")){
+                eMsg.append("- Create password field cannot be empty!\n");
+                password_input.setBorder(new LineBorder(Color.RED, 1));
+                Error = true;
+            }
+            
+            if(pass2.isEmpty() || pass2.equals(" Confirm password...")){
+                eMsg.append("- Confirm password field cannot be empty!\n");
+                confirmpassword_input.setBorder(new LineBorder(Color.RED, 1));
+                Error = true;
+            }
+        
+            if (Error) {
+            JOptionPane.showMessageDialog(null, eMsg.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+            
+        
+            // Validate email format
             String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
                 
             if (!email.matches(emailRegex)) {
                JOptionPane.showMessageDialog(null, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
+               email_input.setBorder(new LineBorder(Color.RED, 1));
+               return;
                } 
-                // Validate password match
-            else if (!password_input.getText().equals(confirmpassword_input.getText())) {
+               
+            // Validate password match
+           if (!password_input.getText().equals(confirmpassword_input.getText())) {
                 JOptionPane.showMessageDialog(null, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+                password_input.setBorder(new LineBorder(Color.RED, 1));
+                confirmpassword_input.setBorder(new LineBorder(Color.RED, 1));
+                return;
             } 
                 // Validate password strength
-            else {
+          
                 String password = password_input.getText();
                 String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
 
             if (!password.matches(passwordRegex)) {
                 JOptionPane.showMessageDialog(null, "Password must be at least 8 characters and include:\n- One uppercase letter\n- One lowercase letter\n- One number\n- One special character (@#$%^&+=!)", 
                                               "Error", JOptionPane.ERROR_MESSAGE);
+                password_input.setBorder(new LineBorder(Color.RED, 1));
+                return;
                } 
-            else {
+           
+                
+                
+                
                 // Insert into database
                 dbConnector con = new dbConnector();
                 int result = con.InsertData("INSERT INTO user (f_name, l_name, username, email, role, password, status) "
@@ -307,9 +381,9 @@ public class register extends javax.swing.JFrame {
                    else {
                        JOptionPane.showMessageDialog(null, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                    }
-               }
-           }
-       }
+               
+           
+       
     }//GEN-LAST:event_signupActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -451,6 +525,10 @@ public class register extends javax.swing.JFrame {
         show_pass1.setVisible(false);
         confirmpassword_input.setEchoChar((char) 0); 
     }//GEN-LAST:event_show_pass1MousePressed
+
+    private void firstname_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstname_inputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstname_inputActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
