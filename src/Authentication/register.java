@@ -95,7 +95,7 @@ public class register extends javax.swing.JFrame {
                 signupActionPerformed(evt);
             }
         });
-        jPanel1.add(signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 90, 30));
+        jPanel1.add(signup, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 90, 30));
 
         password1.setBackground(new java.awt.Color(255, 255, 255));
         password1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -260,13 +260,13 @@ public class register extends javax.swing.JFrame {
         jPanel1.add(fn_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 80, 10));
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 80, 10));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 370, 440));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 370, 500));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resort.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 440));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         pack();
         setLocationRelativeTo(null);

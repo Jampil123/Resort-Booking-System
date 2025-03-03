@@ -29,18 +29,13 @@ public class login extends javax.swing.JFrame {
         header = new javax.swing.JLabel();
         hide_pass = new javax.swing.JLabel();
         show_pass = new javax.swing.JLabel();
-        password = new javax.swing.JLabel();
         username_input = new javax.swing.JTextField();
         password_input = new javax.swing.JPasswordField();
-        username = new javax.swing.JLabel();
         Login = new javax.swing.JButton();
         register = new javax.swing.JLabel();
         createAccount = new javax.swing.JLabel();
-        role = new javax.swing.JComboBox<>();
-        password1 = new javax.swing.JLabel();
         username_validation = new javax.swing.JLabel();
         password_validation = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -54,7 +49,7 @@ public class login extends javax.swing.JFrame {
         header.setFont(new java.awt.Font("Bauhaus 93", 0, 24)); // NOI18N
         header.setForeground(new java.awt.Color(255, 255, 255));
         header.setText("WELCOME");
-        jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 110, 40));
+        jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 110, 40));
 
         hide_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
         hide_pass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -62,7 +57,7 @@ public class login extends javax.swing.JFrame {
                 hide_passMousePressed(evt);
             }
         });
-        jPanel1.add(hide_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, 30));
+        jPanel1.add(hide_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, 30));
 
         show_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/eye.png"))); // NOI18N
         show_pass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -70,18 +65,13 @@ public class login extends javax.swing.JFrame {
                 show_passMousePressed(evt);
             }
         });
-        jPanel1.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, 30));
+        jPanel1.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, 30));
 
-        password.setBackground(new java.awt.Color(255, 255, 255));
-        password.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        password.setForeground(new java.awt.Color(255, 255, 255));
-        password.setText("Role");
-        jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 70, 20));
-
+        username_input.setBackground(new java.awt.Color(51, 51, 51));
         username_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         username_input.setForeground(new java.awt.Color(153, 153, 153));
         username_input.setText(" Enter your username...");
-        username_input.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        username_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         username_input.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 username_inputFocusGained(evt);
@@ -95,9 +85,10 @@ public class login extends javax.swing.JFrame {
                 username_inputMouseReleased(evt);
             }
         });
-        jPanel1.add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 170, 30));
+        jPanel1.add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 220, 50));
 
-        password_input.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        password_input.setBackground(new java.awt.Color(51, 51, 51));
+        password_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         password_input.setText(" Enter your password...");
         password_input.setEchoChar((char) 0);
         password_input.setForeground(Color.GRAY);
@@ -115,13 +106,7 @@ public class login extends javax.swing.JFrame {
                 password_inputMouseReleased(evt);
             }
         });
-        jPanel1.add(password_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 170, 30));
-
-        username.setBackground(new java.awt.Color(255, 255, 255));
-        username.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        username.setForeground(new java.awt.Color(255, 255, 255));
-        username.setText("Username");
-        jPanel1.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 70, 20));
+        jPanel1.add(password_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 220, 50));
 
         Login.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         Login.setText("LOG IN");
@@ -130,12 +115,12 @@ public class login extends javax.swing.JFrame {
                 LoginActionPerformed(evt);
             }
         });
-        jPanel1.add(Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 90, 30));
+        jPanel1.add(Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 100, 40));
 
         register.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         register.setForeground(new java.awt.Color(204, 204, 204));
         register.setText("Not registered yet?");
-        jPanel1.add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
+        jPanel1.add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));
 
         createAccount.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         createAccount.setForeground(new java.awt.Color(204, 0, 51));
@@ -145,32 +130,17 @@ public class login extends javax.swing.JFrame {
                 createAccountMouseClicked(evt);
             }
         });
-        jPanel1.add(createAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 331, -1, -1));
+        jPanel1.add(createAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        jPanel1.add(username_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 90, 10));
+        jPanel1.add(password_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 90, 10));
 
-        role.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 11)); // NOI18N
-        role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Staff" }));
-        jPanel1.add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 170, 28));
-
-        password1.setBackground(new java.awt.Color(255, 255, 255));
-        password1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        password1.setForeground(new java.awt.Color(255, 255, 255));
-        password1.setText("Password");
-        jPanel1.add(password1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 70, 20));
-        jPanel1.add(username_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 90, 10));
-        jPanel1.add(password_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 90, 10));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, 230, 440));
-
-        jPanel2.setLayout(null);
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 280, 500));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(0, 0, 220, 220);
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 220, 220));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 300, 300));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resort.png"))); // NOI18N
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 440));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
 
         pack();
         setLocationRelativeTo(null);
@@ -185,27 +155,25 @@ public class login extends javax.swing.JFrame {
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         String username = username_input.getText();
         String password = new String(password_input.getPassword());
-        String selectedRole = role.getSelectedItem().toString(); // Get selected role
 
-        if(username.isEmpty() || username.equals(" Enter your username...") ){
-            username_input.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+        if (username.isEmpty() || username.equals(" Enter your username...")) {
+            username_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0), 1), "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 0, 0)));
             username_validation.setText("Username is empty");
             username_validation.setForeground(Color.RED);
             username_validation.setFont(new Font("Arial", Font.PLAIN, 9));
-            
-        }
-        if(password.isEmpty() || password.equals(" Enter your password...")){
+        }password_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0), 1), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 0, 0)));
+        if (password.isEmpty() || password.equals(" Enter your password...")) {
             password_input.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
             password_validation.setText("Password is empty");
             password_validation.setForeground(Color.RED);
             password_validation.setFont(new Font("Arial", Font.PLAIN, 9));
         }
-            
+
         dbConnector db = new dbConnector(); 
         Connection con = db.getConnection(); 
 
         String sql = "SELECT password, status, role FROM user WHERE username = ?";
-        
+
         try {
             PreparedStatement pst = con.prepareStatement(sql);
             pst.setString(1, username);
@@ -219,8 +187,8 @@ public class login extends javax.swing.JFrame {
                 if (storedPassword.equals(password)) { 
                     if ("Pending".equalsIgnoreCase(status)) {
                         JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
-                    } else if (roleFromDB.equalsIgnoreCase(selectedRole)) { 
-                        JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
 
                         // Redirect based on role
                         if ("Admin".equalsIgnoreCase(roleFromDB)) {
@@ -232,8 +200,6 @@ public class login extends javax.swing.JFrame {
                         }
 
                         this.dispose(); // Close login form
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Incorrect role selection!", "Login Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
@@ -247,14 +213,14 @@ public class login extends javax.swing.JFrame {
             con.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }   
+        }     
     }//GEN-LAST:event_LoginActionPerformed
 
     private void username_inputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_username_inputFocusGained
         if (username_input.getText().equals(" Enter your username...")) {
             username_input.setText("");
             username_input.setFont(new Font("Arial", Font.PLAIN, 12));
-            username_input.setForeground(Color.BLACK); 
+            username_input.setForeground(Color.WHITE); 
         }
     }//GEN-LAST:event_username_inputFocusGained
 
@@ -270,7 +236,7 @@ public class login extends javax.swing.JFrame {
         if (password_input.getText().equals(" Enter your password...")) {
             password_input.setText("");
             password_input.setEchoChar('*');
-            password_input.setForeground(Color.BLACK);
+            password_input.setForeground(Color.WHITE);
             password_input.setFont(new Font("Arial", Font.PLAIN, 12));
         }
         show_pass.setVisible(true); 
@@ -302,12 +268,12 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_hide_passMousePressed
 
     private void username_inputMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_username_inputMouseReleased
-        username_input.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        username_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255)));
         username_validation.setText("");
     }//GEN-LAST:event_username_inputMouseReleased
 
     private void password_inputMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_password_inputMouseReleased
-        password_input.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        password_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255)));
         password_validation.setText("");
     }//GEN-LAST:event_password_inputMouseReleased
 
@@ -351,15 +317,10 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel password;
-    private javax.swing.JLabel password1;
     private javax.swing.JPasswordField password_input;
     private javax.swing.JLabel password_validation;
     private javax.swing.JLabel register;
-    private javax.swing.JComboBox<String> role;
     private javax.swing.JLabel show_pass;
-    private javax.swing.JLabel username;
     private javax.swing.JTextField username_input;
     private javax.swing.JLabel username_validation;
     // End of variables declaration//GEN-END:variables
