@@ -93,7 +93,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(jScrollPane2);
 
-        home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 620, 280));
+        home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 700, 330));
 
         delete.setBackground(new java.awt.Color(51, 51, 51));
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,7 +111,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         jLabel3.setText("Delete");
         delete.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 8, -1, -1));
 
-        home.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 340, 100, 30));
+        home.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 100, 30));
 
         edit.setBackground(new java.awt.Color(51, 51, 51));
         edit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -133,7 +133,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         jLabel4.setText("Edit");
         edit.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 8, -1, -1));
 
-        home.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 100, 30));
+        home.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 100, 30));
 
         approved.setBackground(new java.awt.Color(51, 51, 51));
         approved.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,7 +154,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         jLabel6.setText("Approved");
         approved.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 8, -1, -1));
 
-        home.add(approved, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, 100, 30));
+        home.add(approved, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 100, 30));
 
         refresh.setBackground(new java.awt.Color(51, 51, 51));
         refresh.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,17 +175,17 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         jLabel5.setText("Refresh");
         refresh.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 8, -1, -1));
 
-        home.add(refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 340, 100, 30));
+        home.add(refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
         );
 
         pack();

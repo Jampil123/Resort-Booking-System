@@ -1,7 +1,6 @@
 
 package config;
 
-import AdminInternalPage.ManageStaff;
 import java.sql.*;
 
 public class dbConnector {

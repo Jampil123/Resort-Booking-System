@@ -63,7 +63,7 @@
         <Component class="javax.swing.JLabel" name="hide_pass">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/hidden.png"/>
+              <Image iconType="3" name="/images/hidden-removebg-preview.png"/>
             </Property>
           </Properties>
           <Events>
@@ -71,14 +71,14 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="210" width="-1" height="30"/>
+              <AbsoluteConstraints x="220" y="197" width="-1" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="show_pass">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/eye.png"/>
+              <Image iconType="3" name="/images/show-removebg-preview.png"/>
             </Property>
           </Properties>
           <Events>
@@ -86,7 +86,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="220" y="210" width="-1" height="30"/>
+              <AbsoluteConstraints x="220" y="197" width="-1" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -156,7 +156,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="30" y="200" width="220" height="50"/>
+              <AbsoluteConstraints x="30" y="190" width="220" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -221,7 +221,7 @@
         <Component class="javax.swing.JLabel" name="password_validation">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="160" y="250" width="90" height="10"/>
+              <AbsoluteConstraints x="160" y="240" width="90" height="10"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -235,7 +235,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="100" width="300" height="300"/>
+          <AbsoluteConstraints x="80" y="80" width="350" height="330"/>
         </Constraint>
       </Constraints>
     </Component>
