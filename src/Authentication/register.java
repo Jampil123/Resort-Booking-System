@@ -4,9 +4,12 @@ package Authentication;
 import config.dbConnector;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -296,7 +299,7 @@ public class register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupActionPerformed
-        dbConnector con = new dbConnector(); 
+//        dbConnector con = new dbConnector(); 
         
         String fname = firstname_input.getText();
         String lname = lastname_input.getText();
@@ -416,43 +419,63 @@ public class register extends javax.swing.JFrame {
             return;
         }
         
-        try {
-            String query = "SELECT * FROM user WHERE username = ?";
-            PreparedStatement ps = con.getConnection().prepareStatement(query);
-            ps.setString(1, uname);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) { // If a record is found, username already exists
-                JOptionPane.showMessageDialog(null, "Username is already taken!", "Error", JOptionPane.ERROR_MESSAGE);
-                return; // Stop further execution to prevent insertion
-            }
-            // Close resources
-            rs.close();
-            ps.close();
+        dbConnector con = new dbConnector();
+        Connection cn = con.getConnection();
+        
+        try{
             
+            // Check if email already exists**
+            String checkEmailSql = "SELECT COUNT(*) FROM user WHERE email = ?";
+            try (PreparedStatement emailPst = cn.prepareStatement(checkEmailSql)) {
+                emailPst.setString(1, email);
+                ResultSet rsEmail = emailPst.executeQuery();
+                if (rsEmail.next() && rsEmail.getInt(1) > 0) {
+                    JOptionPane.showMessageDialog(null, "Email already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+            
+            // Check if username is already exists**
+            String query = "SELECT * FROM user WHERE username = ?";
+            try (PreparedStatement ps = con.getConnection().prepareStatement(query)){
+                
+                ps.setString(1, uname);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) { 
+                    JOptionPane.showMessageDialog(null, "Username is already taken!", "Error", JOptionPane.ERROR_MESSAGE);
+                    return; 
+                }
+                rs.close();
+                ps.close();
+            }
+            
+            // Insert into database
+            int result = con.InsertData("INSERT INTO user (f_name, l_name, username, email, role, password, status) "
+                    + "VALUES('"+firstname_input.getText()+"',"
+                    + "'"+lastname_input.getText()+"',"
+                    + "'"+username_input.getText()+"',"
+                    + "'"+email_input.getText()+"',"
+                    + "'"+role.getSelectedItem()+"',"
+                    + "'"+password_input.getText()+"',"
+                    + "'Pending' )");
+            if (result == 1) {
+                JOptionPane.showMessageDialog(null, "Inserted Successfully!");
+                new login().setVisible(true);
+                this.dispose();
+            } 
+            else {
+                JOptionPane.showMessageDialog(null, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
             
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            return; // Stop execution if there's an error
-        }
-        
-        // Insert into database
-          
-        int result = con.InsertData("INSERT INTO user (f_name, l_name, username, email, role, password, status) "
-                + "VALUES('"+firstname_input.getText()+"',"
-                + "'"+lastname_input.getText()+"',"
-                + "'"+username_input.getText()+"',"
-                + "'"+email_input.getText()+"',"
-                + "'"+role.getSelectedItem()+"',"
-                + "'"+password_input.getText()+"',"
-                + "'Pending' )");
-        if (result == 1) {
-            JOptionPane.showMessageDialog(null, "Inserted Successfully!");
-            new login().setVisible(true);
-            this.dispose();
-        } 
-        else {
-            JOptionPane.showMessageDialog(null, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (cn != null) cn.close(); // Ensure connection is closed
+            } catch (SQLException ex) {
+                Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_signupActionPerformed
 
@@ -686,7 +709,7 @@ public class register extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
