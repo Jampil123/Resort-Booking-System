@@ -105,21 +105,21 @@ public class register extends javax.swing.JFrame {
         role.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Staff" }));
         rigester_panel.add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 190, 40));
 
-        show_pass1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/show-removebg-preview.png"))); // NOI18N
+        show_pass1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/show.png"))); // NOI18N
         show_pass1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 show_pass1MousePressed(evt);
             }
         });
-        rigester_panel.add(show_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 347, -1, 40));
+        rigester_panel.add(show_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, 40));
 
-        hide_pass1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden-removebg-preview.png"))); // NOI18N
+        hide_pass1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
         hide_pass1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 hide_pass1MousePressed(evt);
             }
         });
-        rigester_panel.add(hide_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 347, -1, 40));
+        rigester_panel.add(hide_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, 40));
 
         confirmpassword_input.setBackground(new java.awt.Color(51, 51, 51));
         confirmpassword_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -220,21 +220,21 @@ public class register extends javax.swing.JFrame {
         });
         rigester_panel.add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 190, 50));
 
-        hide_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden-removebg-preview.png"))); // NOI18N
+        hide_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
         hide_pass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 hide_passMousePressed(evt);
             }
         });
-        rigester_panel.add(hide_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 347, -1, 40));
+        rigester_panel.add(hide_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, -1, 40));
 
-        show_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/show-removebg-preview.png"))); // NOI18N
+        show_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/show.png"))); // NOI18N
         show_pass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 show_passMousePressed(evt);
             }
         });
-        rigester_panel.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 347, -1, 40));
+        rigester_panel.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, -1, 40));
 
         password_input.setBackground(new java.awt.Color(51, 51, 51));
         password_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -289,7 +289,7 @@ public class register extends javax.swing.JFrame {
         getContentPane().add(rigester_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 440, 500));
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
-        getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+        getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 350, 320));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resort.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));

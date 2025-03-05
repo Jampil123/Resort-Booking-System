@@ -134,7 +134,7 @@
         <Component class="javax.swing.JLabel" name="show_pass1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/show-removebg-preview.png"/>
+              <Image iconType="3" name="/images/show.png"/>
             </Property>
           </Properties>
           <Events>
@@ -142,14 +142,14 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="390" y="347" width="-1" height="40"/>
+              <AbsoluteConstraints x="420" y="350" width="-1" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="hide_pass1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/hidden-removebg-preview.png"/>
+              <Image iconType="3" name="/images/hidden.png"/>
             </Property>
           </Properties>
           <Events>
@@ -157,7 +157,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="390" y="347" width="-1" height="40"/>
+              <AbsoluteConstraints x="420" y="350" width="-1" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -339,7 +339,7 @@
         <Component class="javax.swing.JLabel" name="hide_pass">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/hidden-removebg-preview.png"/>
+              <Image iconType="3" name="/images/hidden.png"/>
             </Property>
           </Properties>
           <Events>
@@ -347,14 +347,14 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="347" width="-1" height="40"/>
+              <AbsoluteConstraints x="210" y="350" width="-1" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="show_pass">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/images/show-removebg-preview.png"/>
+              <Image iconType="3" name="/images/show.png"/>
             </Property>
           </Properties>
           <Events>
@@ -362,7 +362,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="180" y="347" width="-1" height="40"/>
+              <AbsoluteConstraints x="210" y="350" width="-1" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -526,7 +526,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="80" width="-1" height="-1"/>
+          <AbsoluteConstraints x="50" y="80" width="350" height="320"/>
         </Constraint>
       </Constraints>
     </Component>

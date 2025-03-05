@@ -1,13 +1,21 @@
 
 package StaffInternalPage;
 
-import FloatedPage.AddGuest;
 import config.dbConnector;
 import java.awt.Color;
+import java.awt.Font;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-import net.proteanit.sql.DbUtils;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
+
 
 public class Guest extends javax.swing.JInternalFrame {
 
@@ -15,35 +23,61 @@ public class Guest extends javax.swing.JInternalFrame {
         initComponents();
         displayData();
         
+        //removed Border
         guest.setVisible(true);
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
         
+//        // Center align header text
+//        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+//        headerRenderer.setHorizontalAlignment(JLabel.CENTER);
+//
+//        // Apply the renderer to each column
+//        for (int i = 0; i < guest_tbl.getColumnModel().getColumnCount(); i++) {
+//            TableColumn column = guest_tbl.getColumnModel().getColumn(i);
+//            column.setHeaderRenderer(headerRenderer);
+//        }
+
+        //header design
+        guest_tbl.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12)); 
+        guest_tbl.getTableHeader().setOpaque(false);
+        guest_tbl.getTableHeader().setBorder(null);
+        guest_tbl.getTableHeader().setBackground(new Color(51, 51, 255));
+        guest_tbl.getTableHeader().setForeground(new Color(255, 255, 255));
+        guest_tbl.setRowHeight(25);
+        
+        //table colum size
+        guest_tbl.getColumnModel().getColumn(0).setPreferredWidth(30);
     }
         Color navcolor = new Color(51,51,51);
         Color headcolor = new Color(0,0,0);
         Color bodycolor = new Color(102,102,102);
         
-     public void displayData(){
+    public void displayData(){
+        
+        dbConnector dbc = new dbConnector();
         try{
-            dbConnector dbc = new dbConnector();          
-            ResultSet rs = dbc.getData("SELECT * FROM guest");
-            guest_tbl.setModel(DbUtils.resultSetToTableModel(rs));
-            rs.close();
+           ResultSet rs = dbc.getData("SELECT * FROM guest");         
+           DefaultTableModel model = (DefaultTableModel)guest_tbl.getModel();
+           model.setRowCount(0);
+           
+           while(rs.next()){
+               model.addRow(new String[]{rs.getString(1), 
+                   rs.getString(2), 
+                   rs.getString(3), 
+                   rs.getString(4),
+                   rs.getString(5)});             
+           }
         }catch(SQLException ex){
             System.out.println("Errors: "+ex.getMessage());
-
         }
-
-    }
-
+    }    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         guest = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         guest_tbl = new javax.swing.JTable();
@@ -55,35 +89,43 @@ public class Guest extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         addPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        ea = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        a = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        fn = new javax.swing.JTextField();
+        cn = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        search_bar = new javax.swing.JTextField();
 
         guest.setBackground(new java.awt.Color(255, 255, 255));
         guest.setPreferredSize(new java.awt.Dimension(640, 380));
         guest.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        guest.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 20));
-
+        guest_tbl.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         guest_tbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Guest ID", "Full Name", "Contact Number", "Email", "Address"
             }
         ));
+        guest_tbl.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        guest_tbl.setRowHeight(25);
+        guest_tbl.setSelectionBackground(new java.awt.Color(255, 0, 0));
+        guest_tbl.setShowVerticalLines(false);
+        guest_tbl.getTableHeader().setResizingAllowed(false);
+        guest_tbl.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(guest_tbl);
 
         jScrollPane1.setViewportView(jScrollPane2);
 
-        guest.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 620, 280));
+        guest.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 570, 270));
 
         editPanel.setBackground(new java.awt.Color(51, 51, 51));
         editPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,7 +143,7 @@ public class Guest extends javax.swing.JInternalFrame {
         jLabel3.setText("Edit");
         editPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 8, -1, -1));
 
-        guest.add(editPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, 100, 30));
+        guest.add(editPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 100, 100, 30));
 
         refreshPanel.setBackground(new java.awt.Color(51, 51, 51));
         refreshPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,7 +164,7 @@ public class Guest extends javax.swing.JInternalFrame {
         jLabel4.setText("Refresh");
         refreshPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 8, -1, -1));
 
-        guest.add(refreshPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 100, 30));
+        guest.add(refreshPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 150, 100, 30));
 
         deletePanel.setBackground(new java.awt.Color(51, 51, 51));
         deletePanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -140,7 +182,7 @@ public class Guest extends javax.swing.JInternalFrame {
         jLabel6.setText("Delete");
         deletePanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 8, -1, -1));
 
-        guest.add(deletePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, 100, 30));
+        guest.add(deletePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, 100, 30));
 
         addPanel.setBackground(new java.awt.Color(51, 51, 51));
         addPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,25 +203,77 @@ public class Guest extends javax.swing.JInternalFrame {
         jLabel7.setText("Add Guest");
         addPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 8, -1, -1));
 
-        guest.add(addPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 100, 30));
+        guest.add(addPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 100, 30));
+
+        ea.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        ea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        guest.add(ea, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 210, 30));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Address");
+        guest.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 60, 20));
+
+        a.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        a.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        guest.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 230, 30));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setText("Full Name");
+        guest.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 60, 20));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel5.setText("Email");
+        guest.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 40, 20));
+
+        fn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        fn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        guest.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 210, 30));
+
+        cn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        guest.add(cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 230, 30));
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setText("Contact Number");
+        guest.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 100, 20));
+
+        search_bar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        search_bar.setForeground(new java.awt.Color(153, 153, 153));
+        search_bar.setText(" search...");
+        search_bar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        search_bar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                search_barFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                search_barFocusLost(evt);
+            }
+        });
+        search_bar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_barActionPerformed(evt);
+            }
+        });
+        search_bar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_barKeyReleased(evt);
+            }
+        });
+        guest.add(search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 170, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(guest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(guest, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(guest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(guest, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void editPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editPanelMouseEntered
         editPanel.setBackground(bodycolor);
@@ -214,27 +308,105 @@ public class Guest extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_addPanelMouseExited
 
     private void addPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPanelMouseClicked
-        AddGuest ag = new AddGuest();
-        ag.setVisible(true);
+         if (fn.getText().isEmpty() 
+      || cn.getText().isEmpty() 
+      || ea.getText().isEmpty() 
+      || a.getText().isEmpty()) {
+        
+        JOptionPane.showMessageDialog(null, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Validate Email
+    String email = ea.getText();
+    String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+    if (!email.matches(emailRegex)) {
+        JOptionPane.showMessageDialog(null, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Validate Contact Number (Must start with 09 and be 11 digits long)
+    String contactNumber = cn.getText();
+    if (!contactNumber.matches("^09\\d{9}$")) {
+        JOptionPane.showMessageDialog(null, "Invalid contact number! It must start with '09' and be 11 digits long.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+        dbConnector con = new dbConnector();
+        String query = "INSERT INTO guest (full_name, contact_number, email, address) VALUES (?, ?, ?, ?)";
+        
+        PreparedStatement pstmt = con.getConnection().prepareStatement(query);
+        pstmt.setString(1, fn.getText());
+        pstmt.setString(2, contactNumber);
+        pstmt.setString(3, email);
+        pstmt.setString(4, a.getText());
+
+        int result = pstmt.executeUpdate();
+
+        if (result == 1) {
+            JOptionPane.showMessageDialog(null, "Inserted Successfully!");          
+        } else {
+            JOptionPane.showMessageDialog(null, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_addPanelMouseClicked
 
     private void refreshPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshPanelMouseClicked
         displayData();
     }//GEN-LAST:event_refreshPanelMouseClicked
 
+    private void search_barFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_barFocusGained
+        if (search_bar.getText().equals(" search...")) {
+            search_bar.setText("");
+            search_bar.setFont(new Font("Arial", Font.PLAIN, 11));
+            search_bar.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_search_barFocusGained
+
+    private void search_barFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_search_barFocusLost
+        if (search_bar.getText().isEmpty()) {
+            search_bar.setText(" search...");
+            search_bar.setFont(new Font("Arial", Font.PLAIN, 11));
+            search_bar.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_search_barFocusLost
+
+    private void search_barActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_barActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_search_barActionPerformed
+
+    private void search_barKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_barKeyReleased
+        DefaultTableModel model = (DefaultTableModel)guest_tbl.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) guest_tbl.getModel());
+        guest_tbl.setRowSorter(sorter);
+        sorter.setRowFilter(RowFilter.regexFilter(search_bar.getText()));
+    }//GEN-LAST:event_search_barKeyReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField a;
     private javax.swing.JPanel addPanel;
+    private javax.swing.JTextField cn;
     private javax.swing.JPanel deletePanel;
+    private javax.swing.JTextField ea;
     private javax.swing.JPanel editPanel;
+    private javax.swing.JTextField fn;
     private javax.swing.JPanel guest;
     private javax.swing.JTable guest_tbl;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel refreshPanel;
+    private javax.swing.JTextField search_bar;
     // End of variables declaration//GEN-END:variables
 }

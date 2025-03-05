@@ -50,21 +50,21 @@ public class login extends javax.swing.JFrame {
         header.setText("WELCOME");
         jPanel1.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 110, 40));
 
-        hide_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden-removebg-preview.png"))); // NOI18N
+        hide_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
         hide_pass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 hide_passMousePressed(evt);
             }
         });
-        jPanel1.add(hide_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 197, -1, 40));
+        jPanel1.add(hide_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, 10));
 
-        show_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/show-removebg-preview.png"))); // NOI18N
+        show_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/show.png"))); // NOI18N
         show_pass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 show_passMousePressed(evt);
             }
         });
-        jPanel1.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 197, -1, 40));
+        jPanel1.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, 10));
 
         username_input.setBackground(new java.awt.Color(51, 51, 51));
         username_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -87,6 +87,7 @@ public class login extends javax.swing.JFrame {
         jPanel1.add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 220, 50));
 
         password_input.setBackground(new java.awt.Color(51, 51, 51));
+        password_input.setForeground(new java.awt.Color(255, 255, 255));
         password_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         password_input.setText(" Enter your password...");
         password_input.setEchoChar((char) 0);
@@ -107,8 +108,10 @@ public class login extends javax.swing.JFrame {
         });
         jPanel1.add(password_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 220, 50));
 
+        Login.setBackground(new java.awt.Color(0, 102, 153));
         Login.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         Login.setText("LOG IN");
+        Login.setBorder(null);
         Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginActionPerformed(evt);
