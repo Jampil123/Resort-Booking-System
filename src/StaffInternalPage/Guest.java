@@ -49,6 +49,10 @@ public class Guest extends javax.swing.JInternalFrame {
         
         //table colum size
         guest_tbl.getColumnModel().getColumn(0).setPreferredWidth(30);
+        guest_tbl.getColumnModel().getColumn(1).setPreferredWidth(50);
+        guest_tbl.getColumnModel().getColumn(2).setPreferredWidth(50);
+        guest_tbl.getColumnModel().getColumn(3).setPreferredWidth(70);
+        guest_tbl.getColumnModel().getColumn(4).setPreferredWidth(70);
     }
         Color navcolor = new Color(51,51,51);
         Color headcolor = new Color(0,0,0);
@@ -89,15 +93,20 @@ public class Guest extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         addPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        ea = new javax.swing.JTextField();
+        search_bar = new javax.swing.JTextField();
+        add_panel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        cn = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         a = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         fn = new javax.swing.JTextField();
-        cn = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        search_bar = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        ea = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
 
         guest.setBackground(new java.awt.Color(255, 255, 255));
         guest.setPreferredSize(new java.awt.Dimension(640, 380));
@@ -125,7 +134,7 @@ public class Guest extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(jScrollPane2);
 
-        guest.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 570, 270));
+        guest.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 570, 240));
 
         editPanel.setBackground(new java.awt.Color(51, 51, 51));
         editPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -203,39 +212,7 @@ public class Guest extends javax.swing.JInternalFrame {
         jLabel7.setText("Add Guest");
         addPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 8, -1, -1));
 
-        guest.add(addPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 370, 100, 30));
-
-        ea.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        ea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        guest.add(ea, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 210, 30));
-
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel1.setText("Address");
-        guest.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 60, 20));
-
-        a.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        a.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        guest.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 230, 30));
-
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setText("Full Name");
-        guest.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 60, 20));
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel5.setText("Email");
-        guest.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 40, 20));
-
-        fn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        fn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        guest.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 210, 30));
-
-        cn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        cn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        guest.add(cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 350, 230, 30));
-
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setText("Contact Number");
-        guest.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 100, 20));
+        guest.add(addPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 365, 100, 30));
 
         search_bar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         search_bar.setForeground(new java.awt.Color(153, 153, 153));
@@ -259,7 +236,62 @@ public class Guest extends javax.swing.JInternalFrame {
                 search_barKeyReleased(evt);
             }
         });
-        guest.add(search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 170, 25));
+        guest.add(search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 13, 170, 25));
+
+        add_panel.setBackground(new java.awt.Color(204, 255, 255));
+        add_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel8.setText("Contact Number");
+        add_panel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 100, 30));
+
+        cn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        add_panel.add(cn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 190, 30));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setText("Address");
+        add_panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, 60, 30));
+
+        a.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        a.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        add_panel.add(a, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 190, 30));
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel2.setText("Full Name");
+        add_panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 60, 30));
+
+        fn.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        fn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        add_panel.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 190, 30));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel5.setText("Email");
+        add_panel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 40, 30));
+
+        ea.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        ea.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        add_panel.add(ea, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 190, 30));
+
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel9.setText("Guest Form");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -3, -1, 30));
+
+        add_panel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 110, -1));
+
+        guest.add(add_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 570, 130));
+
+        jPanel2.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/magnifier.png"))); // NOI18N
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 20, 20));
+
+        guest.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 13, 25, 25));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,7 +301,7 @@ public class Guest extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(guest, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+            .addComponent(guest, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
         );
 
         pack();
@@ -389,6 +421,7 @@ public class Guest extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField a;
     private javax.swing.JPanel addPanel;
+    private javax.swing.JPanel add_panel;
     private javax.swing.JTextField cn;
     private javax.swing.JPanel deletePanel;
     private javax.swing.JTextField ea;
@@ -397,6 +430,7 @@ public class Guest extends javax.swing.JInternalFrame {
     private javax.swing.JPanel guest;
     private javax.swing.JTable guest_tbl;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -404,6 +438,9 @@ public class Guest extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel refreshPanel;

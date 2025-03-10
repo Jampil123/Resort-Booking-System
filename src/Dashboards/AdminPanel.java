@@ -97,7 +97,7 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book.png"))); // NOI18N
         bookingsPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
 
-        jPanel1.add(bookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 40));
+        jPanel1.add(bookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 140, 40));
 
         propertiesPanel.setBackground(new java.awt.Color(51, 51, 51));
         propertiesPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,7 +121,7 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-button.png"))); // NOI18N
         propertiesPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
 
-        jPanel1.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 140, 40));
+        jPanel1.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 40));
 
         reportsPanel.setBackground(new java.awt.Color(51, 51, 51));
         reportsPanel.addMouseListener(new java.awt.event.MouseAdapter() {

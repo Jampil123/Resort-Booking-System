@@ -77,6 +77,7 @@ public class register extends javax.swing.JFrame {
         email_input.setForeground(new java.awt.Color(153, 153, 153));
         email_input.setText("name@example.com");
         email_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        email_input.setCaretColor(new java.awt.Color(255, 255, 255));
         email_input.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 email_inputFocusGained(evt);
@@ -111,7 +112,7 @@ public class register extends javax.swing.JFrame {
                 show_pass1MousePressed(evt);
             }
         });
-        rigester_panel.add(show_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, 40));
+        rigester_panel.add(show_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 348, -1, 40));
 
         hide_pass1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
         hide_pass1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,14 +120,16 @@ public class register extends javax.swing.JFrame {
                 hide_pass1MousePressed(evt);
             }
         });
-        rigester_panel.add(hide_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, -1, 40));
+        rigester_panel.add(hide_pass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(395, 348, -1, 40));
 
         confirmpassword_input.setBackground(new java.awt.Color(51, 51, 51));
         confirmpassword_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         confirmpassword_input.setForeground(new java.awt.Color(153, 153, 153));
         confirmpassword_input.setText(" Confirm password...");
         confirmpassword_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Confirm Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        confirmpassword_input.setCaretColor(new java.awt.Color(255, 255, 255));
         confirmpassword_input.setEchoChar('\u0000');
+        confirmpassword_input.setOpaque(false);
         confirmpassword_input.setText(" Confirm password...");
         confirmpassword_input.setEchoChar((char) 0);
         confirmpassword_input.setForeground(Color.GRAY);
@@ -157,6 +160,7 @@ public class register extends javax.swing.JFrame {
         firstname_input.setForeground(new java.awt.Color(204, 204, 204));
         firstname_input.setText("Enter first name...");
         firstname_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        firstname_input.setCaretColor(new java.awt.Color(255, 255, 255));
         firstname_input.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 firstname_inputFocusGained(evt);
@@ -177,6 +181,7 @@ public class register extends javax.swing.JFrame {
         lastname_input.setForeground(new java.awt.Color(153, 153, 153));
         lastname_input.setText("Enter last name...");
         lastname_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        lastname_input.setCaretColor(new java.awt.Color(255, 255, 255));
         lastname_input.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 lastname_inputFocusGained(evt);
@@ -200,6 +205,8 @@ public class register extends javax.swing.JFrame {
         username_input.setForeground(new java.awt.Color(153, 153, 153));
         username_input.setText("Enter username...");
         username_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Username", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        username_input.setCaretColor(new java.awt.Color(255, 255, 255));
+        username_input.setOpaque(false);
         username_input.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 username_inputFocusGained(evt);
@@ -226,7 +233,7 @@ public class register extends javax.swing.JFrame {
                 hide_passMousePressed(evt);
             }
         });
-        rigester_panel.add(hide_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, -1, 40));
+        rigester_panel.add(hide_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 348, -1, 40));
 
         show_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/show.png"))); // NOI18N
         show_pass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -234,14 +241,16 @@ public class register extends javax.swing.JFrame {
                 show_passMousePressed(evt);
             }
         });
-        rigester_panel.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, -1, 40));
+        rigester_panel.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 348, -1, 40));
 
         password_input.setBackground(new java.awt.Color(51, 51, 51));
         password_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         password_input.setForeground(new java.awt.Color(153, 153, 153));
         password_input.setText(" Create password...");
         password_input.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        password_input.setCaretColor(new java.awt.Color(255, 255, 255));
         password_input.setEchoChar('\u0000');
+        password_input.setOpaque(false);
         password_input.setText(" Create password...");
         password_input.setEchoChar((char) 0);
         password_input.setForeground(Color.GRAY);
@@ -289,7 +298,7 @@ public class register extends javax.swing.JFrame {
         getContentPane().add(rigester_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 440, 500));
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
-        getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 350, 320));
+        getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 240, 230));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resort.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
@@ -299,8 +308,7 @@ public class register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupActionPerformed
-//        dbConnector con = new dbConnector(); 
-        
+      
         String fname = firstname_input.getText();
         String lname = lastname_input.getText();
         String uname = username_input.getText();

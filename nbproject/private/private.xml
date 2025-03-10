@@ -5,10 +5,8 @@
         <group>
             <file>file:/D:/John%20files/Java%20files/Java%20Project%20GUI/Resort-Booking-System/src/AdminInternalPage/ManageStaff.java</file>
             <file>file:/D:/John%20files/Java%20files/Java%20Project%20GUI/Resort-Booking-System/src/Dashboards/AdminPanel.java</file>
-            <file>file:/D:/John%20files/Java%20files/Java%20Project%20GUI/Resort-Booking-System/src/Dashboards/StaffPanel.java</file>
-            <file>file:/D:/John%20files/Java%20files/Java%20Project%20GUI/Resort-Booking-System/src/config/dbConnector.java</file>
-            <file>file:/D:/John%20files/Java%20files/Java%20Project%20GUI/Resort-Booking-System/src/Authentication/register.java</file>
-            <file>file:/D:/John%20files/Java%20files/Java%20Project%20GUI/Resort-Booking-System/src/Authentication/login.java</file>
+            <file>file:/D:/John%20files/Java%20files/Java%20Project%20GUI/Resort-Booking-System/src/FloatedPage/add_user.java</file>
+            <file>file:/D:/John%20files/Java%20files/Java%20Project%20GUI/Resort-Booking-System/src/FloatedPage/edit_user.java</file>
         </group>
     </open-files>
 </project-private>
