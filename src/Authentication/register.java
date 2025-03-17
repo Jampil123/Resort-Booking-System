@@ -2,8 +2,10 @@
 package Authentication;
 
 import config.dbConnector;
+import config.passwordHasher;
 import java.awt.Color;
 import java.awt.Font;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -427,12 +429,14 @@ public class register extends javax.swing.JFrame {
             return;
         }
         
-        dbConnector con = new dbConnector();
+       dbConnector con = new dbConnector();
         Connection cn = con.getConnection();
-        
-        try{
-            
-            // Check if email already exists**
+
+        try {
+            String pass = passwordHasher.hashPassword(new String(password_input.getPassword())); // Get password securely
+
+
+            // Check if email already exists
             String checkEmailSql = "SELECT COUNT(*) FROM user WHERE email = ?";
             try (PreparedStatement emailPst = cn.prepareStatement(checkEmailSql)) {
                 emailPst.setString(1, email);
@@ -442,42 +446,43 @@ public class register extends javax.swing.JFrame {
                     return;
                 }
             }
-            
-            // Check if username is already exists**
-            String query = "SELECT * FROM user WHERE username = ?";
-            try (PreparedStatement ps = con.getConnection().prepareStatement(query)){
-                
+
+            // Check if username already exists
+            String checkUsernameSql = "SELECT COUNT(*) FROM user WHERE username = ?";
+            try (PreparedStatement ps = cn.prepareStatement(checkUsernameSql)) {
                 ps.setString(1, uname);
                 ResultSet rs = ps.executeQuery();
-
-                if (rs.next()) { 
+                if (rs.next() && rs.getInt(1) > 0) {
                     JOptionPane.showMessageDialog(null, "Username is already taken!", "Error", JOptionPane.ERROR_MESSAGE);
-                    return; 
+                    return;
                 }
-                rs.close();
-                ps.close();
             }
-            
-            // Insert into database
-            int result = con.InsertData("INSERT INTO user (f_name, l_name, username, email, role, password, status) "
-                    + "VALUES('"+firstname_input.getText()+"',"
-                    + "'"+lastname_input.getText()+"',"
-                    + "'"+username_input.getText()+"',"
-                    + "'"+email_input.getText()+"',"
-                    + "'"+role.getSelectedItem()+"',"
-                    + "'"+password_input.getText()+"',"
-                    + "'Pending' )");
-            if (result == 1) {
-                JOptionPane.showMessageDialog(null, "Inserted Successfully!");
-                new login().setVisible(true);
-                this.dispose();
-            } 
-            else {
-                JOptionPane.showMessageDialog(null, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            // Insert into database using prepared statement
+            String insertSql = "INSERT INTO user (f_name, l_name, username, email, role, password, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement insertPst = cn.prepareStatement(insertSql)) {
+                insertPst.setString(1, firstname_input.getText());
+                insertPst.setString(2, lastname_input.getText());
+                insertPst.setString(3, uname);
+                insertPst.setString(4, email);
+                insertPst.setString(5, role.getSelectedItem().toString());
+                insertPst.setString(6, pass);
+                insertPst.setString(7, "Pending");
+
+                int result = insertPst.executeUpdate();
+                if (result == 1) {
+                    JOptionPane.showMessageDialog(null, "Inserted Successfully!");
+                    new login().setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Registration failed. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("Error: " + ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (cn != null) cn.close(); // Ensure connection is closed

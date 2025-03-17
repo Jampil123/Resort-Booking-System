@@ -30,14 +30,17 @@ public class AdminPanel extends javax.swing.JFrame {
         propertiesPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        reportsPanel = new javax.swing.JPanel();
+        profile_button = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         homePanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        reports_button = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         mainDesktop = new javax.swing.JDesktopPane();
@@ -123,29 +126,29 @@ public class AdminPanel extends javax.swing.JFrame {
 
         jPanel1.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 40));
 
-        reportsPanel.setBackground(new java.awt.Color(51, 51, 51));
-        reportsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+        profile_button.setBackground(new java.awt.Color(51, 51, 51));
+        profile_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                reportsPanelMouseClicked(evt);
+                profile_buttonMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                reportsPanelMouseEntered(evt);
+                profile_buttonMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                reportsPanelMouseExited(evt);
+                profile_buttonMouseExited(evt);
             }
         });
-        reportsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        profile_button.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Reports");
-        reportsPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        jLabel3.setText("Profile");
+        profile_button.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
 
-        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document.png"))); // NOI18N
-        reportsPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        profile_button.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
 
-        jPanel1.add(reportsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 40));
+        jPanel1.add(profile_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 140, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo icon.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 60));
@@ -183,6 +186,30 @@ public class AdminPanel extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 120, 30));
+
+        reports_button.setBackground(new java.awt.Color(51, 51, 51));
+        reports_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reports_buttonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                reports_buttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                reports_buttonMouseExited(evt);
+            }
+        });
+        reports_button.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Reports");
+        reports_button.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document.png"))); // NOI18N
+        reports_button.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+
+        jPanel1.add(reports_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 40));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 500));
 
@@ -244,6 +271,7 @@ public class AdminPanel extends javax.swing.JFrame {
         mainDesktop.add(home);
         home.setVisible(true);
     }
+    
     private void usersPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersPanelMouseClicked
         ManageStaff ms = new ManageStaff();
         mainDesktop.add(ms).setVisible(true);
@@ -282,17 +310,19 @@ public class AdminPanel extends javax.swing.JFrame {
         propertiesPanel.setBackground(navcolor);
     }//GEN-LAST:event_propertiesPanelMouseExited
 
-    private void reportsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanelMouseClicked
+    private void profile_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profile_buttonMouseClicked
+       Profile profileWindow = new Profile();
+       mainDesktop.add(profileWindow);
+       profileWindow.setVisible(true);
+    }//GEN-LAST:event_profile_buttonMouseClicked
 
-    }//GEN-LAST:event_reportsPanelMouseClicked
+    private void profile_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profile_buttonMouseEntered
+        profile_button.setBackground(bodycolor);
+    }//GEN-LAST:event_profile_buttonMouseEntered
 
-    private void reportsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanelMouseEntered
-        reportsPanel.setBackground(bodycolor);
-    }//GEN-LAST:event_reportsPanelMouseEntered
-
-    private void reportsPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsPanelMouseExited
-        reportsPanel.setBackground(navcolor);
-    }//GEN-LAST:event_reportsPanelMouseExited
+    private void profile_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profile_buttonMouseExited
+        profile_button.setBackground(navcolor);
+    }//GEN-LAST:event_profile_buttonMouseExited
 
     private void homePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homePanelMouseClicked
         Home hm = new Home();
@@ -313,6 +343,18 @@ public class AdminPanel extends javax.swing.JFrame {
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void reports_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reports_buttonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reports_buttonMouseClicked
+
+    private void reports_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reports_buttonMouseEntered
+         reports_button.setBackground(bodycolor);
+    }//GEN-LAST:event_reports_buttonMouseEntered
+
+    private void reports_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reports_buttonMouseExited
+        reports_button.setBackground(navcolor);
+    }//GEN-LAST:event_reports_buttonMouseExited
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -355,7 +397,9 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -367,9 +411,10 @@ public class AdminPanel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JDesktopPane mainDesktop;
+    public javax.swing.JDesktopPane mainDesktop;
+    private javax.swing.JPanel profile_button;
     private javax.swing.JPanel propertiesPanel;
-    private javax.swing.JPanel reportsPanel;
+    private javax.swing.JPanel reports_button;
     private javax.swing.JPanel usersPanel;
     // End of variables declaration//GEN-END:variables
 }

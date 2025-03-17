@@ -3,9 +3,12 @@ package Authentication;
 
 import Dashboards.AdminPanel;
 import Dashboards.StaffPanel;
+import config.Session;
 import config.dbConnector;
+import config.passwordHasher;
 import java.awt.Color;
 import java.awt.Font;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,8 +23,45 @@ public class login extends javax.swing.JFrame {
         show_pass.setVisible(false);
         
     }
+    static String status;
+    static String type;
     
+    public static boolean loginAcc(String username, String password){
+        dbConnector con = new dbConnector();
+  
+        try {
+            String query = "SELECT * FROM user WHERE username = '" + username + "'";
+            ResultSet resultSet = con.getData(query);
 
+            if (resultSet.next()) {
+                
+                String hashedPass = resultSet.getString("password");
+                String rehashedPass = passwordHasher.hashPassword(password);
+                if(hashedPass.equals(rehashedPass)){
+
+                    status = resultSet.getString("status");
+                    type = resultSet.getString("role");
+
+                    Session sess = Session.getInstance();
+                    sess.setUser_id(resultSet.getString("user_id"));
+                    sess.setF_name(resultSet.getString("f_name"));
+                    sess.setL_name(resultSet.getString("l_name"));
+                    sess.setUsername(resultSet.getString("username"));
+                    sess.setEmail(resultSet.getString("email"));
+                    sess.setRole(resultSet.getString("role"));
+                    sess.setStatus(resultSet.getString("status"));
+
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } catch (SQLException | NoSuchAlgorithmException ex) {
+            return false;
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -186,52 +226,83 @@ public class login extends javax.swing.JFrame {
             password_validation.setForeground(Color.RED);
             password_validation.setFont(new Font("Arial", Font.PLAIN, 9));
         }
-
+        
         dbConnector db = new dbConnector(); 
         Connection con = db.getConnection(); 
 
-        String sql = "SELECT password, status, role FROM user WHERE username = ?";
+       
 
-        try {
-            PreparedStatement pst = con.prepareStatement(sql);
-            pst.setString(1, username);
-            ResultSet rs = pst.executeQuery();
+        if (loginAcc(username, password)) {  // Calls loginAcc method
+            // Get user role from session
+            Session sess = Session.getInstance();
+            String roleFromDB = sess.getRole();
+            String status = sess.getStatus();
 
-            if (rs.next()) {
-                String storedPassword = rs.getString("password");
-                String status = rs.getString("status");
-                String roleFromDB = rs.getString("role");
-
-                if (storedPassword.equals(password)) { 
-                    if ("Pending".equalsIgnoreCase(status)) {
-                        JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-                        // Redirect based on role
-                        if ("Admin".equalsIgnoreCase(roleFromDB)) {
-                            AdminPanel admin = new AdminPanel();
-                            admin.setVisible(true);
-                        } else if ("Staff".equalsIgnoreCase(roleFromDB)) {
-                            StaffPanel staff = new StaffPanel();
-                            staff.setVisible(true);
-                        }
-
-                        this.dispose(); // Close login form
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
-                }
+            if ("Pending".equalsIgnoreCase(status)) {
+                JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
-            }
+                JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-            rs.close();
-            pst.close();
-            con.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }     
+                // Redirect based on role
+                if ("Admin".equalsIgnoreCase(roleFromDB)) {
+                    AdminPanel admin = new AdminPanel();
+                    admin.setVisible(true);
+                } else if ("Staff".equalsIgnoreCase(roleFromDB)) {
+                    StaffPanel staff = new StaffPanel();
+                    staff.setVisible(true);
+                }
+
+                this.dispose(); // Close login form
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+//        dbConnector db = new dbConnector(); 
+//        Connection con = db.getConnection(); 
+//
+//        String sql = "SELECT password, status, role FROM user WHERE username = ?";
+//
+//        try {
+//            PreparedStatement pst = con.prepareStatement(sql);
+//            pst.setString(1, username);
+//            ResultSet rs = pst.executeQuery();
+//
+//            if (rs.next()) {
+//                String storedPassword = rs.getString("password");
+//                String status = rs.getString("status");
+//                String roleFromDB = rs.getString("role");
+//
+//                if (storedPassword.equals(password)) { 
+//                    if ("Pending".equalsIgnoreCase(status)) {
+//                        JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
+//                    } else {
+//                        JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
+//
+//                        // Redirect based on role
+//                        if ("Admin".equalsIgnoreCase(roleFromDB)) {
+//                            AdminPanel admin = new AdminPanel();
+//                            admin.setVisible(true);
+//                        } else if ("Staff".equalsIgnoreCase(roleFromDB)) {
+//                            StaffPanel staff = new StaffPanel();
+//                            staff.setVisible(true);
+//                        }
+//
+//                        this.dispose(); // Close login form
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
+//                }
+//            } else {
+//                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//
+//            rs.close();
+//            pst.close();
+//            con.close();
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }     
     }//GEN-LAST:event_LoginActionPerformed
 
     private void username_inputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_username_inputFocusGained
