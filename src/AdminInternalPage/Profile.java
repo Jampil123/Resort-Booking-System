@@ -2,6 +2,7 @@
 package AdminInternalPage;
 
 import FloatedPage.change_pass;
+import FloatedPage.setupSecurity;
 import config.Session;
 import config.dbConnector;
 import java.sql.Connection;
@@ -32,6 +33,7 @@ public class Profile extends javax.swing.JInternalFrame {
         label_username = new javax.swing.JLabel();
         label_name = new javax.swing.JLabel();
         label_role1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         firstname_input = new javax.swing.JTextField();
@@ -87,6 +89,15 @@ public class Profile extends javax.swing.JInternalFrame {
         label_role1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         label_role1.setText("Admin");
         jPanel2.add(label_role1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setText("Set up Security Question");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 280, 380));
 
@@ -288,6 +299,17 @@ public class Profile extends javax.swing.JInternalFrame {
         dialog.setVisible(true); // Show the floating add_user
     }//GEN-LAST:event_change_passMouseClicked
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        JDialog dialog = new JDialog(); // Create a floating window
+        setupSecurity newPanel = new setupSecurity();
+
+        dialog.add(newPanel); // Add add_user to the dialog
+        dialog.pack(); // Automatically set size based on the panel's preferred size
+        dialog.setLocationRelativeTo(null); // Center the window
+        dialog.setModal(true); // Prevent interactions with the main window until closed
+        dialog.setVisible(true); // Show the floating add_user
+    }//GEN-LAST:event_jLabel6MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel change_pass;
@@ -298,6 +320,7 @@ public class Profile extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

@@ -1,8 +1,8 @@
 
 package Authentication;
 
-import Dashboards.AdminPanel;
-import Dashboards.StaffPanel;
+import Dashboards.Admin;
+import Dashboards.Staff;
 import config.Session;
 import config.dbConnector;
 import config.passwordHasher;
@@ -50,7 +50,7 @@ public class login extends javax.swing.JFrame {
                     sess.setRole(resultSet.getString("role"));
                     sess.setStatus(resultSet.getString("status"));
                     
-//                    System.out.println("Session User ID: " + sess.getUser_id());
+                    System.out.println("Session User ID: " + sess.getUser_id());
                     return true;
                 } else {
                     return false;
@@ -62,6 +62,7 @@ public class login extends javax.swing.JFrame {
             return false;
         }
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -74,6 +75,7 @@ public class login extends javax.swing.JFrame {
         username_input = new javax.swing.JTextField();
         password_input = new javax.swing.JPasswordField();
         Login = new javax.swing.JButton();
+        forgotpass = new javax.swing.JLabel();
         register = new javax.swing.JLabel();
         createAccount = new javax.swing.JLabel();
         username_validation = new javax.swing.JLabel();
@@ -175,6 +177,16 @@ public class login extends javax.swing.JFrame {
         });
         jPanel1.add(Login, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 300, 100, 40));
 
+        forgotpass.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        forgotpass.setForeground(new java.awt.Color(153, 255, 255));
+        forgotpass.setText("Forgotten password?");
+        forgotpass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                forgotpassMouseClicked(evt);
+            }
+        });
+        jPanel1.add(forgotpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, 20));
+
         register.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
         register.setForeground(new java.awt.Color(204, 204, 204));
         register.setText("Not registered yet?");
@@ -195,7 +207,7 @@ public class login extends javax.swing.JFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 0, 280, 500));
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
-        getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 240, 250));
+        getContentPane().add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 240, 250));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resort.png"))); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 500));
@@ -243,10 +255,10 @@ public class login extends javax.swing.JFrame {
 
                
                 if ("Admin".equalsIgnoreCase(roleFromDB)) {
-                    AdminPanel admin = new AdminPanel();
+                    Admin admin = new Admin();
                     admin.setVisible(true);
                 } else if ("Staff".equalsIgnoreCase(roleFromDB)) {
-                    StaffPanel staff = new StaffPanel();
+                    Staff staff = new Staff();
                     staff.setVisible(true);
                 }
 
@@ -318,6 +330,14 @@ public class login extends javax.swing.JFrame {
         password_input.setEchoChar('*'); 
     }//GEN-LAST:event_show_passMousePressed
 
+    private void forgotpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotpassMouseClicked
+        ForgotPassword fp = new ForgotPassword();
+        fp.setVisible(true);
+        this.dispose();
+        
+        
+    }//GEN-LAST:event_forgotpassMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -353,6 +373,7 @@ public class login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Login;
     private javax.swing.JLabel createAccount;
+    private javax.swing.JLabel forgotpass;
     private javax.swing.JLabel header;
     private javax.swing.JLabel hide_pass;
     private javax.swing.JLabel jLabel3;
