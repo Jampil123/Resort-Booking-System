@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -50,7 +49,8 @@ public class login extends javax.swing.JFrame {
                     sess.setEmail(resultSet.getString("email"));
                     sess.setRole(resultSet.getString("role"));
                     sess.setStatus(resultSet.getString("status"));
-
+                    
+//                    System.out.println("Session User ID: " + sess.getUser_id());
                     return true;
                 } else {
                     return false;
@@ -102,7 +102,7 @@ public class login extends javax.swing.JFrame {
                 show_passMousePressed(evt);
             }
         });
-        jPanel2.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 10));
+        jPanel2.add(show_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, -1, 30));
 
         hide_pass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
         hide_pass.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -230,10 +230,8 @@ public class login extends javax.swing.JFrame {
         dbConnector db = new dbConnector(); 
         Connection con = db.getConnection(); 
 
-       
-
-        if (loginAcc(username, password)) {  // Calls loginAcc method
-            // Get user role from session
+        if (loginAcc(username, password)) {
+            
             Session sess = Session.getInstance();
             String roleFromDB = sess.getRole();
             String status = sess.getStatus();
@@ -243,7 +241,7 @@ public class login extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-                // Redirect based on role
+               
                 if ("Admin".equalsIgnoreCase(roleFromDB)) {
                     AdminPanel admin = new AdminPanel();
                     admin.setVisible(true);
@@ -252,57 +250,11 @@ public class login extends javax.swing.JFrame {
                     staff.setVisible(true);
                 }
 
-                this.dispose(); // Close login form
+                this.dispose();
             }
         } else {
             JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-//        dbConnector db = new dbConnector(); 
-//        Connection con = db.getConnection(); 
-//
-//        String sql = "SELECT password, status, role FROM user WHERE username = ?";
-//
-//        try {
-//            PreparedStatement pst = con.prepareStatement(sql);
-//            pst.setString(1, username);
-//            ResultSet rs = pst.executeQuery();
-//
-//            if (rs.next()) {
-//                String storedPassword = rs.getString("password");
-//                String status = rs.getString("status");
-//                String roleFromDB = rs.getString("role");
-//
-//                if (storedPassword.equals(password)) { 
-//                    if ("Pending".equalsIgnoreCase(status)) {
-//                        JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
-//
-//                        // Redirect based on role
-//                        if ("Admin".equalsIgnoreCase(roleFromDB)) {
-//                            AdminPanel admin = new AdminPanel();
-//                            admin.setVisible(true);
-//                        } else if ("Staff".equalsIgnoreCase(roleFromDB)) {
-//                            StaffPanel staff = new StaffPanel();
-//                            staff.setVisible(true);
-//                        }
-//
-//                        this.dispose(); // Close login form
-//                    }
-//                } else {
-//                    JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
-//            }
-//
-//            rs.close();
-//            pst.close();
-//            con.close();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//        }     
+        }    
     }//GEN-LAST:event_LoginActionPerformed
 
     private void username_inputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_username_inputFocusGained
@@ -328,8 +280,8 @@ public class login extends javax.swing.JFrame {
             password_input.setForeground(Color.WHITE);
             password_input.setFont(new Font("Arial", Font.PLAIN, 12));
         }
-            show_pass.setVisible(true); 
-            hide_pass.setVisible(false);        
+            show_pass.setVisible(false); 
+            hide_pass.setVisible(true);        
     }//GEN-LAST:event_password_inputFocusGained
 
     private void password_inputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_password_inputFocusLost
@@ -357,13 +309,13 @@ public class login extends javax.swing.JFrame {
     private void hide_passMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hide_passMousePressed
         show_pass.setVisible(true);
         hide_pass.setVisible(false);
-        password_input.setEchoChar('*'); 
+        password_input.setEchoChar((char) 0); 
     }//GEN-LAST:event_hide_passMousePressed
 
     private void show_passMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_show_passMousePressed
         hide_pass.setVisible(true);
         show_pass.setVisible(false);
-        password_input.setEchoChar((char) 0); 
+        password_input.setEchoChar('*'); 
     }//GEN-LAST:event_show_passMousePressed
 
     public static void main(String args[]) {

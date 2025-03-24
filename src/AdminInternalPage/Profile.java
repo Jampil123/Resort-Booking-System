@@ -1,9 +1,6 @@
 
 package AdminInternalPage;
 
-import Authentication.register;
-import Dashboards.AdminPanel;
-import FloatedPage.add_user;
 import FloatedPage.change_pass;
 import config.Session;
 import config.dbConnector;
@@ -19,11 +16,10 @@ public class Profile extends javax.swing.JInternalFrame {
     public Profile() {
         initComponents();
             
-         //remove border
+        //remove border
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
-        bi.setNorthPane(null);
-        
+        bi.setNorthPane(null);  
     }
     
     @SuppressWarnings("unchecked")
@@ -71,7 +67,8 @@ public class Profile extends javax.swing.JInternalFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setPreferredSize(new java.awt.Dimension(720, 440));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -167,7 +164,7 @@ public class Profile extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,31 +215,52 @@ public class Profile extends javax.swing.JInternalFrame {
         String newLastName = lastname_input.getText();
         String newUsername = username_input.getText();
         String newEmail = email_input.getText();
-       
-        // Update session data
+
+        // Get session instance
         Session sess = Session.getInstance();
+        String userId = sess.getUser_id(); // Retrieve user_id
+
+        // Debugging check
+        System.out.println("User ID: " + userId); 
+        if (userId == null || userId.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Error: User ID is missing!");
+            return;
+        }
+
+        // Update session data
         sess.setF_name(newFirstName);
         sess.setL_name(newLastName);
         sess.setUsername(newUsername);
         sess.setEmail(newEmail);
-     
+
         // Update UI labels
-        String fullName = newFirstName + " " + newLastName;
-        label_name.setText(fullName);
+        label_name.setText(newFirstName + " " + newLastName);
         label_username.setText("@" + newUsername);
 
-        // (Optional) Update database
+        // Update database
         try {
-             dbConnector con = new dbConnector();
-              Connection conn = con.getConnection();
-            
-            String sql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ?, password = ? WHERE user_id = ?";
+            dbConnector con = new dbConnector();
+            Connection conn = con.getConnection();
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(this, "Database connection failed.");
+                return;
+            }
+
+            String sql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ? WHERE user_id = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, newFirstName);
             pst.setString(2, newLastName);
             pst.setString(3, newUsername);
-            pst.setString(4, newEmail);      
-            pst.setString(6, sess.getUser_id()); // Assuming Session stores user_id
+            pst.setString(4, newEmail);
+
+            // Check if user_id is an integer or string
+            try {
+                int userIdInt = Integer.parseInt(userId);
+                pst.setInt(5, userIdInt);
+            } catch (NumberFormatException e) {
+                pst.setString(5, userId); // Use string if user_id is stored as varchar
+            }
 
             int updated = pst.executeUpdate();
             if (updated > 0) {
@@ -257,7 +275,6 @@ public class Profile extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
             e.printStackTrace();
         }
-
     }//GEN-LAST:event_update_buttonMouseClicked
 
     private void change_passMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_change_passMouseClicked

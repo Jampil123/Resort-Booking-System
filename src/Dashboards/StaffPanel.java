@@ -5,6 +5,7 @@ import AdminInternalPage.Properties;
 import Authentication.login;
 import StaffInternalPage.Guest;
 import StaffInternalPage.HomePage;
+import StaffInternalPage.Profile;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -37,6 +38,9 @@ public class StaffPanel extends javax.swing.JFrame {
         bookingsPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        profile_button = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         header_title = new javax.swing.JLabel();
         header_subtitle = new javax.swing.JLabel();
         mainDesktop = new javax.swing.JDesktopPane();
@@ -63,7 +67,7 @@ public class StaffPanel extends javax.swing.JFrame {
                 signout_buttonActionPerformed(evt);
             }
         });
-        buttons_panel.add(signout_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 120, 30));
+        buttons_panel.add(signout_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 120, 30));
 
         homePanel.setBackground(new java.awt.Color(51, 51, 51));
         homePanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -82,12 +86,12 @@ public class StaffPanel extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Home");
-        homePanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        homePanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-button.png"))); // NOI18N
-        homePanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        homePanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        buttons_panel.add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 140, 40));
+        buttons_panel.add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 180, 40));
 
         guestPanel.setBackground(new java.awt.Color(51, 51, 51));
         guestPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,12 +110,12 @@ public class StaffPanel extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Guest");
-        guestPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        guestPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        guestPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        guestPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        buttons_panel.add(guestPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 140, 40));
+        buttons_panel.add(guestPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 180, 40));
 
         propertiesPanel.setBackground(new java.awt.Color(51, 51, 51));
         propertiesPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,12 +134,12 @@ public class StaffPanel extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Properties");
-        propertiesPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        propertiesPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-button.png"))); // NOI18N
-        propertiesPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        propertiesPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        buttons_panel.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 140, 40));
+        buttons_panel.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 180, 40));
 
         bookingsPanel.setBackground(new java.awt.Color(51, 51, 51));
         bookingsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -154,12 +158,36 @@ public class StaffPanel extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Bookings");
-        bookingsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        bookingsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book.png"))); // NOI18N
-        bookingsPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        bookingsPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        buttons_panel.add(bookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 40));
+        buttons_panel.add(bookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 180, 40));
+
+        profile_button.setBackground(new java.awt.Color(51, 51, 51));
+        profile_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                profile_buttonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                profile_buttonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                profile_buttonMouseExited(evt);
+            }
+        });
+        profile_button.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Profile");
+        profile_button.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
+
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        profile_button.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
+
+        buttons_panel.add(profile_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 180, 40));
 
         main_panel.add(buttons_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 500));
 
@@ -281,6 +309,20 @@ public class StaffPanel extends javax.swing.JFrame {
         bookingsPanel.setBackground(navcolor);
     }//GEN-LAST:event_bookingsPanelMouseExited
 
+    private void profile_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profile_buttonMouseClicked
+        Profile profileWindow = new Profile();
+        mainDesktop.add(profileWindow);
+        profileWindow.setVisible(true);
+    }//GEN-LAST:event_profile_buttonMouseClicked
+
+    private void profile_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profile_buttonMouseEntered
+        profile_button.setBackground(bodycolor);
+    }//GEN-LAST:event_profile_buttonMouseEntered
+
+    private void profile_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_profile_buttonMouseExited
+        profile_button.setBackground(navcolor);
+    }//GEN-LAST:event_profile_buttonMouseExited
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -326,12 +368,15 @@ public class StaffPanel extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JDesktopPane mainDesktop;
     private javax.swing.JPanel main_panel;
+    private javax.swing.JPanel profile_button;
     private javax.swing.JPanel propertiesPanel;
     private javax.swing.JButton signout_button;
     // End of variables declaration//GEN-END:variables

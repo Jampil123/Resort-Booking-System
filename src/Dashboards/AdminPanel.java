@@ -71,12 +71,12 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Users");
-        usersPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        usersPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        usersPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        usersPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        jPanel1.add(usersPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 140, 40));
+        jPanel1.add(usersPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 180, 40));
 
         bookingsPanel.setBackground(new java.awt.Color(51, 51, 51));
         bookingsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,12 +95,12 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Bookings");
-        bookingsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        bookingsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book.png"))); // NOI18N
-        bookingsPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        bookingsPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        jPanel1.add(bookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 140, 40));
+        jPanel1.add(bookingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 180, 40));
 
         propertiesPanel.setBackground(new java.awt.Color(51, 51, 51));
         propertiesPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,12 +119,12 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Properties");
-        propertiesPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        propertiesPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-button.png"))); // NOI18N
-        propertiesPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        propertiesPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        jPanel1.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 40));
+        jPanel1.add(propertiesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 180, 40));
 
         profile_button.setBackground(new java.awt.Color(51, 51, 51));
         profile_button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,12 +143,12 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Profile");
-        profile_button.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        profile_button.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        profile_button.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        profile_button.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        jPanel1.add(profile_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 140, 40));
+        jPanel1.add(profile_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 180, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo icon.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 60));
@@ -170,12 +170,12 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Home");
-        homePanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        homePanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-button.png"))); // NOI18N
-        homePanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        homePanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        jPanel1.add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 140, 40));
+        jPanel1.add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 180, 40));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -185,7 +185,7 @@ public class AdminPanel extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 120, 30));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 120, 30));
 
         reports_button.setBackground(new java.awt.Color(51, 51, 51));
         reports_button.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -204,12 +204,12 @@ public class AdminPanel extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Reports");
-        reports_button.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 13, -1, -1));
+        reports_button.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/document.png"))); // NOI18N
-        reports_button.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, 20));
+        reports_button.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 20, 20));
 
-        jPanel1.add(reports_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 140, 40));
+        jPanel1.add(reports_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 180, 40));
 
         jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 180, 500));
 

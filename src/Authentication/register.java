@@ -295,7 +295,7 @@ public class register extends javax.swing.JFrame {
         rigester_panel.add(email_validation1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 90, 10));
         rigester_panel.add(password_validation1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, 40, 10));
         rigester_panel.add(confirmpassword_validation1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, 40, 10));
-        rigester_panel.add(username_validation2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 180, 10));
+        rigester_panel.add(username_validation2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 190, 10));
 
         getContentPane().add(rigester_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 0, 440, 500));
 
@@ -319,10 +319,8 @@ public class register extends javax.swing.JFrame {
         String pass2 = confirmpassword_input.getText();
         
         boolean Error = false;
-        StringBuilder eMsg = new StringBuilder();
-            
-        if(fname.isEmpty() || fname.equals("Enter first name...")){
-            eMsg.append("- First name field cannot be empty!\n");
+     
+        if(fname.isEmpty() || fname.equals("Enter first name...")){          
             firstname_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "First Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
             Error = true;
             firstname_validation.setText("first Name is empty");
@@ -331,7 +329,6 @@ public class register extends javax.swing.JFrame {
         }
             
         if(lname.isEmpty() || lname.equals("Enter last name...")){
-            eMsg.append("- Last name field cannot be empty!\n");
             lastname_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Last Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
             Error = true;
             lastname_validation.setText("last Name is empty");
@@ -340,7 +337,6 @@ public class register extends javax.swing.JFrame {
         }
             
         if(uname.isEmpty() || uname.equals("Enter username...")){
-            eMsg.append("- Username field cannot be empty!\n");
             username_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Username Name", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
             Error = true;
             username_validation.setText("username is empty");
@@ -349,7 +345,6 @@ public class register extends javax.swing.JFrame {
         }
 
         if(email.isEmpty() || email.equals("name@example.com")){
-            eMsg.append("- Email field cannot be empty!\n");
             email_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
             Error = true;
             email_validation.setText("email is empty");
@@ -358,7 +353,6 @@ public class register extends javax.swing.JFrame {
         }
 
         if(pass1.isEmpty() || pass1.equals(" Create password...")){
-            eMsg.append("- Create password field cannot be empty!\n");
             password_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
             Error = true;
             password_validation.setText("Password is empty");
@@ -367,7 +361,6 @@ public class register extends javax.swing.JFrame {
         }
 
         if(pass2.isEmpty() || pass2.equals(" Confirm password...")){
-            eMsg.append("- Confirm password field cannot be empty!\n");
             confirmpassword_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Confirm Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
             Error = true;
             confirmpassword_validation.setText("confirm password is empty");
@@ -375,8 +368,7 @@ public class register extends javax.swing.JFrame {
             confirmpassword_validation.setFont(new Font("Arial", Font.PLAIN, 9));
         }
         
-        if (Error) {
-            JOptionPane.showMessageDialog(null, eMsg.toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        if (Error) {         
         return;
         }
         
@@ -429,7 +421,7 @@ public class register extends javax.swing.JFrame {
             return;
         }
         
-       dbConnector con = new dbConnector();
+        dbConnector con = new dbConnector();
         Connection cn = con.getConnection();
 
         try {
@@ -648,25 +640,25 @@ public class register extends javax.swing.JFrame {
     private void hide_passMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hide_passMousePressed
         show_pass.setVisible(true);
         hide_pass.setVisible(false);
-        password_input.setEchoChar('*'); 
+        password_input.setEchoChar((char) 0); 
     }//GEN-LAST:event_hide_passMousePressed
 
     private void show_passMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_show_passMousePressed
         hide_pass.setVisible(true);
         show_pass.setVisible(false);
-        password_input.setEchoChar((char) 0); 
+        password_input.setEchoChar('*'); 
     }//GEN-LAST:event_show_passMousePressed
 
     private void hide_pass1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hide_pass1MousePressed
         show_pass1.setVisible(true);
         hide_pass1.setVisible(false);
-        confirmpassword_input.setEchoChar('*'); 
+        confirmpassword_input.setEchoChar((char) 0); 
     }//GEN-LAST:event_hide_pass1MousePressed
 
     private void show_pass1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_show_pass1MousePressed
         hide_pass1.setVisible(true);
         show_pass1.setVisible(false);
-        confirmpassword_input.setEchoChar((char) 0); 
+        confirmpassword_input.setEchoChar('*'); 
     }//GEN-LAST:event_show_pass1MousePressed
 
     private void username_inputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_username_inputKeyReleased
@@ -686,6 +678,7 @@ public class register extends javax.swing.JFrame {
                 username_validation2.setText("Username must be at least 5 characters long");
                 username_validation2.setForeground(Color.RED);
                 username_validation2.setFont(new Font("Arial", Font.PLAIN, 9));
+                username_validation1.setText("");
                 check_icon.setVisible(false);
                 return;
             } else {
