@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2025 at 02:37 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Mar 27, 2025 at 05:03 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,15 +35,6 @@ CREATE TABLE `guest` (
   `address` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `guest`
---
-
-INSERT INTO `guest` (`guest_id`, `full_name`, `contact_number`, `email`, `address`) VALUES
-(1, 'John Phil Esconde', '09198996251', 'john@gmail.com', 'Badian, Cebu'),
-(2, 'Ashley Balbon', '09143141431', 'ash@gmail.com', 'Negros Oriental'),
-(3, 'Wael he', '09198996251', 'wael@gmail.com', 'campakong, kong');
-
 -- --------------------------------------------------------
 
 --
@@ -59,6 +50,26 @@ CREATE TABLE `properties` (
   `capacity` int(11) NOT NULL,
   `status` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `securityquestion`
+--
+
+CREATE TABLE `securityquestion` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `answer` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `securityquestion`
+--
+
+INSERT INTO `securityquestion` (`id`, `user_id`, `question`, `answer`) VALUES
+(1, 1, 'What is the name of your favorite teacher?', 'Ashley');
 
 -- --------------------------------------------------------
 
@@ -82,28 +93,19 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `f_name`, `l_name`, `username`, `email`, `role`, `password`, `status`) VALUES
-(101, 'John Phil', 'Esconde', 'Jampil123\r\n', 'johnescondephil15@gmail.com', 'Admin', 'Jampil123!', 'Approved'),
-(102, 'Ashley', 'Balbon', 'Ashpil', 'Ash@Gmail.com', 'Staff', 'Ashley123!', 'Approved'),
-(104, 'John', 'Esconde', 'John', 'Phil@Gmail.com', 'Admin', 'Gomesconde05!', 'Approved'),
-(105, 'John Phil', 'Esconde', 'admin', 'hil@gmail.com', 'Admin', '1234', 'Approved'),
-(106, 'John', 'Doe', 'Doe', 'Doe@Gmail.com', 'Staff', 'Doe12345!', 'Approved'),
-(107, 'Jesriel', 'Alegado', 'jesriel', 'jes@Gmail.com', 'Staff', 'Jes12345!', 'Pending');
+(1, 'John Phil', 'Esconde', 'Admin', 'johnescondephil15@gmail.com', 'Admin', 'A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=', 'Approved'),
+(2, 'Ashley', 'Balbon', 'staff', 'ash@gmail.com', 'Staff', 'A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=', 'Approved');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `guest`
+-- Indexes for table `securityquestion`
 --
-ALTER TABLE `guest`
-  ADD PRIMARY KEY (`guest_id`);
-
---
--- Indexes for table `properties`
---
-ALTER TABLE `properties`
-  ADD PRIMARY KEY (`property_id`);
+ALTER TABLE `securityquestion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `user`
@@ -116,22 +118,26 @@ ALTER TABLE `user`
 --
 
 --
--- AUTO_INCREMENT for table `guest`
+-- AUTO_INCREMENT for table `securityquestion`
 --
-ALTER TABLE `guest`
-  MODIFY `guest_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `properties`
---
-ALTER TABLE `properties`
-  MODIFY `property_id` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `securityquestion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `securityquestion`
+--
+ALTER TABLE `securityquestion`
+  ADD CONSTRAINT `securityquestion_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
