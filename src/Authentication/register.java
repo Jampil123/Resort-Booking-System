@@ -3,6 +3,7 @@ package Authentication;
 
 import config.dbConnector;
 import config.passwordHasher;
+import config.util;
 import java.awt.Color;
 import java.awt.Font;
 import java.security.NoSuchAlgorithmException;
@@ -373,15 +374,13 @@ public class register extends javax.swing.JFrame {
         }
         
         // Validate email format
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-
-        if (!email.matches(emailRegex)) {
-           JOptionPane.showMessageDialog(null, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
-           email_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
-           email_validation1.setText("Invalid email format!");
-           email_validation1.setForeground(Color.RED);
-           email_validation1.setFont(new Font("Arial", Font.PLAIN, 9));
-           return;
+       if (!util.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
+            email_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Email", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
+            email_validation1.setText("Invalid email format!");
+            email_validation1.setForeground(Color.RED);
+            email_validation1.setFont(new Font("Arial", Font.PLAIN, 9));
+            return;
         } 
         
         // Validate password match
@@ -397,17 +396,16 @@ public class register extends javax.swing.JFrame {
             confirmpassword_validation.setFont(new Font("Arial", Font.PLAIN, 9));
             return;
         } 
+       
         // Validate password strength
-            String password = password_input.getText();
-            String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
-
-        if (!password.matches(passwordRegex)) {
+        if (!util.isValidPassword(pass1)) {
             JOptionPane.showMessageDialog(null, "Password must be at least 8 characters and include:"
                     + "\n- One uppercase letter"
                     + "\n- One lowercase letter"
                     + "\n- One number"
                     + "\n- One special character (@#$%^&+=!)", 
                     "Error", JOptionPane.ERROR_MESSAGE);
+            
             password_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
             confirmpassword_input.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true), "Password", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12), new java.awt.Color(255, 255, 255))); 
             
@@ -418,36 +416,24 @@ public class register extends javax.swing.JFrame {
             password_validation1.setText("Invalid!");
             password_validation1.setForeground(Color.RED);
             password_validation1.setFont(new Font("Arial", Font.PLAIN, 9));
+            
             return;
         }
-        
+       
         dbConnector con = new dbConnector();
         Connection cn = con.getConnection();
 
         try {
             String pass = passwordHasher.hashPassword(new String(password_input.getPassword())); // Get password securely
 
-
-            // Check if email already exists
-            String checkEmailSql = "SELECT COUNT(*) FROM user WHERE email = ?";
-            try (PreparedStatement emailPst = cn.prepareStatement(checkEmailSql)) {
-                emailPst.setString(1, email);
-                ResultSet rsEmail = emailPst.executeQuery();
-                if (rsEmail.next() && rsEmail.getInt(1) > 0) {
-                    JOptionPane.showMessageDialog(null, "Email already exists!", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            if (util.isEmailExists(email)) {
+                JOptionPane.showMessageDialog(this, "Email already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
-            // Check if username already exists
-            String checkUsernameSql = "SELECT COUNT(*) FROM user WHERE username = ?";
-            try (PreparedStatement ps = cn.prepareStatement(checkUsernameSql)) {
-                ps.setString(1, uname);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next() && rs.getInt(1) > 0) {
-                    JOptionPane.showMessageDialog(null, "Username is already taken!", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            if (util.isUsernameExists(uname)) {
+                JOptionPane.showMessageDialog(this, "Username is already taken!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
             // Insert into database using prepared statement
@@ -497,8 +483,8 @@ public class register extends javax.swing.JFrame {
             password_input.setForeground(Color.WHITE);
             password_input.setFont(new Font("Arial", Font.PLAIN, 12));
         }
-            show_pass.setVisible(true); 
-            hide_pass.setVisible(false);
+            show_pass.setVisible(false); 
+            hide_pass.setVisible(true);
     }//GEN-LAST:event_password_inputFocusGained
 
     private void password_inputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_password_inputFocusLost
@@ -520,8 +506,8 @@ public class register extends javax.swing.JFrame {
             confirmpassword_input.setForeground(Color.WHITE);
             confirmpassword_input.setFont(new Font("Arial", Font.PLAIN, 12));
         }
-        show_pass1.setVisible(true);  
-        hide_pass1.setVisible(false);
+        show_pass1.setVisible(false);  
+        hide_pass1.setVisible(true);
     }//GEN-LAST:event_confirmpassword_inputFocusGained
 
     private void confirmpassword_inputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confirmpassword_inputFocusLost

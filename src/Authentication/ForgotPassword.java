@@ -1,6 +1,7 @@
 
 package Authentication;
 
+import config.Session;
 import config.dbConnector;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +13,37 @@ public class ForgotPassword extends javax.swing.JFrame {
     public ForgotPassword() {
         initComponents();
     }
+    public static boolean searchUserForReset(String input) {
+        dbConnector con = new dbConnector();
+
+        try {
+            // Search by either username or email
+            String query = "SELECT * FROM user WHERE username = ? OR email = ?";
+            PreparedStatement pst = con.getConnection().prepareStatement(query);
+            pst.setString(1, input);
+            pst.setString(2, input);
+            ResultSet resultSet = pst.executeQuery();
+
+            if (resultSet.next()) {
+                // Store user details in session for further steps
+                Session sess = Session.getInstance();
+                sess.setUser_id(resultSet.getString("user_id"));
+                sess.setF_name(resultSet.getString("f_name"));
+                sess.setL_name(resultSet.getString("l_name"));
+                sess.setUsername(resultSet.getString("username"));
+                sess.setEmail(resultSet.getString("email"));
+
+                System.out.println("User found! Redirecting to security questions...");
+                return true;  // User found, proceed to security question page
+            } else {
+                System.out.println("User not found!");
+                return false; // No user found
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -19,12 +51,12 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        header = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         search_field = new javax.swing.JTextField();
         search_button = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        cancel_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -35,17 +67,17 @@ public class ForgotPassword extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
-        jPanel3.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        header.setBackground(new java.awt.Color(51, 51, 51));
+        header.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
+        header.setForeground(new java.awt.Color(102, 102, 102));
+        header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Find Your Account");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, -1));
+        header.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, -1));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
+        jPanel2.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -62,16 +94,16 @@ public class ForgotPassword extends javax.swing.JFrame {
                 search_buttonActionPerformed(evt);
             }
         });
-        jPanel2.add(search_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 80, 30));
+        jPanel2.add(search_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 80, 30));
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton2.setText("Cancel");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        cancel_button.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cancel_button.setText("Cancel");
+        cancel_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                cancel_buttonActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 80, 30));
+        jPanel2.add(cancel_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 80, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, 360));
 
@@ -100,16 +132,13 @@ public class ForgotPassword extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void cancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_buttonActionPerformed
         login in = new login();
         in.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_cancel_buttonActionPerformed
 
     private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_buttonActionPerformed
-        System.out.println("Search button clicked! Input: " + search_field.getText().trim());
-
-        // Get input from the search field
         String searchInput = search_field.getText().trim();
 
         if (searchInput.isEmpty()) {
@@ -117,29 +146,40 @@ public class ForgotPassword extends javax.swing.JFrame {
             return;
         }
 
-        // Database connection
         dbConnector con = new dbConnector();
-
         try {
             // Query to search by username OR email
-            String query = "SELECT username, email FROM user WHERE username = ? OR email = ?";
+            String query = "SELECT * FROM user WHERE username = ? OR email = ?";
             PreparedStatement pst = con.getConnection().prepareStatement(query);
             pst.setString(1, searchInput);
             pst.setString(2, searchInput);
             ResultSet rs = pst.executeQuery();
 
-            // If user is found, proceed to SecurityQuestionPage
+            // If user is found, store data in session and proceed
             if (rs.next()) {
-                String foundUsername = rs.getString("username");
-                String foundEmail = rs.getString("email");
+                // Get user details
+                String userId = rs.getString("user_id");
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                String firstName = rs.getString("f_name");
+                String lastName = rs.getString("l_name");
+
+                // Store user details in session
+                Session sess = Session.getInstance();
+                sess.setUser_id(userId);
+                sess.setUsername(username);
+                sess.setEmail(email);
+                sess.setF_name(firstName);
+                sess.setL_name(lastName);
 
                 JOptionPane.showMessageDialog(this, 
                     "User Found!\nRedirecting to Security Question Page...",
                     "Success", JOptionPane.INFORMATION_MESSAGE);
 
+                // Open the security question page
                 SecurityQuestion sqp = new SecurityQuestion();
                 sqp.setVisible(true);
-                this.dispose();
+                this.dispose(); // Close search page
 
             } else {
                 JOptionPane.showMessageDialog(this, "User not found!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -188,14 +228,14 @@ public class ForgotPassword extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton cancel_button;
+    private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton search_button;
     private javax.swing.JTextField search_field;
     // End of variables declaration//GEN-END:variables

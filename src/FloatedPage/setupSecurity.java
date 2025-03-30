@@ -42,11 +42,6 @@ public class setupSecurity extends javax.swing.JPanel {
 
         question2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         question2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What was the name of your first pet?", "What is the name of the street you grew up on?", "What was your childhood best friend’s name?" }));
-        question2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                question2ActionPerformed(evt);
-            }
-        });
         add(question2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 280, 30));
 
         answerField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -81,18 +76,14 @@ public class setupSecurity extends javax.swing.JPanel {
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 50));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void question2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_question2ActionPerformed
-
     private void submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_buttonActionPerformed
         Session sess = Session.getInstance();
         String userId = sess.getUser_id();
 
-        String selectedQuestion1 = question1.getSelectedItem().toString(); // Get first question
-        String selectedQuestion2 = question2.getSelectedItem().toString(); // Get second question
-        String userAnswer1 = answerField1.getText().trim(); // Get first answer
-        String userAnswer2 = answerField2.getText().trim(); // Get second answer
+        String selectedQuestion1 = question1.getSelectedItem().toString();
+        String selectedQuestion2 = question2.getSelectedItem().toString(); 
+        String userAnswer1 = answerField1.getText().trim(); 
+        String userAnswer2 = answerField2.getText().trim(); 
 
         if (userId == null || userId.isEmpty()) {
             JOptionPane.showMessageDialog(this, "User ID is missing. Please log in again.", "Session Error", JOptionPane.ERROR_MESSAGE);
@@ -107,35 +98,47 @@ public class setupSecurity extends javax.swing.JPanel {
             dbConnector con = new dbConnector();
             Connection connection = con.getConnection();
 
-            // Check if user already has a security question
             String checkQuery = "SELECT * FROM securityQuestion WHERE user_id = ?";
-            PreparedStatement checkStmt = connection.prepareStatement(checkQuery);
-            checkStmt.setInt(1, Integer.parseInt(userId));
-            ResultSet rs = checkStmt.executeQuery();
-
-            if (rs.next()) { // If user already has a security question
-                JOptionPane.showMessageDialog(this, "You have already set a security question.", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                // Insert the security question if not set yet
-                String insertQuery = "INSERT INTO securityQuestion (user_id, question, answer) VALUES (?, ?, ?)";
-                PreparedStatement pst = connection.prepareStatement(insertQuery);
-                pst.setInt(1, Integer.parseInt(userId));
-                pst.setString(2, selectedQuestion1); // Only one question
-                pst.setString(3, userAnswer1);
-                pst.executeUpdate();
-                pst.close();
-
-                JOptionPane.showMessageDialog(this, "Security question saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            try (PreparedStatement checkStmt = connection.prepareStatement(checkQuery)) {
+                checkStmt.setInt(1, Integer.parseInt(userId));
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    if (rs.next()) {
+                        JOptionPane.showMessageDialog(this, "You have already set security questions.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return; // Exit method early
+                    }
+                }
             }
 
-            rs.close();
-            checkStmt.close();
-            connection.close();
+            // Validate inputs
+            if (selectedQuestion1 == null || selectedQuestion1.trim().isEmpty() ||
+                userAnswer1 == null || userAnswer1.trim().isEmpty() ||
+                selectedQuestion2 == null || selectedQuestion2.trim().isEmpty() ||
+                userAnswer2 == null || userAnswer2.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Security questions and answers cannot be empty.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
+            // Insert two security questions
+            String insertQuery = "INSERT INTO securityQuestion (user_id, question, answer) VALUES (?, ?, ?), (?, ?, ?)";
+            try (PreparedStatement pst = connection.prepareStatement(insertQuery)) {
+                pst.setInt(1, Integer.parseInt(userId));
+                pst.setString(2, selectedQuestion1);
+                pst.setString(3, userAnswer1);
+                pst.setInt(4, Integer.parseInt(userId));
+                pst.setString(5, selectedQuestion2);
+                pst.setString(6, userAnswer2);
+                pst.executeUpdate();
+            }
+
+            JOptionPane.showMessageDialog(this, "Security questions saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            // Close the registration form (JDialog)
+                JDialog parentDialog = (JDialog) SwingUtilities.getWindowAncestor(this);
+                if (parentDialog != null) {
+                    parentDialog.dispose();  // Closes the JDialog
+                }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_submit_buttonActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -33,7 +33,7 @@ public class Profile extends javax.swing.JInternalFrame {
         label_username = new javax.swing.JLabel();
         label_name = new javax.swing.JLabel();
         label_role1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        SetupSecurityQuestion = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         firstname_input = new javax.swing.JTextField();
@@ -63,11 +63,6 @@ public class Profile extends javax.swing.JInternalFrame {
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
             }
         });
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setPreferredSize(new java.awt.Dimension(720, 440));
@@ -90,14 +85,14 @@ public class Profile extends javax.swing.JInternalFrame {
         label_role1.setText("Admin");
         jPanel2.add(label_role1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel6.setText("Set up Security Question");
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        SetupSecurityQuestion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        SetupSecurityQuestion.setText("Set up Security Question");
+        SetupSecurityQuestion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel6MouseClicked(evt);
+                SetupSecurityQuestionMouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
+        jPanel2.add(SetupSecurityQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 280, 380));
 
@@ -108,19 +103,9 @@ public class Profile extends javax.swing.JInternalFrame {
         jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 23, -1, -1));
 
         firstname_input.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        firstname_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstname_inputActionPerformed(evt);
-            }
-        });
         jPanel4.add(firstname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 280, 30));
 
         lastname_input.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lastname_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastname_inputActionPerformed(evt);
-            }
-        });
         jPanel4.add(lastname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 280, 30));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -132,11 +117,6 @@ public class Profile extends javax.swing.JInternalFrame {
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         username_input.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        username_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                username_inputActionPerformed(evt);
-            }
-        });
         jPanel4.add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 280, 30));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -144,11 +124,6 @@ public class Profile extends javax.swing.JInternalFrame {
         jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         email_input.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        email_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email_inputActionPerformed(evt);
-            }
-        });
         jPanel4.add(email_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 280, 30));
 
         update_button.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -185,10 +160,6 @@ public class Profile extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-
-    }//GEN-LAST:event_formComponentShown
-
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         Session sess = Session.getInstance();
         String fullName = sess.getF_name() + " " + sess.getL_name(); // Add space between first and last name
@@ -202,22 +173,6 @@ public class Profile extends javax.swing.JInternalFrame {
         username_input.setText(""+sess.getUsername());
         email_input.setText(""+sess.getEmail());  
     }//GEN-LAST:event_formInternalFrameActivated
-
-    private void firstname_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstname_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_firstname_inputActionPerformed
-
-    private void lastname_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastname_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lastname_inputActionPerformed
-
-    private void username_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_username_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_username_inputActionPerformed
-
-    private void email_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_email_inputActionPerformed
 
     private void update_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_update_buttonMouseClicked
                                                  
@@ -299,7 +254,7 @@ public class Profile extends javax.swing.JInternalFrame {
         dialog.setVisible(true); // Show the floating add_user
     }//GEN-LAST:event_change_passMouseClicked
 
-    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+    private void SetupSecurityQuestionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetupSecurityQuestionMouseClicked
         JDialog dialog = new JDialog(); // Create a floating window
         setupSecurity newPanel = new setupSecurity();
 
@@ -308,10 +263,11 @@ public class Profile extends javax.swing.JInternalFrame {
         dialog.setLocationRelativeTo(null); // Center the window
         dialog.setModal(true); // Prevent interactions with the main window until closed
         dialog.setVisible(true); // Show the floating add_user
-    }//GEN-LAST:event_jLabel6MouseClicked
+    }//GEN-LAST:event_SetupSecurityQuestionMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel SetupSecurityQuestion;
     private javax.swing.JLabel change_pass;
     private javax.swing.JTextField email_input;
     private javax.swing.JTextField firstname_input;
@@ -320,7 +276,6 @@ public class Profile extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;

@@ -4,6 +4,7 @@ package FloatedPage;
 import Authentication.register;
 import config.dbConnector;
 import config.passwordHasher;
+import config.util;
 import java.awt.Color;
 import java.awt.Font;
 import java.security.NoSuchAlgorithmException;
@@ -501,27 +502,20 @@ public class add_user extends javax.swing.JPanel {
         }
 
         if (Error) {
-            
         return;
         }
         
-        // Validate email format
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-
-        if (!email.matches(emailRegex)) {
-           JOptionPane.showMessageDialog(null, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
-           email_input.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-           email_validation1.setText("Invalid email format!");
-           email_validation1.setForeground(Color.RED);
-           email_validation1.setFont(new Font("Arial", Font.PLAIN, 9));
-           return;
+         // Validate email format
+        if (!util.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
+            email_input.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+            email_validation1.setText("Invalid email format!");
+            email_validation1.setForeground(Color.RED);
+            email_validation1.setFont(new Font("Arial", Font.PLAIN, 9));
+            return;
         } 
-         
-        // Validate password strength
-            String password = password_input.getText();
-            String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,}$";
-
-        if (!password.matches(passwordRegex)) {
+         // Validate password strength
+        if (!util.isValidPassword(pass1)) {
             JOptionPane.showMessageDialog(null, "Password must be at least 8 characters and include:"
                     + "\n- One uppercase letter"
                     + "\n- One lowercase letter"
@@ -529,7 +523,6 @@ public class add_user extends javax.swing.JPanel {
                     + "\n- One special character (@#$%^&+=!)", 
                     "Error", JOptionPane.ERROR_MESSAGE);
             password_input.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-            
             password_validation1.setText("Invalid!");
             password_validation1.setForeground(Color.RED);
             password_validation1.setFont(new Font("Arial", Font.PLAIN, 9));
@@ -549,26 +542,15 @@ public class add_user extends javax.swing.JPanel {
         Connection cn = con.getConnection();
 
         try {
-            // Check if email already exists
-            String checkEmailSql = "SELECT COUNT(*) FROM user WHERE email = ?";
-            try (PreparedStatement emailPst = cn.prepareStatement(checkEmailSql)) {
-                emailPst.setString(1, email);
-                ResultSet rsEmail = emailPst.executeQuery();
-                if (rsEmail.next() && rsEmail.getInt(1) > 0) {
-                    JOptionPane.showMessageDialog(null, "Email already exists!", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            
+            if (util.isEmailExists(email)) {
+                JOptionPane.showMessageDialog(this, "Email already exists!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
-            // Check if username already exists
-            String checkUsernameSql = "SELECT COUNT(*) FROM user WHERE username = ?";
-            try (PreparedStatement ps = cn.prepareStatement(checkUsernameSql)) {
-                ps.setString(1, uname);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next() && rs.getInt(1) > 0) {
-                    JOptionPane.showMessageDialog(null, "Username is already taken!", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+            if (util.isUsernameExists(uname)) {
+                JOptionPane.showMessageDialog(this, "Username is already taken!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
 
             // Insert new user securely
