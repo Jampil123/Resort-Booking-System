@@ -243,7 +243,7 @@ public class Admin extends javax.swing.JFrame {
                 settingsMouseClicked(evt);
             }
         });
-        jPanel3.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 2, 40, 60));
+        jPanel3.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 2, 50, 60));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 720, 60));
 

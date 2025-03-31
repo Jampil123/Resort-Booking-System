@@ -9,6 +9,7 @@ import Authentication.register;
 import com.mysql.jdbc.Statement;
 import config.Session;
 import config.dbConnector;
+import config.util;
 import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
@@ -471,17 +472,16 @@ public class edit_user extends javax.swing.JPanel {
             email_validation.setFont(new Font("Arial", Font.PLAIN, 9));
         }
 
-        // Validate email format
-        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
-
-        if (!email.matches(emailRegex)) {
+         // Validate email format
+        if (!util.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Invalid email format!", "Error", JOptionPane.ERROR_MESSAGE);
             email_input.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
             email_validation1.setText("Invalid email format!");
             email_validation1.setForeground(Color.RED);
             email_validation1.setFont(new Font("Arial", Font.PLAIN, 9));
             return;
-        }
-
+        } 
+       
         dbConnector con = new dbConnector();
         Connection cn = con.getConnection();
 
@@ -511,7 +511,6 @@ public class edit_user extends javax.swing.JPanel {
             }
 
             // Update user details using PreparedStatement and logs the process
-            
             int lastInsertedId = 0;  
             String updateSql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ?, role = ?, status = ? WHERE user_id = ?";
             try (PreparedStatement pst = cn.prepareStatement(updateSql, Statement.RETURN_GENERATED_KEYS)) {
@@ -534,7 +533,7 @@ public class edit_user extends javax.swing.JPanel {
                     
                     // Logging the action
                     String action = "Update user with ID " +user_id.getText();
-                    con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('"+sess.getUser_id()+"', '"+action+"', '"+LocalDateTime.now()+"')");
+                    con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('"+sess.getUser_id()+"', '"+action+"', CURRENT_TIMESTAMP)");
                     JOptionPane.showMessageDialog(null, "User updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     
                     JDialog parentDialog = (JDialog) SwingUtilities.getWindowAncestor(this);

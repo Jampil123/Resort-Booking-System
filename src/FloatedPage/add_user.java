@@ -197,11 +197,6 @@ public class add_user extends javax.swing.JPanel {
                 lastname_inputMouseReleased(evt);
             }
         });
-        lastname_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastname_inputActionPerformed(evt);
-            }
-        });
         jPanel1.add(lastname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 140, 30));
 
         firstname_input.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -219,11 +214,6 @@ public class add_user extends javax.swing.JPanel {
         firstname_input.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 firstname_inputMouseReleased(evt);
-            }
-        });
-        firstname_input.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstname_inputActionPerformed(evt);
             }
         });
         jPanel1.add(firstname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 130, 30));
@@ -445,14 +435,6 @@ public class add_user extends javax.swing.JPanel {
         password_input.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));//        password_validation.setText("");
         password_validation.setText("");
     }//GEN-LAST:event_password_inputMouseReleased
-
-    private void firstname_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstname_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_firstname_inputActionPerformed
-
-    private void lastname_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastname_inputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lastname_inputActionPerformed
 
     private void save_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_save_buttonMouseClicked
         

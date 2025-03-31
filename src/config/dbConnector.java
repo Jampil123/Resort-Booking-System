@@ -32,7 +32,6 @@ public class dbConnector {
         try{
             PreparedStatement pst = connect.prepareStatement(sql);
             pst.executeUpdate();
-            System.out.println("Inserted Successfully! ");
             pst.close();
             result = 1;
         }catch(SQLException ex){

@@ -34,6 +34,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
+        
         //table header layout
         users_table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12)); 
         users_table.getTableHeader().setOpaque(false);

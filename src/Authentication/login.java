@@ -10,8 +10,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class login extends javax.swing.JFrame {
@@ -50,7 +56,7 @@ public class login extends javax.swing.JFrame {
                     sess.setRole(resultSet.getString("role"));
                     sess.setStatus(resultSet.getString("status"));
                     
-                    System.out.println("Session User ID: " + sess.getUser_id());
+//                    System.out.println("Session User ID: " + sess.getUser_id());
                     return true;
                 } else {
                     return false;
@@ -239,34 +245,51 @@ public class login extends javax.swing.JFrame {
             password_validation.setFont(new Font("Arial", Font.PLAIN, 9));
         }
         
-        dbConnector db = new dbConnector(); 
-        Connection con = db.getConnection(); 
+        dbConnector db = new dbConnector();
 
-        if (loginAcc(username, password)) {
-            
-            Session sess = Session.getInstance();
-            String roleFromDB = sess.getRole();
-            String status = sess.getStatus();
+        try (Connection con = db.getConnection()) {
 
-            if ("Pending".equalsIgnoreCase(status)) {
-                JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
+            if (loginAcc(username, password)) {
 
-               
-                if ("Admin".equalsIgnoreCase(roleFromDB)) {
-                    Admin admin = new Admin();
-                    admin.setVisible(true);
-                } else if ("Staff".equalsIgnoreCase(roleFromDB)) {
-                    Staff staff = new Staff();
-                    staff.setVisible(true);
+                Session sess = Session.getInstance();
+                String roleFromDB = sess.getRole();
+                String status = sess.getStatus();
+
+                if ("Pending".equalsIgnoreCase(status)) {
+                    JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    
+                    // Logging the action
+                    String action = "Account login for user ID: " + sess.getUser_id();
+                    String logQuery = "INSERT INTO logs (user_id, action, date_time) VALUES (?, ?, ?)";
+
+                    try (PreparedStatement logStmt = con.prepareStatement(logQuery)) {
+                        logStmt.setInt(1, Integer.parseInt(sess.getUser_id()));
+                        logStmt.setString(2, action);
+                        logStmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+                        logStmt.executeUpdate();
+                    }
+
+                    JOptionPane.showMessageDialog(this, "Login successful! \nYou are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    if ("Admin".equalsIgnoreCase(roleFromDB)) {
+                        Admin admin = new Admin();
+                        admin.setVisible(true);
+                    } else if ("Staff".equalsIgnoreCase(roleFromDB)) {
+                        Staff staff = new Staff();
+                        staff.setVisible(true);
+                    }
+
+                    this.dispose();
                 }
-
-                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
-        }    
+
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle database errors properly in production
+            JOptionPane.showMessageDialog(this, "Database connection error.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_LoginActionPerformed
 
     private void username_inputFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_username_inputFocusGained
