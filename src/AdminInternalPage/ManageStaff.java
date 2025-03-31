@@ -3,13 +3,17 @@ package AdminInternalPage;
 
 import FloatedPage.add_user;
 import FloatedPage.edit_user;
+import config.Session;
 import config.dbConnector;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -134,6 +138,9 @@ public class ManageStaff extends javax.swing.JInternalFrame {
 
         delete.setBackground(new java.awt.Color(51, 51, 51));
         delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 deleteMouseEntered(evt);
             }
@@ -244,6 +251,8 @@ public class ManageStaff extends javax.swing.JInternalFrame {
 
         home.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 100, 30));
 
+        jScrollPane1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
         users_table.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         users_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -335,19 +344,29 @@ public class ManageStaff extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_approvedMouseExited
 
     private void approvedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedMouseClicked
-        int selectedUserId = getSelectedUserId(); // Get the selected user's ID
+        int selectedUserId = getSelectedUserId(); 
 
         if (selectedUserId != -1) {
             try {
-                dbConnector db = new dbConnector(); // Create an instance of dbConnector
-                Connection conn = db.getConnection(); // Get database connection
+                dbConnector db = new dbConnector(); 
+                Connection conn = db.getConnection(); 
 
                 String query = "UPDATE user SET status = 'Approved' WHERE user_id = ?";
-                PreparedStatement pstmt = conn.prepareStatement(query);
+                PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                     pstmt.setInt(1, selectedUserId);
 
                     int rowsUpdated = pstmt.executeUpdate();
             if (rowsUpdated > 0) {
+                ResultSet generatedKeys = pstmt.getGeneratedKeys();
+                    int lastInsertedId = 0;
+                    if (generatedKeys.next()) {
+                        lastInsertedId = generatedKeys.getInt(1);
+                    }
+
+                    // Logging the action
+                    Session sess = Session.getInstance();
+                    String action = "Approved user with ID " + selectedUserId;
+                    db.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
                 JOptionPane.showMessageDialog(this, "User approved successfully!");
             } else {
                 JOptionPane.showMessageDialog(this, "Failed to approve user.");
@@ -454,6 +473,58 @@ public class ManageStaff extends javax.swing.JInternalFrame {
     private void editMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseExited
         edit.setBackground(navcolor);
     }//GEN-LAST:event_editMouseExited
+
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+        int selectedRow = users_table.getSelectedRow(); // Get selected row index
+    
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+            return;
+        }
+
+        // Assuming the ID is in the first column (index 0)
+        int id = Integer.parseInt(users_table.getValueAt(selectedRow, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this record?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                dbConnector con = new dbConnector();
+                Connection cn = con.getConnection();
+                
+                String sql = "DELETE FROM user WHERE user_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                pst.setInt(1, id);
+                
+                
+                int rowsAffected = pst.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    ResultSet generatedKeys = pst.getGeneratedKeys();
+                    int lastInsertedId = 0;
+                    if (generatedKeys.next()) {
+                        lastInsertedId = generatedKeys.getInt(1);
+                    }
+
+                    // Logging the action
+                    Session sess = Session.getInstance();
+                    String action = "Delete user with ID " + id;
+                    con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
+                    JOptionPane.showMessageDialog(this, "Record deleted successfully.");
+
+                    // Remove from JTable model
+                    DefaultTableModel model = (DefaultTableModel) users_table.getModel();
+                    model.removeRow(selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error: Record not found.");
+                }
+
+                pst.close();
+                cn.close();
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error deleting record: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_deleteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

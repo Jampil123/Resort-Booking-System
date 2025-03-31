@@ -2,9 +2,17 @@
 package Dashboards;
 
 import AdminInternalPage.*;
-import Authentication.login;
+
+import FloatedPage.Settings;
 import java.awt.Color;
-import javax.swing.JOptionPane;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
+import javax.swing.JDialog;
+import javax.swing.Timer;
+
 
 public class Admin extends javax.swing.JFrame {
     
@@ -37,7 +45,6 @@ public class Admin extends javax.swing.JFrame {
         homePanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         reports_button = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -45,6 +52,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         mainDesktop = new javax.swing.JDesktopPane();
         jPanel3 = new javax.swing.JPanel();
+        settings = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -177,16 +185,6 @@ public class Admin extends javax.swing.JFrame {
 
         jPanel1.add(homePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 180, 40));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton1.setText("Sign out");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 120, 30));
-
         reports_button.setBackground(new java.awt.Color(51, 51, 51));
         reports_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -237,17 +235,15 @@ public class Admin extends javax.swing.JFrame {
         jPanel2.add(mainDesktop, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 720, 440));
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-        );
+        settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
+        settings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                settingsMouseClicked(evt);
+            }
+        });
+        jPanel3.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 2, 40, 60));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 720, 60));
 
@@ -265,7 +261,7 @@ public class Admin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-     
+    
     private void showHomePage() {
         Home home = new Home();
         mainDesktop.add(home);
@@ -337,15 +333,8 @@ public class Admin extends javax.swing.JFrame {
         homePanel.setBackground(navcolor);
     }//GEN-LAST:event_homePanelMouseExited
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        login login = new login();
-        JOptionPane.showMessageDialog(null, "Logging out", "Log", JOptionPane.INFORMATION_MESSAGE);
-        login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void reports_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reports_buttonMouseClicked
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_reports_buttonMouseClicked
 
     private void reports_buttonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reports_buttonMouseEntered
@@ -355,6 +344,88 @@ public class Admin extends javax.swing.JFrame {
     private void reports_buttonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reports_buttonMouseExited
         reports_button.setBackground(navcolor);
     }//GEN-LAST:event_reports_buttonMouseExited
+    
+    private JDialog settingsDialog; 
+    
+    private void settingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingsMouseClicked
+        if (settingsDialog == null) { // Create only once
+            settingsDialog = new JDialog(this, "Settings", false); // Non-modal
+            Settings newPanel = new Settings(); // Your settings panel
+
+            settingsDialog.add(newPanel);
+            settingsDialog.setUndecorated(true);
+            settingsDialog.setOpacity(1f); // Make sure opacity is enabled
+            settingsDialog.pack();
+
+            // Close when losing focus (optional, you can remove this if you want only icon toggle)
+            settingsDialog.addWindowFocusListener(new WindowFocusListener() {
+                @Override
+                public void windowGainedFocus(WindowEvent e) {
+                }
+                @Override
+                public void windowLostFocus(WindowEvent e) {
+                    fadeOut();
+                }
+            });
+        }
+
+        if (settingsDialog.isVisible()) {
+            fadeOut(); // Smooth fade when hiding
+        } else {
+            // Position top-right
+            Point location = this.getLocationOnScreen();
+            int parentWidth = this.getWidth();
+            int dialogWidth = settingsDialog.getWidth();
+
+            int x = location.x + parentWidth - dialogWidth - 10;
+            int y = location.y + 90;
+
+            settingsDialog.setLocation(x, y);
+
+            settingsDialog.setOpacity(1f); // Reset opacity
+            settingsDialog.setVisible(true);
+            settingsDialog.requestFocus();
+            fadeIn();
+        }
+    }
+    
+    // Fade-in animation
+    private void fadeIn() {
+        Timer timer = new Timer(20, null); // 20ms delay
+        timer.addActionListener(new ActionListener() {
+            float opacity = 0f;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                opacity += 0.1f;
+                if (opacity >= 1f) {
+                    settingsDialog.setOpacity(1f);
+                    timer.stop();
+                } else {
+                    settingsDialog.setOpacity(opacity);
+                }
+            }
+        });
+        timer.start();
+    }
+    
+    // Fade-out animation method
+    private void fadeOut() {
+        Timer timer = new Timer(20, null); // 20ms delay
+        timer.addActionListener(new ActionListener() {
+            float opacity = 1f;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                opacity -= 0.1f;
+                if (opacity <= 0f) {
+                    settingsDialog.setVisible(false);
+                    timer.stop();
+                } else {
+                    settingsDialog.setOpacity(opacity);
+                }
+            }
+        });
+        timer.start();
+    }//GEN-LAST:event_settingsMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -394,7 +465,6 @@ public class Admin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bookingsPanel;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -417,6 +487,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPanel profile_button;
     private javax.swing.JPanel propertiesPanel;
     private javax.swing.JPanel reports_button;
+    private javax.swing.JLabel settings;
     private javax.swing.JPanel usersPanel;
     // End of variables declaration//GEN-END:variables
 }

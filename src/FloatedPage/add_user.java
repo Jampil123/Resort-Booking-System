@@ -2,6 +2,8 @@
 package FloatedPage;
 
 import Authentication.register;
+import com.mysql.jdbc.Statement;
+import config.Session;
 import config.dbConnector;
 import config.passwordHasher;
 import config.util;
@@ -12,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -541,8 +544,7 @@ public class add_user extends javax.swing.JPanel {
         dbConnector con = new dbConnector();
         Connection cn = con.getConnection();
 
-        try {
-            
+       try {
             if (util.isEmailExists(email)) {
                 JOptionPane.showMessageDialog(this, "Email already exists!", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -553,19 +555,31 @@ public class add_user extends javax.swing.JPanel {
                 return;
             }
 
-            // Insert new user securely
+            // Insert new user and log the process correctly
             String insertQuery = "INSERT INTO user (f_name, l_name, username, email, role, password, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement pst = cn.prepareStatement(insertQuery)) {
+            try (PreparedStatement pst = cn.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS)) {
                 pst.setString(1, fname);
                 pst.setString(2, lname);
                 pst.setString(3, uname);
                 pst.setString(4, email);
                 pst.setString(5, role.getSelectedItem().toString());
-                pst.setString(6, hashedPassword); // Store hashed password
+                pst.setString(6, hashedPassword);
                 pst.setString(7, status.getSelectedItem().toString());
 
                 int result = pst.executeUpdate();
+
                 if (result > 0) {
+                    ResultSet generatedKeys = pst.getGeneratedKeys();
+                    int lastInsertedId = 0;
+                    if (generatedKeys.next()) {
+                        lastInsertedId = generatedKeys.getInt(1);
+                    }
+
+                    // Logging the action
+                    Session sess = Session.getInstance();
+                    String action = "Added new user with ID " + lastInsertedId;
+                    con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
+
                     JOptionPane.showMessageDialog(null, "User registered successfully!");
 
                     // Close the registration form (JDialog)
@@ -578,7 +592,6 @@ public class add_user extends javax.swing.JPanel {
                 }
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Database Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {

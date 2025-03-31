@@ -6,6 +6,8 @@
 package FloatedPage;
 
 import Authentication.register;
+import com.mysql.jdbc.Statement;
+import config.Session;
 import config.dbConnector;
 import java.awt.Color;
 import java.awt.Font;
@@ -13,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -507,9 +510,11 @@ public class edit_user extends javax.swing.JPanel {
                 }
             }
 
-            // Update user details using PreparedStatement
+            // Update user details using PreparedStatement and logs the process
+            
+            int lastInsertedId = 0;  
             String updateSql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ?, role = ?, status = ? WHERE user_id = ?";
-            try (PreparedStatement pst = cn.prepareStatement(updateSql)) {
+            try (PreparedStatement pst = cn.prepareStatement(updateSql, Statement.RETURN_GENERATED_KEYS)) {
                 pst.setString(1, firstname_input.getText());
                 pst.setString(2, lastname_input.getText());
                 pst.setString(3, username_input.getText());
@@ -517,21 +522,31 @@ public class edit_user extends javax.swing.JPanel {
                 pst.setString(5, role.getSelectedItem().toString());
                 pst.setString(6, status.getSelectedItem().toString());
                 pst.setString(7, user_id.getText());
-
+ 
                 int rowsUpdated = pst.executeUpdate();
+                
                 if (rowsUpdated > 0) {
+                    ResultSet generatedKeys = pst.getGeneratedKeys();
+                    Session sess = Session.getInstance();
+                    if (generatedKeys.next()){
+                        lastInsertedId = generatedKeys.getInt(1);
+                    }
+                    
+                    // Logging the action
+                    String action = "Update user with ID " +user_id.getText();
+                    con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('"+sess.getUser_id()+"', '"+action+"', '"+LocalDateTime.now()+"')");
                     JOptionPane.showMessageDialog(null, "User updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     
                     JDialog parentDialog = (JDialog) SwingUtilities.getWindowAncestor(this);
                     if (parentDialog != null) {
-                        parentDialog.dispose();  // Closes the JDialog
+                        parentDialog.dispose();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "No user found with the given ID!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } finally {
             try {
