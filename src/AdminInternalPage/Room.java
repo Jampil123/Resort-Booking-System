@@ -3,26 +3,81 @@ package AdminInternalPage;
 
 import FloatedPage.AddRoom;
 import FloatedPage.add_user;
+import config.dbConnector;
 import javax.swing.*; 
 import java.awt.*;    
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 public class Room extends javax.swing.JInternalFrame {
 
     public Room() {
         initComponents();
+        displayData();
         
         //remove border
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);
+        
+        //table header layout
+        room_table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12)); 
+        room_table.getTableHeader().setOpaque(false);
+        room_table.getTableHeader().setBorder(null);
+        room_table.getTableHeader().setBackground(new Color(51, 51, 255));
+        room_table.getTableHeader().setForeground(new Color(255, 255, 255));
+        room_table.setRowHeight(25);
+        
+        // Enable automatic column resizing
+        room_table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+
+        // Adjust column widths based on content
+        resizeColumnWidth(room_table);
     }
         Color navcolor = new Color(51,51,51);
         Color headcolor = new Color(0,0,0);
         Color bodycolor = new Color(102,102,102);
+    
+    private void resizeColumnWidth(JTable table) {
+        final TableColumnModel columnModel = table.getColumnModel();
+        for (int column = 0; column < table.getColumnCount(); column++) {
+            int width = 15; // Min width
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                width = Math.max(comp.getPreferredSize().width + 10, width); // Add padding
+            }
+            columnModel.getColumn(column).setPreferredWidth(width);
+        }
+    }
+        
+    public void displayData(){
+        
+        dbConnector dbc = new dbConnector();
+        try{
+           ResultSet rs = dbc.getData("SELECT * FROM room");         
+           DefaultTableModel model = (DefaultTableModel)room_table.getModel();
+           model.setRowCount(0);
+           
+           while(rs.next()){
+               model.addRow(new String[]{rs.getString(1), 
+                   rs.getString(2), 
+                   rs.getString(3), 
+                   rs.getString(4), 
+                   rs.getString(5), 
+                   rs.getString(6), 
+                   rs.getString(7)});             
+           }
+        }catch(SQLException ex){
+            System.out.println("Errors: "+ex.getMessage());
+        }
+    }
   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

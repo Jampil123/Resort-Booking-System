@@ -2,7 +2,6 @@
 package Effect;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class ShakeButton {
@@ -31,18 +30,5 @@ public class ShakeButton {
 
         timer.setRepeats(true);
         timer.start();
-    }
-
-    // Add Shadow Effect
-    public static void addShadow(JPanel panel) {
-        panel.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(0, 0, 0, 80), 3), // Outer shadow
-            BorderFactory.createEmptyBorder(5, 5, 5, 5) // Padding
-        ));
-    }
-
-    // Remove Shadow Effect
-    public static void removeShadow(JPanel panel) {
-        panel.setBorder(null);
     }
 }
