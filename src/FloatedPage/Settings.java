@@ -43,7 +43,7 @@ public class Settings extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(51, 51, 51));
-        setPreferredSize(new java.awt.Dimension(227, 331));
+        setPreferredSize(new java.awt.Dimension(340, 489));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
@@ -52,14 +52,14 @@ public class Settings extends javax.swing.JPanel {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         settings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/settings.png"))); // NOI18N
-        jPanel1.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
+        jPanel1.add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 40, 40));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Settings");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 90, 60));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 90, 80));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 60));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 80));
 
         profileButton.setBackground(new java.awt.Color(51, 51, 51));
         profileButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -75,15 +75,15 @@ public class Settings extends javax.swing.JPanel {
         });
         profileButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Profile");
-        profileButton.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, 20));
+        profileButton.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, 60));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        profileButton.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 20, 20));
+        profileButton.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 30, 60));
 
-        add(profileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 230, 40));
+        add(profileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 340, 60));
 
         logsButton.setBackground(new java.awt.Color(51, 51, 51));
         logsButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -99,15 +99,15 @@ public class Settings extends javax.swing.JPanel {
         });
         logsButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Logs");
-        logsButton.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, -1, 40));
+        logsButton.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, -1, 60));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/log.png"))); // NOI18N
-        logsButton.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 40));
+        logsButton.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 60));
 
-        add(logsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 230, 40));
+        add(logsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 340, 60));
 
         securityQuestionButton.setBackground(new java.awt.Color(51, 51, 51));
         securityQuestionButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,15 +123,15 @@ public class Settings extends javax.swing.JPanel {
         });
         securityQuestionButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Set up security Questions");
-        securityQuestionButton.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 40));
+        securityQuestionButton.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, -1, 60));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/question.png"))); // NOI18N
-        securityQuestionButton.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        securityQuestionButton.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 60));
 
-        add(securityQuestionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 230, 40));
+        add(securityQuestionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 340, 60));
 
         logoutButton.setBackground(new java.awt.Color(51, 51, 51));
         logoutButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -147,15 +147,15 @@ public class Settings extends javax.swing.JPanel {
         });
         logoutButton.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Logout");
-        logoutButton.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, -1, 40));
+        logoutButton.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, 60));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logout.png"))); // NOI18N
-        logoutButton.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
+        logoutButton.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, 60));
 
-        add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 230, 40));
+        add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 340, 60));
     }// </editor-fold>//GEN-END:initComponents
 
     private void logsButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logsButtonMouseEntered

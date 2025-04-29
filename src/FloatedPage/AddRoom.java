@@ -92,9 +92,9 @@ public class AddRoom extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ADD ROOM");
-        roundedPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 60));
+        roundedPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, -1, 50));
 
-        add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 220, 60));
+        add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 220, 50));
 
         addButton.setBackground(new java.awt.Color(102, 102, 102));
         addButton.setForeground(new java.awt.Color(255, 255, 255));

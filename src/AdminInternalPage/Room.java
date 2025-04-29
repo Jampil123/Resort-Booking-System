@@ -2,7 +2,6 @@
 package AdminInternalPage;
 
 import FloatedPage.AddRoom;
-import FloatedPage.add_user;
 import config.dbConnector;
 import javax.swing.*; 
 import java.awt.*;    
@@ -27,12 +26,12 @@ public class Room extends javax.swing.JInternalFrame {
         bi.setNorthPane(null);
         
         //table header layout
-        room_table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12)); 
+        room_table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14)); 
         room_table.getTableHeader().setOpaque(false);
         room_table.getTableHeader().setBorder(null);
         room_table.getTableHeader().setBackground(new Color(51, 51, 255));
         room_table.getTableHeader().setForeground(new Color(255, 255, 255));
-        room_table.setRowHeight(25);
+        room_table.setRowHeight(30);
         
         // Enable automatic column resizing
         room_table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -85,23 +84,21 @@ public class Room extends javax.swing.JInternalFrame {
 
         home = new javax.swing.JPanel();
         search_bar = new javax.swing.JTextField();
-        delete = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        addRoom = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        approved = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         room_table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        addButton = new Swing.Button();
+        deleteButton = new Swing.Button();
+        editButton = new Swing.Button();
+        jLabel2 = new javax.swing.JLabel();
 
         home.setBackground(new java.awt.Color(255, 255, 255));
-        home.setPreferredSize(new java.awt.Dimension(720, 440));
+        home.setPreferredSize(new java.awt.Dimension(910, 610));
         home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        search_bar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        search_bar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         search_bar.setForeground(new java.awt.Color(153, 153, 153));
         search_bar.setText(" search...");
         search_bar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -123,78 +120,17 @@ public class Room extends javax.swing.JInternalFrame {
                 search_barKeyReleased(evt);
             }
         });
-        home.add(search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 14, 170, 25));
-
-        delete.setBackground(new java.awt.Color(51, 51, 51));
-        delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                deleteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                deleteMouseExited(evt);
-            }
-        });
-        delete.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Delete");
-        delete.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, -1, 30));
-
-        home.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 100, 30));
-
-        addRoom.setBackground(new java.awt.Color(51, 51, 51));
-        addRoom.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addRoomMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addRoomMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                addRoomMouseExited(evt);
-            }
-        });
-        addRoom.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Add Room");
-        addRoom.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 60, 30));
-
-        home.add(addRoom, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 100, 30));
-
-        approved.setBackground(new java.awt.Color(51, 51, 51));
-        approved.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                approvedMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                approvedMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                approvedMouseExited(evt);
-            }
-        });
-        approved.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Edit");
-        approved.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 0, -1, 30));
-
-        home.add(approved, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 100, 30));
+        home.add(search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 240, 30));
 
         jPanel2.setBackground(new java.awt.Color(51, 102, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/magnifier.png"))); // NOI18N
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 20, 20));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        home.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, 25, 25));
+        home.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, 30));
 
-        room_table.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        room_table.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         room_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -225,20 +161,71 @@ public class Room extends javax.swing.JInternalFrame {
         room_table.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(room_table);
 
-        home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 690, 320));
+        home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 870, 440));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
-        home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(674, 4, 30, 40));
+        home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, 30));
+
+        addButton.setBackground(new java.awt.Color(51, 51, 51));
+        addButton.setForeground(new java.awt.Color(255, 255, 255));
+        addButton.setText("Add Room");
+        addButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addButtonMouseExited(evt);
+            }
+        });
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        home.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 530, 120, 50));
+
+        deleteButton.setBackground(new java.awt.Color(51, 51, 51));
+        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteButton.setText("Delete");
+        deleteButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseExited(evt);
+            }
+        });
+        home.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 530, 120, 50));
+
+        editButton.setBackground(new java.awt.Color(51, 51, 51));
+        editButton.setForeground(new java.awt.Color(255, 255, 255));
+        editButton.setText("Edit");
+        editButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                editButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                editButtonMouseExited(evt);
+            }
+        });
+        home.add(editButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 120, 50));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Refresh");
+        home.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -271,15 +258,7 @@ public class Room extends javax.swing.JInternalFrame {
         sorter.setRowFilter(RowFilter.regexFilter(search_bar.getText()));
     }//GEN-LAST:event_search_barKeyReleased
 
-    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
-        delete.setBackground(bodycolor);
-    }//GEN-LAST:event_deleteMouseEntered
-
-    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
-        delete.setBackground(navcolor);
-    }//GEN-LAST:event_deleteMouseExited
-
-    private void addRoomMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRoomMouseClicked
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         JDialog dialog = new JDialog(); // Create a floating window
         AddRoom newPanel = new AddRoom();
 
@@ -288,39 +267,41 @@ public class Room extends javax.swing.JInternalFrame {
         dialog.setLocationRelativeTo(null);
         dialog.setModal(true);
         dialog.setVisible(true);
-    }//GEN-LAST:event_addRoomMouseClicked
+    }//GEN-LAST:event_addButtonActionPerformed
 
-    private void addRoomMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRoomMouseEntered
-        addRoom.setBackground(bodycolor);
-    }//GEN-LAST:event_addRoomMouseEntered
+    private void addButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseEntered
+        addButton.setBackground(bodycolor);
+    }//GEN-LAST:event_addButtonMouseEntered
 
-    private void addRoomMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRoomMouseExited
-        addRoom.setBackground(navcolor);
-    }//GEN-LAST:event_addRoomMouseExited
+    private void addButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseExited
+        addButton.setBackground(navcolor);
+    }//GEN-LAST:event_addButtonMouseExited
 
-    private void approvedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedMouseClicked
+    private void deleteButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseEntered
+        deleteButton.setBackground(bodycolor);
+    }//GEN-LAST:event_deleteButtonMouseEntered
 
-    }//GEN-LAST:event_approvedMouseClicked
+    private void deleteButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseExited
+        deleteButton.setBackground(navcolor);
+    }//GEN-LAST:event_deleteButtonMouseExited
 
-    private void approvedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedMouseEntered
-        approved.setBackground(bodycolor);
-    }//GEN-LAST:event_approvedMouseEntered
+    private void editButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseEntered
+        editButton.setBackground(bodycolor);
+    }//GEN-LAST:event_editButtonMouseEntered
 
-    private void approvedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedMouseExited
-        approved.setBackground(navcolor);
-    }//GEN-LAST:event_approvedMouseExited
+    private void editButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseExited
+        editButton.setBackground(navcolor);
+    }//GEN-LAST:event_editButtonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel addRoom;
-    private javax.swing.JPanel approved;
-    private javax.swing.JPanel delete;
+    private Swing.Button addButton;
+    private Swing.Button deleteButton;
+    private Swing.Button editButton;
     private javax.swing.JPanel home;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable room_table;

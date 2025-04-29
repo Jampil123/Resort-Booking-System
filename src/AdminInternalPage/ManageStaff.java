@@ -1,8 +1,8 @@
 
 package AdminInternalPage;
 
-import FloatedPage.add_user;
-import FloatedPage.edit_user;
+import FloatedPage.addUser;
+import FloatedPage.editUser;
 import config.Session;
 import config.dbConnector;
 import java.awt.Color;
@@ -36,7 +36,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         bi.setNorthPane(null);
         
         //table header layout
-        users_table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12)); 
+        users_table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 14)); 
         users_table.getTableHeader().setOpaque(false);
         users_table.getTableHeader().setBorder(null);
         users_table.getTableHeader().setBackground(new Color(51, 51, 255));
@@ -94,23 +94,19 @@ public class ManageStaff extends javax.swing.JInternalFrame {
 
         home = new javax.swing.JPanel();
         search_bar = new javax.swing.JTextField();
-        delete = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        add_user = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        approved = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        refresh = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        edit = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         users_table = new javax.swing.JTable();
+        deleteButton = new Swing.Button();
+        editButton = new Swing.Button();
+        approvedButton = new Swing.Button();
+        addButton = new Swing.Button();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         home.setBackground(new java.awt.Color(255, 255, 255));
-        home.setPreferredSize(new java.awt.Dimension(720, 440));
+        home.setPreferredSize(new java.awt.Dimension(910, 610));
         home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         search_bar.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
@@ -135,126 +131,19 @@ public class ManageStaff extends javax.swing.JInternalFrame {
                 search_barKeyReleased(evt);
             }
         });
-        home.add(search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 14, 170, 25));
-
-        delete.setBackground(new java.awt.Color(51, 51, 51));
-        delete.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deleteMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                deleteMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                deleteMouseExited(evt);
-            }
-        });
-        delete.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Delete");
-        delete.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 8, -1, -1));
-
-        home.add(delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 100, 30));
-
-        add_user.setBackground(new java.awt.Color(51, 51, 51));
-        add_user.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                add_userMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                add_userMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                add_userMouseExited(evt);
-            }
-        });
-        add_user.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Add User");
-        add_user.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 8, -1, -1));
-
-        home.add(add_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 100, 30));
-
-        approved.setBackground(new java.awt.Color(51, 51, 51));
-        approved.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                approvedMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                approvedMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                approvedMouseExited(evt);
-            }
-        });
-        approved.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Approved");
-        approved.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 8, -1, -1));
-
-        home.add(approved, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 390, 100, 30));
-
-        refresh.setBackground(new java.awt.Color(51, 51, 51));
-        refresh.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                refreshMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                refreshMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                refreshMouseExited(evt);
-            }
-        });
-        refresh.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Refresh");
-        refresh.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 8, -1, -1));
-
-        home.add(refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 100, 30));
+        home.add(search_bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 240, 30));
 
         jPanel2.setBackground(new java.awt.Color(51, 102, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/magnifier.png"))); // NOI18N
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 20, 20));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
-        home.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 14, 25, 25));
-
-        edit.setBackground(new java.awt.Color(51, 51, 51));
-        edit.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                editMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                editMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                editMouseExited(evt);
-            }
-        });
-        edit.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Edit");
-        edit.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 8, -1, -1));
-
-        home.add(edit, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 100, 30));
+        home.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 30, 30));
 
         jScrollPane1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
-        users_table.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        users_table.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         users_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -285,7 +174,95 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         users_table.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(users_table);
 
-        home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 700, 320));
+        home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 870, 450));
+
+        deleteButton.setBackground(new java.awt.Color(51, 51, 51));
+        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteButton.setText("Delete");
+        deleteButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseExited(evt);
+            }
+        });
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+        home.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 540, 100, 50));
+
+        editButton.setBackground(new java.awt.Color(51, 51, 51));
+        editButton.setForeground(new java.awt.Color(255, 255, 255));
+        editButton.setText("Edit");
+        editButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                editButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                editButtonMouseExited(evt);
+            }
+        });
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+        home.add(editButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 540, 100, 50));
+
+        approvedButton.setBackground(new java.awt.Color(51, 51, 51));
+        approvedButton.setForeground(new java.awt.Color(255, 255, 255));
+        approvedButton.setText("Approved");
+        approvedButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        approvedButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                approvedButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                approvedButtonMouseExited(evt);
+            }
+        });
+        approvedButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                approvedButtonActionPerformed(evt);
+            }
+        });
+        home.add(approvedButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 540, 100, 50));
+
+        addButton.setBackground(new java.awt.Color(51, 51, 51));
+        addButton.setForeground(new java.awt.Color(255, 255, 255));
+        addButton.setText("Add User");
+        addButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addButtonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addButtonMouseExited(evt);
+            }
+        });
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+        home.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 540, 100, 50));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Refresh");
+        home.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 530, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -295,9 +272,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(home, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -306,93 +281,6 @@ public class ManageStaff extends javax.swing.JInternalFrame {
     private void search_barActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_barActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_search_barActionPerformed
-
-    private void add_userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_userMouseClicked
-        
-        JDialog dialog = new JDialog(); // Create a floating window
-        add_user newPanel = new add_user();
-
-        dialog.add(newPanel); // Add add_user to the dialog
-        dialog.setSize(325, 500); // Set the size of the window
-        dialog.setLocationRelativeTo(null); // Center the window
-        dialog.setModal(true); // Prevent interactions with the main window until closed
-        dialog.setVisible(true); // Show the floating add_user
-    
-    }//GEN-LAST:event_add_userMouseClicked
-
-    private void add_userMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_userMouseEntered
-        add_user.setBackground(bodycolor);
-    }//GEN-LAST:event_add_userMouseEntered
-
-    private void add_userMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_add_userMouseExited
-        add_user.setBackground(navcolor);
-    }//GEN-LAST:event_add_userMouseExited
-
-    private void deleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseEntered
-        delete.setBackground(bodycolor);
-    }//GEN-LAST:event_deleteMouseEntered
-
-    private void deleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseExited
-        delete.setBackground(navcolor);
-    }//GEN-LAST:event_deleteMouseExited
-
-    private void approvedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedMouseEntered
-        approved.setBackground(bodycolor);
-    }//GEN-LAST:event_approvedMouseEntered
-
-    private void approvedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedMouseExited
-        approved.setBackground(navcolor);
-    }//GEN-LAST:event_approvedMouseExited
-
-    private void approvedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedMouseClicked
-        int selectedUserId = getSelectedUserId(); 
-
-        if (selectedUserId != -1) {
-            try {
-                dbConnector db = new dbConnector(); 
-                Connection conn = db.getConnection(); 
-
-                String query = "UPDATE user SET status = 'Approved' WHERE user_id = ?";
-                PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-                    pstmt.setInt(1, selectedUserId);
-
-                    int rowsUpdated = pstmt.executeUpdate();
-            if (rowsUpdated > 0) {
-                ResultSet generatedKeys = pstmt.getGeneratedKeys();
-                    int lastInsertedId = 0;
-                    if (generatedKeys.next()) {
-                        lastInsertedId = generatedKeys.getInt(1);
-                    }
-
-                    // Logging the action
-                    Session sess = Session.getInstance();
-                    String action = "Approved user with ID " + selectedUserId;
-                    db.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
-                JOptionPane.showMessageDialog(this, "User approved successfully!");
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to approve user.");
-            }
-                pstmt.close();
-                conn.close();
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a user to approve.");
-        }
-    }//GEN-LAST:event_approvedMouseClicked
-
-    private void refreshMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseClicked
-        displayData();
-    }//GEN-LAST:event_refreshMouseClicked
-
-    private void refreshMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseEntered
-        refresh.setBackground(bodycolor);
-    }//GEN-LAST:event_refreshMouseEntered
-
-    private void refreshMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshMouseExited
-        refresh.setBackground(navcolor);
-    }//GEN-LAST:event_refreshMouseExited
 
     private void search_barKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_barKeyReleased
        DefaultTableModel model = (DefaultTableModel)users_table.getModel();
@@ -417,65 +305,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_search_barFocusLost
 
-    private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        int rowIndex = users_table.getSelectedRow();
-        
-        if(rowIndex < 0){
-            JOptionPane.showMessageDialog(null, " Please select an Item!!! ");
-        }else{
-            try{
-                dbConnector dbc = new dbConnector();
-                TableModel tbl = users_table.getModel();
-                ResultSet rs = dbc.getData("SELECT * FROM user WHERE user_id = '" + tbl.getValueAt(rowIndex, 0) + "'");
-                if(rs.next()){
-                    JDialog dialog = new JDialog(); // Create a floating window
-                    edit_user newPanel = new edit_user();
-                    
-                    newPanel.user_id.setText(""+rs.getString("user_id"));
-                    newPanel.firstname_input.setText(""+rs.getString("f_name"));
-                    newPanel.lastname_input.setText(""+rs.getString("l_name"));
-                    newPanel.username_input.setText(""+rs.getString("username"));
-                    newPanel.email_input.setText(""+rs.getString("email"));
-                    newPanel.role.setSelectedItem(""+rs.getString("role"));
-                    newPanel.status.setSelectedItem(""+rs.getString("status"));
-                    
-                    Font arialFont = new Font("Arial", Font.PLAIN, 12);
-
-                    newPanel.firstname_input.setFont(arialFont);
-                    newPanel.firstname_input.setForeground(Color.BLACK);
-
-                    newPanel.lastname_input.setFont(arialFont);
-                    newPanel.lastname_input.setForeground(Color.BLACK);
-
-                    newPanel.username_input.setFont(arialFont);
-                    newPanel.username_input.setForeground(Color.BLACK);
-
-                    newPanel.email_input.setFont(arialFont);
-                    newPanel.email_input.setForeground(Color.BLACK);
-                    
-                    dialog.add(newPanel); // Add add_user to the dialog
-                    dialog.setSize(325, 500); // Set the size of the window
-                    dialog.setLocationRelativeTo(null); // Center the window
-                    dialog.setModal(true); // Prevent interactions with the main window until closed
-                    dialog.setVisible(true); // Show the floating add_user
-                    
-                    
-                }
-            }catch(SQLException ex){
-                System.out.println(""+ex);
-            }    
-        }   
-    }//GEN-LAST:event_editMouseClicked
-
-    private void editMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseEntered
-        edit.setBackground(bodycolor);
-    }//GEN-LAST:event_editMouseEntered
-
-    private void editMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseExited
-        edit.setBackground(navcolor);
-    }//GEN-LAST:event_editMouseExited
-
-    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int selectedRow = users_table.getSelectedRow(); // Get selected row index
     
         if (selectedRow == -1) {
@@ -525,24 +355,152 @@ public class ManageStaff extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Error deleting record: " + e.getMessage());
             }
         }
-    }//GEN-LAST:event_deleteMouseClicked
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        int rowIndex = users_table.getSelectedRow();
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, " Please select an Item!!! ");
+        }else{
+            try{
+                dbConnector dbc = new dbConnector();
+                TableModel tbl = users_table.getModel();
+                ResultSet rs = dbc.getData("SELECT * FROM user WHERE user_id = '" + tbl.getValueAt(rowIndex, 0) + "'");
+                if(rs.next()){
+                    JDialog dialog = new JDialog(); // Create a floating window
+                    editUser newPanel = new editUser();
+                    
+                    newPanel.user_id.setText(""+rs.getString("user_id"));
+                    newPanel.firstname_input.setText(""+rs.getString("f_name"));
+                    newPanel.lastname_input.setText(""+rs.getString("l_name"));
+                    newPanel.username_input.setText(""+rs.getString("username"));
+                    newPanel.email_input.setText(""+rs.getString("email"));
+                    newPanel.role.setSelectedItem(""+rs.getString("role"));
+                    newPanel.status.setSelectedItem(""+rs.getString("status"));
+                    
+                    Font arialFont = new Font("Arial", Font.PLAIN, 12);
+
+                    newPanel.firstname_input.setFont(arialFont);
+                    newPanel.firstname_input.setForeground(Color.BLACK);
+
+                    newPanel.lastname_input.setFont(arialFont);
+                    newPanel.lastname_input.setForeground(Color.BLACK);
+
+                    newPanel.username_input.setFont(arialFont);
+                    newPanel.username_input.setForeground(Color.BLACK);
+
+                    newPanel.email_input.setFont(arialFont);
+                    newPanel.email_input.setForeground(Color.BLACK);
+                    
+                    dialog.add(newPanel); // Add add_user to the dialog
+                    dialog.pack();
+                    dialog.setLocationRelativeTo(null); // Center the window
+                    dialog.setModal(true); // Prevent interactions with the main window until closed
+                    dialog.setVisible(true); // Show the floating add_user
+                    
+                    
+                }
+            }catch(SQLException ex){
+                System.out.println(""+ex);
+            }    
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void approvedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approvedButtonActionPerformed
+        int selectedUserId = getSelectedUserId(); 
+
+        if (selectedUserId != -1) {
+            try {
+                dbConnector db = new dbConnector(); 
+                Connection conn = db.getConnection(); 
+
+                String query = "UPDATE user SET status = 'Approved' WHERE user_id = ?";
+                PreparedStatement pstmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                    pstmt.setInt(1, selectedUserId);
+
+                    int rowsUpdated = pstmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                ResultSet generatedKeys = pstmt.getGeneratedKeys();
+                    int lastInsertedId = 0;
+                    if (generatedKeys.next()) {
+                        lastInsertedId = generatedKeys.getInt(1);
+                    }
+
+                    // Logging the action
+                    Session sess = Session.getInstance();
+                    String action = "Approved user with ID " + selectedUserId;
+                    db.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
+                JOptionPane.showMessageDialog(this, "User approved successfully!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to approve user.");
+            }
+                pstmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a user to approve.");
+        }
+    }//GEN-LAST:event_approvedButtonActionPerformed
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        JDialog dialog = new JDialog(); // Create a floating window
+        addUser newPanel = new addUser();
+
+        dialog.add(newPanel);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setModal(true);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void addButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseEntered
+        addButton.setBackground(bodycolor);
+    }//GEN-LAST:event_addButtonMouseEntered
+
+    private void addButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseExited
+        addButton.setBackground(navcolor);    }//GEN-LAST:event_addButtonMouseExited
+
+    private void editButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseEntered
+        editButton.setBackground(bodycolor);
+    }//GEN-LAST:event_editButtonMouseEntered
+
+    private void editButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseExited
+        editButton.setBackground(navcolor);    }//GEN-LAST:event_editButtonMouseExited
+
+    private void approvedButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedButtonMouseEntered
+        approvedButton.setBackground(bodycolor);
+    }//GEN-LAST:event_approvedButtonMouseEntered
+
+    private void approvedButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedButtonMouseExited
+        approvedButton.setBackground(navcolor);    }//GEN-LAST:event_approvedButtonMouseExited
+
+    private void deleteButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseEntered
+        deleteButton.setBackground(bodycolor);
+    }//GEN-LAST:event_deleteButtonMouseEntered
+
+    private void deleteButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseExited
+        deleteButton.setBackground(navcolor);
+    }//GEN-LAST:event_deleteButtonMouseExited
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        displayData();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel add_user;
-    private javax.swing.JPanel approved;
-    private javax.swing.JPanel delete;
-    private javax.swing.JPanel edit;
+    private Swing.Button addButton;
+    private Swing.Button approvedButton;
+    private Swing.Button deleteButton;
+    private Swing.Button editButton;
     private javax.swing.JPanel home;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel refresh;
     private javax.swing.JTextField search_bar;
     private javax.swing.JTable users_table;
     // End of variables declaration//GEN-END:variables

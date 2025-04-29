@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class ResetPasswordForm extends javax.swing.JFrame {
@@ -37,6 +38,8 @@ public class ResetPasswordForm extends javax.swing.JFrame {
         new_pass = new javax.swing.JLabel();
         show = new javax.swing.JLabel();
         hide = new javax.swing.JLabel();
+        showPass = new javax.swing.JLabel();
+        showPass1 = new javax.swing.JLabel();
         newPasswordField = new javax.swing.JPasswordField();
         confirm_pass = new javax.swing.JLabel();
         show1 = new javax.swing.JLabel();
@@ -47,6 +50,7 @@ public class ResetPasswordForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        panel.setPreferredSize(new java.awt.Dimension(1200, 700));
         panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         mainPanel.setBackground(new java.awt.Color(51, 51, 51));
@@ -57,40 +61,40 @@ public class ResetPasswordForm extends javax.swing.JFrame {
         header.setForeground(new java.awt.Color(102, 102, 102));
         header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Reset Password");
-        header.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, -1));
+        header.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, -1, 250, 80));
 
-        mainPanel.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
+        mainPanel.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 80));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Enter a new password to complete the reset process.");
-        mainPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        mainPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
-        submit_button.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        submit_button.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         submit_button.setText("Submit");
         submit_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submit_buttonActionPerformed(evt);
             }
         });
-        mainPanel.add(submit_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 80, 30));
+        mainPanel.add(submit_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 470, 110, 40));
 
-        cancel_button.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cancel_button.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         cancel_button.setText("Cancel");
         cancel_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancel_buttonActionPerformed(evt);
             }
         });
-        mainPanel.add(cancel_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 80, 30));
+        mainPanel.add(cancel_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 100, 40));
 
-        new_pass.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        new_pass.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         new_pass.setForeground(new java.awt.Color(255, 255, 255));
         new_pass.setText("Enter new Password");
-        mainPanel.add(new_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, -1, -1));
+        mainPanel.add(new_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
 
         show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
         show.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,7 +102,7 @@ public class ResetPasswordForm extends javax.swing.JFrame {
                 showMousePressed(evt);
             }
         });
-        mainPanel.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, 40));
+        mainPanel.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, -1, 50));
 
         hide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hide.png"))); // NOI18N
         hide.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,13 +110,32 @@ public class ResetPasswordForm extends javax.swing.JFrame {
                 hideMousePressed(evt);
             }
         });
-        mainPanel.add(hide, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, 40));
+        mainPanel.add(hide, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, -1, 50));
 
+        showPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
+        showPass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showPassMouseClicked(evt);
+            }
+        });
+        mainPanel.add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, 50));
+
+        showPass1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
+        showPass1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                showPass1MouseClicked(evt);
+            }
+        });
+        mainPanel.add(showPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, -1, 50));
+
+        newPasswordField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        newPasswordField.setForeground(new java.awt.Color(255, 255, 255));
         newPasswordField.setCaretColor(new java.awt.Color(255, 255, 255));
+        newPasswordField.setOpaque(false);
         newPasswordField.setText(" Enter new password...");
         newPasswordField.setEchoChar((char) 0);
         newPasswordField.setForeground(Color.GRAY);
-        newPasswordField.setFont(new Font("Arial", Font.PLAIN, 11));
+        newPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
         newPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 newPasswordFieldFocusGained(evt);
@@ -121,13 +144,13 @@ public class ResetPasswordForm extends javax.swing.JFrame {
                 newPasswordFieldFocusLost(evt);
             }
         });
-        mainPanel.add(newPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 360, 40));
+        mainPanel.add(newPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 580, 50));
 
         confirm_pass.setBackground(new java.awt.Color(255, 255, 255));
-        confirm_pass.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        confirm_pass.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         confirm_pass.setForeground(new java.awt.Color(255, 255, 255));
         confirm_pass.setText("Confirm Password");
-        mainPanel.add(confirm_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
+        mainPanel.add(confirm_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         show1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
         show1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -135,7 +158,7 @@ public class ResetPasswordForm extends javax.swing.JFrame {
                 show1MousePressed(evt);
             }
         });
-        mainPanel.add(show1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, -1, 40));
+        mainPanel.add(show1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, -1, 50));
 
         hide1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hide.png"))); // NOI18N
         hide1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,12 +166,15 @@ public class ResetPasswordForm extends javax.swing.JFrame {
                 hide1MousePressed(evt);
             }
         });
-        mainPanel.add(hide1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, -1, 40));
+        mainPanel.add(hide1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, -1, 50));
 
+        confirmPasswordField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        confirmPasswordField.setForeground(new java.awt.Color(255, 255, 255));
+        confirmPasswordField.setOpaque(false);
         confirmPasswordField.setText(" Confirm password...");
         confirmPasswordField.setEchoChar((char) 0);
         confirmPasswordField.setForeground(Color.GRAY);
-        confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 11));
+        confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
         confirmPasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 confirmPasswordFieldFocusGained(evt);
@@ -157,27 +183,26 @@ public class ResetPasswordForm extends javax.swing.JFrame {
                 confirmPasswordFieldFocusLost(evt);
             }
         });
-        mainPanel.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 360, 40));
+        mainPanel.add(confirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 580, 50));
 
-        panel.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, 360));
+        panel.add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 720, 530));
 
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
-        panel.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        panel.add(logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resort.png"))); // NOI18N
-        panel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        background.setPreferredSize(new java.awt.Dimension(1200, 700));
+        panel.add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -276,8 +301,8 @@ public class ResetPasswordForm extends javax.swing.JFrame {
         if (newPasswordField.getText().equals(" Enter new password...")) {
             newPasswordField.setText("");
             newPasswordField.setEchoChar('*');
-            newPasswordField.setForeground(Color.BLACK);
-            newPasswordField.setFont(new Font("Arial", Font.PLAIN, 12));
+            newPasswordField.setForeground(Color.WHITE);
+            newPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
         }
         hide.setVisible(true);
         show.setVisible(false);
@@ -288,7 +313,7 @@ public class ResetPasswordForm extends javax.swing.JFrame {
             newPasswordField.setText(" Enter new password...");
             newPasswordField.setEchoChar((char) 0);
             newPasswordField.setForeground(Color.GRAY);
-            newPasswordField.setFont(new Font("Arial", Font.PLAIN, 11));
+            newPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
 
             hide.setVisible(false);
             show.setVisible(false);
@@ -299,8 +324,8 @@ public class ResetPasswordForm extends javax.swing.JFrame {
         if (confirmPasswordField.getText().equals(" Confirm password...")) {
             confirmPasswordField.setText("");
             confirmPasswordField.setEchoChar('*');
-            confirmPasswordField.setForeground(Color.BLACK);
-            confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 12));
+            confirmPasswordField.setForeground(Color.WHITE);
+            confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
         }
         hide1.setVisible(true);
         show1.setVisible(false);
@@ -311,7 +336,7 @@ public class ResetPasswordForm extends javax.swing.JFrame {
             confirmPasswordField.setText(" Confirm password...");
             confirmPasswordField.setEchoChar((char) 0);
             confirmPasswordField.setForeground(Color.GRAY);
-            confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 11));
+            confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
 
             hide1.setVisible(false);
             show1.setVisible(false);
@@ -341,6 +366,40 @@ public class ResetPasswordForm extends javax.swing.JFrame {
         hide1.setVisible(false);
         confirmPasswordField.setEchoChar((char) 0); 
     }//GEN-LAST:event_hide1MousePressed
+    private boolean pass_visible = false;
+    private void showPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPassMouseClicked
+        pass_visible = !pass_visible;
+        String currentText = newPasswordField.getText().trim();
+
+        if (pass_visible) {
+            if (!currentText.equals("")) {
+                newPasswordField.setEchoChar((char) 0);
+            }
+            showPass.setIcon(new ImageIcon(getClass().getResource("/images/eye.png")));
+        } else {
+            if (!currentText.equals("")) {
+                newPasswordField.setEchoChar('•');
+            }
+            showPass.setIcon(new ImageIcon(getClass().getResource("/images/hidden.png")));
+        }
+    }//GEN-LAST:event_showPassMouseClicked
+
+    private void showPass1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPass1MouseClicked
+        pass_visible = !pass_visible;
+        String currentText = confirmPasswordField.getText().trim();
+
+        if (pass_visible) {
+            if (!currentText.equals("")) {
+                confirmPasswordField.setEchoChar((char) 0);
+            }
+            showPass1.setIcon(new ImageIcon(getClass().getResource("/images/eye.png")));
+        } else {
+            if (!currentText.equals("")) {
+                confirmPasswordField.setEchoChar('•');
+            }
+            showPass1.setIcon(new ImageIcon(getClass().getResource("/images/hidden.png")));
+        }
+    }//GEN-LAST:event_showPass1MouseClicked
 
    
     public static void main(String args[]) {
@@ -392,6 +451,8 @@ public class ResetPasswordForm extends javax.swing.JFrame {
     private javax.swing.JPanel panel;
     private javax.swing.JLabel show;
     private javax.swing.JLabel show1;
+    private javax.swing.JLabel showPass;
+    private javax.swing.JLabel showPass1;
     private javax.swing.JButton submit_button;
     // End of variables declaration//GEN-END:variables
 }

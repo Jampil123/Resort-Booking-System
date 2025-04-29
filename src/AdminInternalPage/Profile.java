@@ -33,7 +33,6 @@ public class Profile extends javax.swing.JInternalFrame {
         label_username = new javax.swing.JLabel();
         label_name = new javax.swing.JLabel();
         label_role1 = new javax.swing.JLabel();
-        SetupSecurityQuestion = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         firstname_input = new javax.swing.JTextField();
@@ -65,86 +64,79 @@ public class Profile extends javax.swing.JInternalFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel1.setPreferredSize(new java.awt.Dimension(720, 440));
+        jPanel1.setPreferredSize(new java.awt.Dimension(910, 610));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/profile.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 190, 160));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 200, 170));
 
+        label_username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         label_username.setText("@username");
-        jPanel2.add(label_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, -1, -1));
+        jPanel2.add(label_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
 
-        label_name.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        label_name.setText("                  Name");
-        jPanel2.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 230, -1));
+        label_name.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        label_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_name.setText("Name");
+        jPanel2.add(label_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 400, -1));
 
-        label_role1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        label_role1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         label_role1.setText("Admin");
-        jPanel2.add(label_role1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
+        jPanel2.add(label_role1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
 
-        SetupSecurityQuestion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        SetupSecurityQuestion.setText("Set up Security Question");
-        SetupSecurityQuestion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SetupSecurityQuestionMouseClicked(evt);
-            }
-        });
-        jPanel2.add(SetupSecurityQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 280, 380));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 400, 550));
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel2.setText("First Name");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 23, -1, -1));
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
         firstname_input.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel4.add(firstname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 280, 30));
+        jPanel4.add(firstname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 360, 50));
 
         lastname_input.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel4.add(lastname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 280, 30));
+        jPanel4.add(lastname_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 360, 50));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel3.setText("Last Name");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setText("Username");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
         username_input.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel4.add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 280, 30));
+        jPanel4.add(username_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 360, 50));
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setText("Email");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         email_input.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel4.add(email_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 280, 30));
+        jPanel4.add(email_input, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 360, 50));
 
-        update_button.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        update_button.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         update_button.setText("Update");
         update_button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 update_buttonMouseClicked(evt);
             }
         });
-        jPanel4.add(update_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, -1, -1));
+        jPanel4.add(update_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 510, -1, -1));
 
-        change_pass.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        change_pass.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         change_pass.setText("Change Password");
         change_pass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 change_passMouseClicked(evt);
             }
         });
-        jPanel4.add(change_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+        jPanel4.add(change_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 30, 350, 380));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 420, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,7 +146,7 @@ public class Profile extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -254,20 +246,8 @@ public class Profile extends javax.swing.JInternalFrame {
         dialog.setVisible(true); // Show the floating add_user
     }//GEN-LAST:event_change_passMouseClicked
 
-    private void SetupSecurityQuestionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SetupSecurityQuestionMouseClicked
-        JDialog dialog = new JDialog(); // Create a floating window
-        setupSecurity newPanel = new setupSecurity();
-
-        dialog.add(newPanel); // Add add_user to the dialog
-        dialog.pack(); // Automatically set size based on the panel's preferred size
-        dialog.setLocationRelativeTo(null); // Center the window
-        dialog.setModal(true); // Prevent interactions with the main window until closed
-        dialog.setVisible(true); // Show the floating add_user
-    }//GEN-LAST:event_SetupSecurityQuestionMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel SetupSecurityQuestion;
     private javax.swing.JLabel change_pass;
     private javax.swing.JTextField email_input;
     private javax.swing.JTextField firstname_input;

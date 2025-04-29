@@ -72,60 +72,58 @@ public class ForgotPassword extends javax.swing.JFrame {
         header.setForeground(new java.awt.Color(102, 102, 102));
         header.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Find Your Account");
-        header.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, -1));
+        header.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 250, 80));
 
-        jPanel2.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
+        jPanel2.add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 80));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Please Enter your username or email to search for your account. ");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
-        search_field.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel2.add(search_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 360, 40));
+        search_field.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        search_field.setText("  ");
+        jPanel2.add(search_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 620, 50));
 
-        search_button.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        search_button.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         search_button.setText("Search");
         search_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_buttonActionPerformed(evt);
             }
         });
-        jPanel2.add(search_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 80, 30));
+        jPanel2.add(search_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 480, 120, 40));
 
-        cancel_button.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        cancel_button.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         cancel_button.setText("Cancel");
         cancel_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancel_buttonActionPerformed(evt);
             }
         });
-        jPanel2.add(cancel_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 80, 30));
+        jPanel2.add(cancel_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 480, 110, 40));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, 360));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 690, 550));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resort.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel2.setPreferredSize(new java.awt.Dimension(1200, 700));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();

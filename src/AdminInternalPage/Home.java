@@ -35,7 +35,8 @@ public class Home extends javax.swing.JInternalFrame {
 
         jLabel1.setText("jLabel1");
 
-        home.setBackground(new java.awt.Color(204, 204, 204));
+        home.setBackground(new java.awt.Color(153, 153, 153));
+        home.setPreferredSize(new java.awt.Dimension(910, 610));
         home.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(102, 255, 255));
@@ -50,7 +51,7 @@ public class Home extends javax.swing.JInternalFrame {
 
         jPanel3.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 30));
 
-        home.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 150, 140));
+        home.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 240, 230, 240));
 
         jPanel5.setBackground(new java.awt.Color(102, 255, 255));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,7 +65,7 @@ public class Home extends javax.swing.JInternalFrame {
 
         jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 30));
 
-        home.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 150, 140));
+        home.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 260, 260));
 
         jPanel7.setBackground(new java.awt.Color(102, 255, 255));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,17 +93,17 @@ public class Home extends javax.swing.JInternalFrame {
 
         jPanel9.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 30));
 
-        home.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 150, 140));
+        home.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 200, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+            .addComponent(home, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

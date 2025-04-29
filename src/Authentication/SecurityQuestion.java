@@ -45,75 +45,78 @@ public class SecurityQuestion extends javax.swing.JFrame {
         jPanel3.setForeground(new java.awt.Color(102, 102, 102));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Verify Your Identity");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 190, -1));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 260, -1));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 60));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 70));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Answer your security question to reset your password.");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
-        answerField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel2.add(answerField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 360, 40));
+        answerField2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        answerField2.setText("  ");
+        jPanel2.add(answerField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, 560, 50));
 
-        submit_button.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        submit_button.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         submit_button.setText("Submit");
         submit_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 submit_buttonActionPerformed(evt);
             }
         });
-        jPanel2.add(submit_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 80, 30));
+        jPanel2.add(submit_button, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 100, 40));
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 80, 30));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 100, 40));
 
-        answerField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jPanel2.add(answerField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 360, 40));
+        answerField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        answerField1.setText("  ");
+        jPanel2.add(answerField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 560, 50));
 
-        question2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        question2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         question2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What was the name of your first pet?", "What is the name of the street you grew up on?", "What was your childhood best friend’s name?" }));
         question2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 question2ActionPerformed(evt);
             }
         });
-        jPanel2.add(question2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 280, 30));
+        jPanel2.add(question2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 390, 30));
 
-        question1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        question1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         question1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What is the name of your favorite teacher?", "What is the title of your favorite book?", "What is your mother’s maiden name?" }));
-        jPanel2.add(question1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 280, 30));
+        jPanel2.add(question1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 390, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, 360));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 680, 510));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Logo.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/resort.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel2.setMaximumSize(new java.awt.Dimension(1200, 700));
+        jLabel2.setMinimumSize(new java.awt.Dimension(1200, 700));
+        jLabel2.setPreferredSize(new java.awt.Dimension(1200, 700));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 700));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1200, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
