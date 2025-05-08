@@ -2,7 +2,6 @@
 package AdminInternalPage;
 
 import FloatedPage.change_pass;
-import FloatedPage.setupSecurity;
 import config.Session;
 import config.dbConnector;
 import java.sql.Connection;

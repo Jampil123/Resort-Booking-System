@@ -81,16 +81,16 @@ public class editCottage extends javax.swing.JPanel {
         jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, -1, -1));
 
         name_validation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(name_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 210, 10));
+        jPanel1.add(name_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 210, 10));
 
         location_validation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(location_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 210, 10));
+        jPanel1.add(location_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 210, 10));
 
         capacity_validation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(capacity_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 210, 10));
+        jPanel1.add(capacity_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 210, 10));
 
         price_validation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(price_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 210, 10));
+        jPanel1.add(price_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 210, 10));
 
         name_field.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         name_field.setLabelText("Name");
@@ -141,8 +141,52 @@ public class editCottage extends javax.swing.JPanel {
     }//GEN-LAST:event_updateButtonMouseExited
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        String Name = name_field.getText();
+        String Capacity = capacity_field.getText();
+        String Location = location_field.getText();
+        String Price = price_field.getText();
 
+        Boolean error = true;
 
+        // Validate Name
+        if (Name.isEmpty()) {
+            name_validation.setText("Name field is empty");
+            name_validation.setForeground(Color.RED);
+            name_validation.setFont(new Font("Arial", Font.PLAIN, 9));
+            error = false;
+        } else {
+            name_validation.setText(""); 
+        }
+
+        // Validate Capacity
+        if (Capacity.isEmpty()) {
+            capacity_validation.setText("Capacity field is empty");
+            capacity_validation.setForeground(Color.RED);
+            capacity_validation.setFont(new Font("Arial", Font.PLAIN, 9));
+            error = false;
+        } else {
+            capacity_validation.setText("");
+        }
+
+        // Validate Location
+        if (Location.isEmpty()) {
+            location_validation.setText("Location field is empty");
+            location_validation.setForeground(Color.RED);
+            location_validation.setFont(new Font("Arial", Font.PLAIN, 9));
+            error = false;
+        } else {
+            location_validation.setText("");
+        }
+
+        // Validate Price
+        if (Price.isEmpty()) {
+            price_validation.setText("Price field is empty");
+            price_validation.setForeground(Color.RED);
+            price_validation.setFont(new Font("Arial", Font.PLAIN, 9));
+            error = false;
+        } else {
+            price_validation.setText("");
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseClicked

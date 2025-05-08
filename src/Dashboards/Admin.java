@@ -104,7 +104,7 @@ public class Admin extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Bookings");
-        bookingsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, 50));
+        bookingsPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, -1, 60));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/book.png"))); // NOI18N
         bookingsPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 30, 30));
@@ -284,7 +284,8 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_usersPanelMouseExited
 
     private void bookingsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingsPanelMouseClicked
-        // TODO add your handling code here:
+        Bookings book = new Bookings();
+        mainDesktop.add(book).setVisible(true);
     }//GEN-LAST:event_bookingsPanelMouseClicked
 
     private void bookingsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bookingsPanelMouseEntered

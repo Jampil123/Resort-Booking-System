@@ -1,6 +1,7 @@
 
 package AdminInternalPage;
 
+import javax.swing.JDesktopPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class Home extends javax.swing.JInternalFrame {
@@ -68,6 +69,11 @@ public class Home extends javax.swing.JInternalFrame {
         home.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 260, 260));
 
         jPanel7.setBackground(new java.awt.Color(102, 255, 255));
+        jPanel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel7MouseClicked(evt);
+            }
+        });
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel8.setBackground(new java.awt.Color(0, 255, 255));
@@ -108,6 +114,11 @@ public class Home extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel7MouseClicked
+        ManageStaff ms = new ManageStaff();
+        Effect.TransitionEffect.fadeOutAndOpen(this, ms);
+    }//GEN-LAST:event_jPanel7MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

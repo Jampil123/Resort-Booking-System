@@ -82,16 +82,16 @@ public class addCottage extends javax.swing.JPanel {
         jPanel1.add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, -1, -1));
 
         name_validation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(name_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 210, 10));
+        jPanel1.add(name_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, 210, 10));
 
         location_validation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(location_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 210, 10));
+        jPanel1.add(location_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, 210, 10));
 
         capacity_validation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(capacity_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 230, 210, 10));
+        jPanel1.add(capacity_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 210, 10));
 
         price_validation.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jPanel1.add(price_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 210, 10));
+        jPanel1.add(price_validation, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 210, 10));
 
         name.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         name.setLabelText("Name");
