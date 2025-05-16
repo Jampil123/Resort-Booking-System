@@ -14,33 +14,48 @@ public class panelPrinter implements Printable {
     }
 
    @Override
-public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-    if (pageIndex > 0) {
-        return Printable.NO_SUCH_PAGE;
+    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
+        if (pageIndex > 0) {
+            return NO_SUCH_PAGE;
+        }
+
+        Graphics2D g2d = (Graphics2D) graphics;
+
+        // Set up paper size (Letter)
+        Paper paper = new Paper();
+        double width = 8.5 * 72; // 612 points
+        double height = 11 * 72; // 792 points
+        paper.setSize(width, height);
+
+        // Set 0.5 inch margins (36 points)
+        paper.setImageableArea(36, 36, width - 72, height - 72); 
+        pageFormat.setPaper(paper);
+
+        // Get the printable area
+        double imageableX = pageFormat.getImageableX();
+        double imageableY = pageFormat.getImageableY();
+        double imageableWidth = pageFormat.getImageableWidth();
+        double imageableHeight = pageFormat.getImageableHeight();
+
+        // Get panel size
+        double panelWidth = panelToPrint.getWidth();
+        double panelHeight = panelToPrint.getHeight();
+
+        // Calculate scale to fit panel within printable area
+        double scaleX = imageableWidth / panelWidth;
+        double scaleY = imageableHeight / panelHeight;
+        double scale = Math.min(scaleX, scaleY); // Keep aspect ratio
+
+        // Translate and scale graphics context
+        g2d.translate(imageableX, imageableY);
+        g2d.scale(scale, scale);
+
+        // Print panel
+        panelToPrint.printAll(g2d);
+
+        return PAGE_EXISTS;
     }
-    Graphics2D g2d = (Graphics2D) graphics;
-    // Set page format to bond paper (8.5 x 11 inches)
-    pageFormat.setOrientation(PageFormat.PORTRAIT);
-    pageFormat.setPaper(new Paper());
-    Paper paper = pageFormat.getPaper();
-    double width = 8.5 * 72; // 8.5 inches converted to points (1 inch = 72 points)
-    double height = 11 * 72; // 11 inches converted to points
-    paper.setSize(width, height);
-    paper.setImageableArea(0, 0, width, height);
-    pageFormat.setPaper(paper);
 
-    // Translate graphics context to center of the page with one-inch top margin
-    double panelWidth = panelToPrint.getPreferredSize().getWidth();
-    double panelHeight = panelToPrint.getPreferredSize().getHeight();
-    double xOffset = (pageFormat.getImageableWidth() - panelWidth) / 2;
-    double yOffset = pageFormat.getImageableY() + 72; // One-inch margin at the top
-    g2d.translate(pageFormat.getImageableX() + xOffset, yOffset);
-
-    // Make sure the panel is fully rendered before printing
-    panelToPrint.printAll(graphics);
-
-    return Printable.PAGE_EXISTS;
-}
 
 
     public void printPanel() {

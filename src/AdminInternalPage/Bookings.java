@@ -2,7 +2,7 @@
 package AdminInternalPage;
 
 import FloatedPage.addBookings;
-import ReceiptPrinting.Printing;
+import ReceiptPrinting.IndividualPrinting;
 import config.Session;
 import config.dbConnector;
 import java.awt.Color;
@@ -90,6 +90,7 @@ public class Bookings extends javax.swing.JInternalFrame {
         approvedButton = new Swing.Button();
         rejectButton = new Swing.Button();
         deleteButton = new Swing.Button();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(910, 610));
@@ -216,6 +217,14 @@ public class Bookings extends javax.swing.JInternalFrame {
         });
         jPanel1.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 560, 120, 40));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 565, -1, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -272,7 +281,7 @@ public class Bookings extends javax.swing.JInternalFrame {
                     }
 
                     JDialog dialog = new JDialog();
-                    Printing pr = new Printing();
+                    IndividualPrinting pr = new IndividualPrinting();
 
                     LocalDate currentDate = LocalDate.now();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -477,12 +486,17 @@ public class Bookings extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addButton;
     private Swing.Button approvedButton;
     private javax.swing.JTable booking_table;
     private Swing.Button deleteButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
