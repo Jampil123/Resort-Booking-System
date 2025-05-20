@@ -69,17 +69,17 @@ public class Logs extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         logsTable = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        roundedPanel1 = new Swing.RoundedPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(51, 51, 51));
+        setBackground(new java.awt.Color(255, 255, 255));
         setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        setPreferredSize(new java.awt.Dimension(531, 500));
+        setPreferredSize(new java.awt.Dimension(653, 700));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
-        logsTable.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        logsTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         logsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -109,25 +109,25 @@ public class Logs extends javax.swing.JPanel {
         logsTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(logsTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 490, 350));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 610, 570));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        roundedPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("USER LOGS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        roundedPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 1, 400, 50));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 50));
+        add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 420, 50));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable logsTable;
+    private Swing.RoundedPanel roundedPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,7 +19,9 @@ public class Admin extends javax.swing.JFrame {
     public Admin() {
         initComponents();
         showHomePage();
+        
     }
+
         Color navcolor = new Color(51,51,51);
         Color headcolor = new Color(0,0,0);
         Color bodycolor = new Color(102,102,102);
