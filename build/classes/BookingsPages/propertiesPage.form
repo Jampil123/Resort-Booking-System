@@ -198,7 +198,6 @@
         </Component>
         <Component class="Swing.TextField" name="checkInField">
           <Properties>
-            <Property name="text" type="java.lang.String" value=""/>
             <Property name="labelText" type="java.lang.String" value="Check-In Date"/>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
@@ -238,14 +237,13 @@
                 <Component class="javax.swing.JTable" name="roomTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="7" rowCount="4">
+                      <Table columnCount="6" rowCount="4">
                         <Column editable="false" title="Id" type="java.lang.Object"/>
                         <Column editable="false" title="Room Number" type="java.lang.Object"/>
                         <Column editable="false" title="Room Type" type="java.lang.Object"/>
                         <Column editable="false" title="Bed Type" type="java.lang.Object"/>
                         <Column editable="false" title="Capacity" type="java.lang.Object"/>
                         <Column editable="false" title="Price Per Night" type="java.lang.Object"/>
-                        <Column editable="false" title="Status" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -281,13 +279,12 @@
                 <Component class="javax.swing.JTable" name="cottageTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="4">
+                      <Table columnCount="5" rowCount="4">
                         <Column editable="false" title="Id" type="java.lang.Object"/>
                         <Column editable="false" title="Name" type="java.lang.Object"/>
                         <Column editable="false" title="Location" type="java.lang.Object"/>
                         <Column editable="false" title="Capacity" type="java.lang.Object"/>
                         <Column editable="false" title="Price" type="java.lang.Object"/>
-                        <Column editable="false" title="Status" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

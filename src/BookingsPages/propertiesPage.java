@@ -42,34 +42,37 @@ public class propertiesPage extends javax.swing.JInternalFrame {
         bi.setNorthPane(null);
     }
     
-    public void displayDataTbl_room(){
-        
+    public void displayDataTbl_room() {
         dbConnector dbc = new dbConnector();
-        try{
-           ResultSet rs = dbc.getData("SELECT * FROM room");         
-           DefaultTableModel model = (DefaultTableModel)roomTable.getModel();
-           model.setRowCount(0);
-           
-           while(rs.next()){
-               model.addRow(new String[]{
-                   rs.getString(1), 
-                   rs.getString(2),
-                   rs.getString(3),
-                   rs.getString(4),
-                   rs.getString(5), 
-                   rs.getString(6), 
-                   rs.getString(7)});             
-           }
-        }catch(SQLException ex){
-            System.out.println("Errors: "+ex.getMessage());
+        try {
+            // Modify this query to match your column name and value for availability
+            ResultSet rs = dbc.getData("SELECT * FROM room WHERE status = 'Available'");
+
+            DefaultTableModel model = (DefaultTableModel) roomTable.getModel();
+            model.setRowCount(0);
+
+            while (rs.next()) {
+                model.addRow(new String[] {
+                    rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7)
+                });
+            }
+        } catch (SQLException ex) {
+            System.out.println("Errors: " + ex.getMessage());
         }
-    } 
+    }
+
     
     public void displayDataTbl_cottage(){
         
         dbConnector dbc = new dbConnector();
         try{
-           ResultSet rs = dbc.getData("SELECT * FROM cottage");         
+           ResultSet rs = dbc.getData("SELECT * FROM cottage WHERE status = 'Available'");         
            DefaultTableModel model = (DefaultTableModel)cottageTable.getModel();
            model.setRowCount(0);
            
@@ -192,7 +195,6 @@ public class propertiesPage extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, -1, -1));
 
-        checkInField.setText("");
         checkInField.setLabelText("Check-In Date");
         checkInField.setOpaque(false);
         jPanel1.add(checkInField, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 310, -1));
@@ -203,17 +205,17 @@ public class propertiesPage extends javax.swing.JInternalFrame {
 
         roomTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Room Number", "Room Type", "Bed Type", "Capacity", "Price Per Night", "Status"
+                "Id", "Room Number", "Room Type", "Bed Type", "Capacity", "Price Per Night"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -233,17 +235,17 @@ public class propertiesPage extends javax.swing.JInternalFrame {
 
         cottageTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Name", "Location", "Capacity", "Price", "Status"
+                "Id", "Name", "Location", "Capacity", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

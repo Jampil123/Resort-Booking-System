@@ -4,9 +4,24 @@ package AdminInternalPage;
 import FloatedPage.change_pass;
 import config.Session;
 import config.dbConnector;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -15,12 +30,106 @@ public class Profile extends javax.swing.JInternalFrame {
          
     public Profile() {
         initComponents();
-            
+        image.setPreferredSize(new Dimension(150, 150));
+        this.pack(); // Ensures the layout is computed, giving components their sizes
+   
         //remove border
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI bi = (BasicInternalFrameUI)this.getUI();
         bi.setNorthPane(null);  
     }
+    
+    public String destination = "";
+    File selectedFile;
+    public String oldpath;
+    public String path;
+    
+    public int FileExistenceChecker(String path){
+        File file = new File(path);
+        String fileName = file.getName();
+        
+        Path filePath = Paths.get("src/images", fileName);
+        boolean fileExists = Files.exists(filePath);
+        
+        if (fileExists) {
+            return 1;
+        } else {
+            return 0;
+        }
+    
+    }
+    
+    public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }
+    
+    public ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+        ImageIcon MyImage;
+
+        if (ImagePath != null) {
+            MyImage = new ImageIcon(ImagePath);
+        } else {
+            MyImage = new ImageIcon(pic);
+        }
+
+        Image img = MyImage.getImage();
+
+        int width = label.getWidth() > 0 ? label.getWidth() : 100; // fallback width
+        int originalWidth = MyImage.getIconWidth();
+        int originalHeight = MyImage.getIconHeight();
+
+        int newHeight = (int) ((double) width / originalWidth * originalHeight);
+
+        Image newImg = img.getScaledInstance(width, newHeight, Image.SCALE_SMOOTH);
+        return new ImageIcon(newImg);
+    }
+
+
+        private void loadProfilePicture(String userId) {
+            try (Connection con = new dbConnector().getConnection();
+                 PreparedStatement pst = con.prepareStatement("SELECT profile_pic FROM user WHERE user_id = ?")) {
+
+                pst.setString(1, userId);
+                try (ResultSet rs = pst.executeQuery()) {
+                    if (rs.next()) {
+                        String fileName = rs.getString("profile_pic");
+                        if (fileName != null && !fileName.isEmpty()) {
+                            // Construct full image path
+                            String imagePath = "src/userImages/" + fileName;
+
+                            // Resize and set the image using your method
+                            ImageIcon resizedIcon = ResizeImage(imagePath, null, image);
+                            image.setIcon(resizedIcon);
+                        } else {
+                            image.setIcon(null); // or default
+                        }
+                    }
+                }
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error loading profile picture: " + e.getMessage());
+            }
+        }
+
+
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -28,10 +137,13 @@ public class Profile extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         label_username = new javax.swing.JLabel();
         label_name = new javax.swing.JLabel();
         label_role1 = new javax.swing.JLabel();
+        addButton = new javax.swing.JLabel();
+        roundedPanel1 = new Swing.RoundedPanel();
+        image = new javax.swing.JLabel();
+        uploadButton = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         firstname_input = new javax.swing.JTextField();
@@ -69,12 +181,9 @@ public class Profile extends javax.swing.JInternalFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/profile.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 200, 170));
-
         label_username.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         label_username.setText("@username");
-        jPanel2.add(label_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
+        jPanel2.add(label_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, -1, -1));
 
         label_name.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         label_name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -84,6 +193,32 @@ public class Profile extends javax.swing.JInternalFrame {
         label_role1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         label_role1.setText("Admin");
         jPanel2.add(label_role1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, -1, -1));
+
+        addButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
+        addButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addButtonMouseClicked(evt);
+            }
+        });
+        jPanel2.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 40, 40));
+
+        roundedPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        roundedPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        image.setBackground(new java.awt.Color(204, 204, 204));
+        image.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/profile.png"))); // NOI18N
+        roundedPanel1.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 170));
+
+        jPanel2.add(roundedPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 220, 190));
+
+        uploadButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        uploadButton.setText("Upload");
+        uploadButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                uploadButtonMouseClicked(evt);
+            }
+        });
+        jPanel2.add(uploadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 400, 550));
 
@@ -158,7 +293,8 @@ public class Profile extends javax.swing.JInternalFrame {
         label_name.setText(fullName);
         
         label_username.setText("@"+sess.getUsername());
-        
+        // ✅ Load and resize profile picture from DB
+        loadProfilePicture(sess.getUser_id()); 
         firstname_input.setText(""+sess.getF_name());
         lastname_input.setText(""+sess.getL_name());
         username_input.setText(""+sess.getUsername());
@@ -204,7 +340,7 @@ public class Profile extends javax.swing.JInternalFrame {
                 return;
             }
 
-            String sql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ? WHERE user_id = ?";
+            String sql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ?, profile_pic = ? WHERE user_id = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, newFirstName);
             pst.setString(2, newLastName);
@@ -245,12 +381,112 @@ public class Profile extends javax.swing.JInternalFrame {
         dialog.setVisible(true); // Show the floating add_user
     }//GEN-LAST:event_change_passMouseClicked
 
+    private void addButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addButtonMouseClicked
+        JFileChooser fileChooser = new JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            try {
+                selectedFile = fileChooser.getSelectedFile();
+                destination = "src/userImages/" + selectedFile.getName();
+                path  = selectedFile.getAbsolutePath();
+
+
+                if(FileExistenceChecker(path) == 1){
+                  JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                    destination = "";
+                    path="";
+                }else{
+                    image.setIcon(ResizeImage(path, null, image));
+                }
+            } catch (Exception ex) {
+                System.out.println("File Error!");
+            }
+        }
+    }//GEN-LAST:event_addButtonMouseClicked
+
+    private void uploadButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_uploadButtonMouseClicked
+
+       if (selectedFile == null) {
+            JOptionPane.showMessageDialog(null, "No file selected. Please choose a file first.");
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(
+            null,
+            "Do you want to change your profile picture?",
+            "Change Profile Picture",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            String fileName = selectedFile.getName();
+            File destFile = new File("src/userImages/" + fileName);
+
+            // Get old profile picture filename from database
+            dbConnector cn = new dbConnector();
+            Connection con = cn.getConnection();
+            Session UserSession = Session.getInstance();
+
+            String selectSql = "SELECT profile_pic FROM user WHERE user_id = ?";
+            PreparedStatement selectPst = con.prepareStatement(selectSql);
+            selectPst.setString(1, UserSession.getUser_id());
+
+            String oldFileName = null;
+            try (ResultSet rs = selectPst.executeQuery()) {
+                if (rs.next()) {
+                    oldFileName = rs.getString("profile_pic");
+                }
+            }
+            selectPst.close();
+
+            // Delete old file if it exists and is different from new file
+            if (oldFileName != null && !oldFileName.isEmpty() && !oldFileName.equals(fileName)) {
+                File oldFile = new File("src/userImages/" + oldFileName);
+                if (oldFile.exists()) {
+                    boolean deleted = oldFile.delete();
+                    if (!deleted) {
+                        System.out.println("Warning: Could not delete old profile picture: " + oldFileName);
+                    }
+                }
+            }
+
+            // Copy new file, overwriting if it exists
+            Files.copy(selectedFile.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            // Update database with new filename
+            String updateSql = "UPDATE user SET profile_pic = ? WHERE user_id = ?";
+            PreparedStatement updatePst = con.prepareStatement(updateSql);
+            updatePst.setString(1, fileName);
+            updatePst.setString(2, UserSession.getUser_id());
+
+            int rows = updatePst.executeUpdate();
+            if (rows > 0) {
+                JOptionPane.showMessageDialog(null, "Profile picture updated successfully.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to update profile picture.");
+            }
+
+            updatePst.close();
+            con.close();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error uploading image: " + e.getMessage());
+        }
+
+
+    }//GEN-LAST:event_uploadButtonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addButton;
     private javax.swing.JLabel change_pass;
     private javax.swing.JTextField email_input;
     private javax.swing.JTextField firstname_input;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel image;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -262,7 +498,9 @@ public class Profile extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label_role1;
     private javax.swing.JLabel label_username;
     private javax.swing.JTextField lastname_input;
+    private Swing.RoundedPanel roundedPanel1;
     private javax.swing.JLabel update_button;
+    private javax.swing.JLabel uploadButton;
     private javax.swing.JTextField username_input;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,11 +1,11 @@
 
 package Dashboards;
 
-import AdminInternalPage.Bookings;
+
 import AdminInternalPage.Home;
 import AdminInternalPage.Properties;
-import FloatedPage.Settings;
 import FloatedPage.staffSettings;
+import StaffInternalPage.Bookings;
 import StaffInternalPage.Profile;
 import java.awt.Color;
 import java.awt.Point;

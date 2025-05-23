@@ -120,6 +120,19 @@ public class login extends javax.swing.JFrame {
                 field.setText(message);
                 field.setForeground(new Color(255,0,0));
          }
+        
+        private void proceedToDashboard(String role) {
+            
+            JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + role + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
+            if ("Admin".equalsIgnoreCase(role)) {
+                Admin admin = new Admin();
+                admin.setVisible(true);
+            } else if ("Staff".equalsIgnoreCase(role)) {
+                Staff staff = new Staff();
+                staff.setVisible(true);
+            }
+        }
+
 
     
     @SuppressWarnings("unchecked")
@@ -197,13 +210,13 @@ public class login extends javax.swing.JFrame {
 
         forgotpass.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         forgotpass.setForeground(new java.awt.Color(153, 255, 255));
-        forgotpass.setText("Forgotten password?");
+        forgotpass.setText("Forgot Password");
         forgotpass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 forgotpassMouseClicked(evt);
             }
         });
-        jPanel1.add(forgotpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, 20));
+        jPanel1.add(forgotpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 120, 20));
 
         register.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         register.setForeground(new java.awt.Color(255, 255, 255));
@@ -361,44 +374,64 @@ public class login extends javax.swing.JFrame {
         
         dbConnector con = new dbConnector();
         Connection cn = con.getConnection();
-         
 
         if (loginAcc(username, password)) {
-            
+
             Session sess = Session.getInstance();
             String roleFromDB = sess.getRole();
             String status = sess.getStatus();
             String user = sess.getUser_id();
 
- 
-                String action = "User logged in with ID " + user;
-                con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
-                
-                
+            if (user == null || roleFromDB == null || status == null) {
+                JOptionPane.showMessageDialog(this, "Session error: Incomplete session data.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Insert log
+            String action = "User logged in with ID " + user;
+            con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + user + "', '" + action + "', '" + LocalDateTime.now() + "')");
+
+            // Check if the account is pending
             if ("Pending".equalsIgnoreCase(status)) {
                 JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Login successful! You are logged in as " + roleFromDB + ".", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-               
-                if ("Admin".equalsIgnoreCase(roleFromDB)) {
-                    Admin admin = new Admin();
-                    admin.setVisible(true);
-                } else if ("Staff".equalsIgnoreCase(roleFromDB)) {
-                    Staff staff = new Staff();
-                    staff.setVisible(true);
-                }
-
-                this.dispose();
+                return;
             }
-        } else{
+
+            // Check for security question
+            String sql = "SELECT question FROM securityQuestion WHERE user_id = ?";
+            String securityQuestion = con.getSingleData(sql, user);
+
+            if (securityQuestion == null || securityQuestion.trim().isEmpty()) {
+                int choice = JOptionPane.showConfirmDialog(
+                    this,
+                    "You have not set a security question yet. Do you want to set it now?",
+                    "Set Security Question",
+                    JOptionPane.YES_NO_OPTION
+                );
+
+                if (choice == JOptionPane.YES_OPTION) {
+                    LoginSecurityQuestion sqPanel = new LoginSecurityQuestion();
+                    sqPanel.setVisible(true);
+                } else {
+                    proceedToDashboard(roleFromDB);
+                }
+            } else {
+                proceedToDashboard(roleFromDB);
+            }
+
+            // Dispose login window
+            this.dispose();
+
+        } else {
+            // Login failed
             setInvalidTitledBorder(password_input, "Password");
             setInvalidTitledBorder(username_input, "Username");
-            
+
             validation.setText("Invalid Account!!!");
-            validation.setForeground(new Color (255,0,0));
-            validation.setFont(new Font ("Franklin Gothic Medium", Font.PLAIN, 14));
-        }   
+            validation.setForeground(new Color(255, 0, 0));
+            validation.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 14));
+        }
+ 
 
     }//GEN-LAST:event_loginButtonActionPerformed
 

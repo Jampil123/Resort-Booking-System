@@ -40,6 +40,10 @@ public class Bookings extends javax.swing.JInternalFrame {
         booking_table.setRowHeight(25);
     }
     
+        Color navcolor = new Color(51,51,51);
+        Color headcolor = new Color(0,0,0);
+        Color bodycolor = new Color(102,102,102);
+    
     
     public void displayData(){
         
@@ -90,7 +94,6 @@ public class Bookings extends javax.swing.JInternalFrame {
         approvedButton = new Swing.Button();
         rejectButton = new Swing.Button();
         deleteButton = new Swing.Button();
-        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(910, 610));
@@ -141,16 +144,16 @@ public class Bookings extends javax.swing.JInternalFrame {
         });
         jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, -1, -1));
 
-        printButton.setBackground(new java.awt.Color(51, 51, 255));
+        printButton.setBackground(new java.awt.Color(51, 51, 51));
         printButton.setForeground(new java.awt.Color(255, 255, 255));
         printButton.setText("Print");
-        printButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        printButton.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                printButtonFocusGained(evt);
+        printButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        printButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                printButtonMouseEntered(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                printButtonFocusLost(evt);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                printButtonMouseExited(evt);
             }
         });
         printButton.addActionListener(new java.awt.event.ActionListener() {
@@ -160,16 +163,16 @@ public class Bookings extends javax.swing.JInternalFrame {
         });
         jPanel1.add(printButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 560, 120, 40));
 
-        approvedButton.setBackground(new java.awt.Color(51, 51, 255));
+        approvedButton.setBackground(new java.awt.Color(51, 51, 51));
         approvedButton.setForeground(new java.awt.Color(255, 255, 255));
         approvedButton.setText("Approve");
-        approvedButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        approvedButton.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                approvedButtonFocusGained(evt);
+        approvedButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        approvedButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                approvedButtonMouseEntered(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                approvedButtonFocusLost(evt);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                approvedButtonMouseExited(evt);
             }
         });
         approvedButton.addActionListener(new java.awt.event.ActionListener() {
@@ -179,16 +182,16 @@ public class Bookings extends javax.swing.JInternalFrame {
         });
         jPanel1.add(approvedButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 560, 110, 40));
 
-        rejectButton.setBackground(new java.awt.Color(51, 51, 255));
+        rejectButton.setBackground(new java.awt.Color(51, 51, 51));
         rejectButton.setForeground(new java.awt.Color(255, 255, 255));
         rejectButton.setText("Reject");
-        rejectButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        rejectButton.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                rejectButtonFocusGained(evt);
+        rejectButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        rejectButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                rejectButtonMouseEntered(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                rejectButtonFocusLost(evt);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                rejectButtonMouseExited(evt);
             }
         });
         rejectButton.addActionListener(new java.awt.event.ActionListener() {
@@ -198,16 +201,16 @@ public class Bookings extends javax.swing.JInternalFrame {
         });
         jPanel1.add(rejectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 110, 40));
 
-        deleteButton.setBackground(new java.awt.Color(51, 51, 255));
+        deleteButton.setBackground(new java.awt.Color(51, 51, 51));
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setText("Delete");
-        deleteButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        deleteButton.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                deleteButtonFocusGained(evt);
+        deleteButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseEntered(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                deleteButtonFocusLost(evt);
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                deleteButtonMouseExited(evt);
             }
         });
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -216,14 +219,6 @@ public class Bookings extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 560, 120, 40));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 565, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -326,22 +321,6 @@ public class Bookings extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_printButtonActionPerformed
 
-    private void printButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_printButtonFocusGained
-        printButton.setBackground(new Color (102, 0, 255));
-    }//GEN-LAST:event_printButtonFocusGained
-
-    private void printButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_printButtonFocusLost
-        printButton.setBackground(new Color (51,51,255));
-    }//GEN-LAST:event_printButtonFocusLost
-
-    private void approvedButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_approvedButtonFocusGained
-        approvedButton.setBackground(new Color (102, 0, 255));
-    }//GEN-LAST:event_approvedButtonFocusGained
-
-    private void approvedButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_approvedButtonFocusLost
-        approvedButton.setBackground(new Color (51,51,255));
-    }//GEN-LAST:event_approvedButtonFocusLost
-
     private void approvedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approvedButtonActionPerformed
         int selectedUserId = getSelectedUserId(); 
 
@@ -380,14 +359,6 @@ public class Bookings extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_approvedButtonActionPerformed
 
-    private void rejectButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rejectButtonFocusGained
-        rejectButton.setBackground(new Color (102, 0, 255));
-    }//GEN-LAST:event_rejectButtonFocusGained
-
-    private void rejectButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_rejectButtonFocusLost
-        rejectButton.setBackground(new Color (51,51,255));
-    }//GEN-LAST:event_rejectButtonFocusLost
-
     private void rejectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rejectButtonActionPerformed
         int selectedUserId = getSelectedUserId(); 
 
@@ -425,14 +396,6 @@ public class Bookings extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Please select a booking to reject.");
         }
     }//GEN-LAST:event_rejectButtonActionPerformed
-
-    private void deleteButtonFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_deleteButtonFocusGained
-        rejectButton.setBackground(new Color (102, 0, 255));
-    }//GEN-LAST:event_deleteButtonFocusGained
-
-    private void deleteButtonFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_deleteButtonFocusLost
-        rejectButton.setBackground(new Color (51,51,255));
-    }//GEN-LAST:event_deleteButtonFocusLost
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int selectedRow = booking_table.getSelectedRow(); // Get selected row index
@@ -486,9 +449,37 @@ public class Bookings extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void deleteButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseEntered
+        deleteButton.setBackground(bodycolor);
+    }//GEN-LAST:event_deleteButtonMouseEntered
+
+    private void deleteButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseExited
+        deleteButton.setBackground(navcolor);
+    }//GEN-LAST:event_deleteButtonMouseExited
+
+    private void rejectButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rejectButtonMouseEntered
+        rejectButton.setBackground(bodycolor);
+    }//GEN-LAST:event_rejectButtonMouseEntered
+
+    private void rejectButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rejectButtonMouseExited
+        rejectButton.setBackground(navcolor);
+    }//GEN-LAST:event_rejectButtonMouseExited
+
+    private void approvedButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedButtonMouseEntered
+        approvedButton.setBackground(bodycolor);
+    }//GEN-LAST:event_approvedButtonMouseEntered
+
+    private void approvedButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_approvedButtonMouseExited
+        approvedButton.setBackground(navcolor);
+    }//GEN-LAST:event_approvedButtonMouseExited
+
+    private void printButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printButtonMouseEntered
+       printButton.setBackground(bodycolor);
+    }//GEN-LAST:event_printButtonMouseEntered
+
+    private void printButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printButtonMouseExited
+        printButton.setBackground(navcolor);
+    }//GEN-LAST:event_printButtonMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -496,7 +487,6 @@ public class Bookings extends javax.swing.JInternalFrame {
     private Swing.Button approvedButton;
     private javax.swing.JTable booking_table;
     private Swing.Button deleteButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

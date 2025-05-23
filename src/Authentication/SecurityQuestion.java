@@ -1,11 +1,17 @@
 
 package Authentication;
 
+import static config.AnswerHashing.hashAnswer;
 import config.Session;
 import config.dbConnector;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class SecurityQuestion extends javax.swing.JFrame {
@@ -28,8 +34,10 @@ public class SecurityQuestion extends javax.swing.JFrame {
         submit_button = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         answerField1 = new javax.swing.JTextField();
-        question2 = new javax.swing.JComboBox<>();
-        question1 = new javax.swing.JComboBox<>();
+        combo2 = new javax.swing.JComboBox<>();
+        combo1 = new javax.swing.JComboBox<>();
+        ans_error1 = new javax.swing.JLabel();
+        ans_error2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -55,7 +63,7 @@ public class SecurityQuestion extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Answer your security question to reset your password.");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
 
         answerField2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         answerField2.setText("  ");
@@ -81,20 +89,32 @@ public class SecurityQuestion extends javax.swing.JFrame {
 
         answerField1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         answerField1.setText("  ");
-        jPanel2.add(answerField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 560, 50));
+        jPanel2.add(answerField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 560, 50));
 
-        question2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        question2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What was the name of your first pet?", "What is the name of the street you grew up on?", "What was your childhood best friend’s name?" }));
-        question2.addActionListener(new java.awt.event.ActionListener() {
+        combo2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        combo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What was the name of your first pet?", "What is the name of the street you grew up on?", "What was your childhood best friend’s name?" }));
+        combo2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                question2ActionPerformed(evt);
+                combo2ActionPerformed(evt);
             }
         });
-        jPanel2.add(question2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 390, 30));
+        jPanel2.add(combo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 390, 30));
 
-        question1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        question1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What is the name of your favorite teacher?", "What is the title of your favorite book?", "What is your mother’s maiden name?" }));
-        jPanel2.add(question1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 390, 30));
+        combo1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        combo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "What is the name of your favorite teacher?", "What is the title of your favorite book?", "What is your mother’s maiden name?" }));
+        jPanel2.add(combo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 390, 30));
+
+        ans_error1.setBackground(new java.awt.Color(255, 255, 255));
+        ans_error1.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 13)); // NOI18N
+        ans_error1.setForeground(new java.awt.Color(255, 0, 0));
+        ans_error1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel2.add(ans_error1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 560, 30));
+
+        ans_error2.setBackground(new java.awt.Color(255, 255, 255));
+        ans_error2.setFont(new java.awt.Font("Franklin Gothic Medium", 0, 13)); // NOI18N
+        ans_error2.setForeground(new java.awt.Color(255, 0, 0));
+        ans_error2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jPanel2.add(ans_error2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, 560, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 680, 510));
 
@@ -124,6 +144,14 @@ public class SecurityQuestion extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+        private void displayError(JLabel field, String message) {
+        field.setText(message);
+        field.setForeground(new Color(255, 0, 0));
+       
+       }
+        
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ForgotPassword fp = new ForgotPassword();
         fp.setVisible(true);
@@ -133,70 +161,117 @@ public class SecurityQuestion extends javax.swing.JFrame {
   
     private void submit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_buttonActionPerformed
   
+         boolean valid = true; 
+
         // Retrieve user details from session
         Session sess = Session.getInstance();
-        String userId = sess.getUser_id();  // Get user_id from session
+        String userId = sess.getUser_id();
 
-        if (userId == null || userId.isEmpty()) {
+        System.out.println("User ID from session: " + userId);
+
+        if (userId == null || userId.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Session expired. Please search for your account again.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        String selectedQuestion1 = question1.getSelectedItem().toString(); 
-        String selectedQuestion2 = question2.getSelectedItem().toString();
-        String userAnswer1 = answerField1.getText().trim(); 
-        String userAnswer2 = answerField2.getText().trim(); 
+        // Null-safe combo selections
+        String selectedQuestion1 = combo1.getSelectedItem() != null ? combo1.getSelectedItem().toString().trim() : "";
+        String selectedQuestion2 = combo2.getSelectedItem() != null ? combo2.getSelectedItem().toString().trim() : "";
+        String userAnswer1 = answerField1.getText().trim();
+        String userAnswer2 = answerField2.getText().trim();
 
-        if (userAnswer1.isEmpty() || userAnswer2.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter both answers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+        String answerError = "Answer field cannot be empty!";
+        String questionError = "Please select a security question!";
+
+        // Input validation
+        if (selectedQuestion1.isEmpty()) {
+            displayError(ans_error1, questionError);
+            valid = false;
+        }
+
+        if (userAnswer1.isEmpty()) {
+            displayError(ans_error1, answerError);
+            valid = false;
+        }
+
+        if (selectedQuestion2.isEmpty()) {
+            displayError(ans_error2, questionError);
+            valid = false;
+        }
+
+        if (userAnswer2.isEmpty()) {
+            displayError(ans_error2, answerError);
+            valid = false;
+        }
+
+        if (!valid) {
             return;
         }
 
         try {
-            // Database connection
             dbConnector con = new dbConnector();
-            Connection connection = con.getConnection();
+            String query = "SELECT question, answer FROM securityQuestion WHERE user_id = ? AND question IN (?, ?)";
 
-            // Fetch security questions and answers using user_id from session
-            String query = "SELECT question, answer FROM securityquestion WHERE user_id = ? AND question IN (?, ?)";
-            PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, userId);  // Using user_id from session
-            pst.setString(2, selectedQuestion1);
-            pst.setString(3, selectedQuestion2);
-            ResultSet rs = pst.executeQuery();
+            try (Connection connection = con.getConnection();
+                 PreparedStatement pst = connection.prepareStatement(query)) {
 
-            int correctAnswers = 0;
+                pst.setString(1, userId);
+                pst.setString(2, selectedQuestion1);
+                pst.setString(3, selectedQuestion2);
 
-            while (rs.next()) {
-                String storedQuestion = rs.getString("question").trim();
-                String correctAnswer = rs.getString("answer").trim(); 
+                try (ResultSet rs = pst.executeQuery()) {
+                    Map<String, String> questionAnswerMap = new HashMap<>();
 
-                if (storedQuestion.equals(selectedQuestion1) && correctAnswer.equalsIgnoreCase(userAnswer1.trim())) {
-                    correctAnswers++;
-                } else if (storedQuestion.equals(selectedQuestion2) && correctAnswer.equalsIgnoreCase(userAnswer2.trim())) {
-                    correctAnswers++;
+                    while (rs.next()) {
+                        String storedQuestion = rs.getString("question").trim();
+                        String storedHashedAnswer = rs.getString("answer").trim();
+                        System.out.println("Stored Question: " + storedQuestion);
+                        System.out.println("Stored Hashed Answer: " + storedHashedAnswer);
+                        questionAnswerMap.put(storedQuestion, storedHashedAnswer);
+                    }
+
+                    // Make sure both questions were found
+                    if (!questionAnswerMap.containsKey(selectedQuestion1) || !questionAnswerMap.containsKey(selectedQuestion2)) {
+                        JOptionPane.showMessageDialog(this, "Security questions not found or mismatched.", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    // Hash user input
+                    String hashedUserAnswer1 = hashAnswer(userAnswer1);
+                    String hashedUserAnswer2 = hashAnswer(userAnswer2);
+
+                    boolean answer1Correct = questionAnswerMap.get(selectedQuestion1).equals(hashedUserAnswer1);
+                    boolean answer2Correct = questionAnswerMap.get(selectedQuestion2).equals(hashedUserAnswer2);
+
+                    // Only proceed if BOTH answers are correct
+                    if (answer1Correct && answer2Correct) {
+                        JOptionPane.showMessageDialog(this, "Answers verified! Proceed to reset password.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        new ResetPasswordForm().setVisible(true); // Ensure resetPass is properly initialized and set visible
+                        this.dispose();
+                    } else {
+                        if (!answer1Correct) {
+                            displayError(ans_error1, "Incorrect answer!");
+                        }
+                        if (!answer2Correct) {
+                            displayError(ans_error2, "Incorrect answer!");
+                        }
+                        // Ensure it does not proceed
+                        return;
+                    }
                 }
             }
-
-            if (correctAnswers == 2) {
-                JOptionPane.showMessageDialog(this, "Answers verified! Proceed to reset password.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                new ResetPasswordForm().setVisible(true);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Incorrect answer(s). Try again.", "Verification Failed", JOptionPane.ERROR_MESSAGE);
-            }
-
-            rs.close();
-            pst.close();
-            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Unexpected error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_submit_buttonActionPerformed
 
-    private void question2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_question2ActionPerformed
+    private void combo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_question2ActionPerformed
+    }//GEN-LAST:event_combo2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -231,8 +306,12 @@ public class SecurityQuestion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ans_error1;
+    private javax.swing.JLabel ans_error2;
     private javax.swing.JTextField answerField1;
     private javax.swing.JTextField answerField2;
+    private javax.swing.JComboBox<String> combo1;
+    private javax.swing.JComboBox<String> combo2;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -241,8 +320,6 @@ public class SecurityQuestion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JComboBox<String> question1;
-    private javax.swing.JComboBox<String> question2;
     private javax.swing.JButton submit_button;
     // End of variables declaration//GEN-END:variables
 }

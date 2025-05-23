@@ -71,4 +71,41 @@ public class dbConnector {
         }
         return false;
     }
+    
+    // Get the security question based on the user_id
+    public String getSingleData(String sql, Object... params) {
+        String result = null;
+
+        try (PreparedStatement pstmt = connect.prepareStatement(sql)) {
+            // Set parameters for the prepared statement
+            for (int i = 0; i < params.length; i++) {
+                pstmt.setObject(i + 1, params[i]);
+            }
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    result = rs.getString("question");  // Get the 'question' column value
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving data: " + e.getMessage());
+        }
+
+        return result;
+    }
+    
+     // Insert Data (Parameterized Query to prevent SQL Injection)
+    public int insertData(String sql, Object... params) {
+        int result = 0;
+        try (PreparedStatement pst = connect.prepareStatement(sql)) {
+            for (int i = 0; i < params.length; i++) {
+                pst.setObject(i + 1, params[i]);
+            }
+            result = pst.executeUpdate();
+            System.out.println("Inserted Successfully!");
+        } catch (SQLException e) {
+            System.out.println("Connection Error: " + e.getMessage());
+        }
+        return result;
+    }
 }
