@@ -2,7 +2,6 @@
 package ReceiptPrinting;
 
 import config.panelPrinter;
-import java.awt.Dimension;
 import javax.swing.JPanel;
 
 public class IndividualPrinting extends javax.swing.JPanel {
@@ -392,8 +391,7 @@ public class IndividualPrinting extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
-        receipt.setPreferredSize(new Dimension(870, 651)); // for example
-        receipt.revalidate(); // refresh layout
+
 
         // Proceed to print
         JPanel  newpanel = new JPanel();

@@ -4,6 +4,9 @@ package StaffInternalPage;
 import FloatedPage.change_pass;
 import config.Session;
 import config.dbConnector;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,6 +24,8 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -123,6 +128,7 @@ public class Profile extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Error loading profile picture: " + e.getMessage());
             }
         }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -404,7 +410,7 @@ public class Profile extends javax.swing.JInternalFrame {
         String userId = sess.getUser_id(); // Retrieve user_id
 
         // Debugging check
-        System.out.println("User ID: " + userId);
+        System.out.println("User ID: " + userId); 
         if (userId == null || userId.trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Error: User ID is missing!");
             return;
@@ -430,7 +436,8 @@ public class Profile extends javax.swing.JInternalFrame {
                 return;
             }
 
-            String sql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ?, profile_pic = ? WHERE user_id = ?";
+            // Removed profile_pic from the query
+            String sql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ? WHERE user_id = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, newFirstName);
             pst.setString(2, newLastName);

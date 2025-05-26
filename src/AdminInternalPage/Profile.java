@@ -4,11 +4,12 @@ package AdminInternalPage;
 import FloatedPage.change_pass;
 import config.Session;
 import config.dbConnector;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,6 +24,8 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -127,6 +130,26 @@ public class Profile extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Error loading profile picture: " + e.getMessage());
             }
         }
+        
+        public void showLargeMessage(Component parent, String message, String title, int messageType) {
+    JTextArea textArea = new JTextArea(message);
+    textArea.setFont(new Font("Arial", Font.PLAIN, 16)); // Larger font
+    textArea.setLineWrap(true);
+    textArea.setWrapStyleWord(true);
+    textArea.setEditable(false);
+    textArea.setBackground(null);
+    textArea.setBorder(null);
+
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    scrollPane.setPreferredSize(new Dimension(400, 200)); // Set custom size
+
+    JOptionPane optionPane = new JOptionPane(scrollPane, messageType);
+    JDialog dialog = optionPane.createDialog(parent, title);
+    dialog.setModal(true);
+    dialog.setResizable(true); // Allow resizing if needed
+    dialog.setVisible(true);
+}
+
 
 
 
@@ -340,7 +363,8 @@ public class Profile extends javax.swing.JInternalFrame {
                 return;
             }
 
-            String sql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ?, profile_pic = ? WHERE user_id = ?";
+            // Removed profile_pic from the query
+            String sql = "UPDATE user SET f_name = ?, l_name = ?, username = ?, email = ? WHERE user_id = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, newFirstName);
             pst.setString(2, newLastName);

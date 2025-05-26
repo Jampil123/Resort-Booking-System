@@ -148,7 +148,12 @@ public class Cottage extends javax.swing.JInternalFrame {
         home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 870, 440));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
-        home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, 30));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 90, 30));
 
         addButton.setBackground(new java.awt.Color(51, 51, 51));
         addButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -334,6 +339,10 @@ public class Cottage extends javax.swing.JInternalFrame {
             }    
         }
     }//GEN-LAST:event_editButtonActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        displayData();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

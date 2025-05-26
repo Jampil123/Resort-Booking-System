@@ -10,6 +10,9 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class propertiesPage extends javax.swing.JInternalFrame {
     
@@ -347,48 +350,42 @@ public class propertiesPage extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        int selectedRow = cottageTable.getSelectedRow();
+          int selectedRow = cottageTable.getSelectedRow();
 
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(this, "Please select a property first.");
             return;
         }
-        
-        String currentStatus = cottageTable.getValueAt(selectedRow, 5).toString(); // Column 5 holds the status
 
-        if ("Booked".equalsIgnoreCase(currentStatus)) {
-            JOptionPane.showMessageDialog(this, "This property is already booked. Please choose a different one.");
-            return; 
-        }
-        
+        // Get cottage details from the selected row
         String roomId = cottageTable.getValueAt(selectedRow, 0).toString(); 
         String roomName = cottageTable.getValueAt(selectedRow, 1).toString();
         String location = cottageTable.getValueAt(selectedRow, 2).toString();
         String roomCapacity = cottageTable.getValueAt(selectedRow, 3).toString();
         String price = cottageTable.getValueAt(selectedRow, 4).toString();
 
+        // Save details to session
         guestSession.setSelectedCottageName(roomName);
         guestSession.setSelectedCottagelocation(location);
         guestSession.setSelectedCottageId(roomId);
         guestSession.setSelectedCottageCapacity(roomCapacity);
         guestSession.setSelectedCottagePrice(price);
 
-        cottageTable.setValueAt("Booked", selectedRow, 5);
-
+        // Confirmation popup
         JOptionPane.showMessageDialog(this, 
             "Cottage \"" + roomName + "\" has been successfully booked!", 
             "Booking Confirmed", 
             JOptionPane.INFORMATION_MESSAGE);
 
-        // 🔍 Debug output
+        // Debug output
         System.out.println("=== Property Selection Debug ===");
         System.out.println("Selected Property ID: " + guestSession.getSelectedCottageId());
         System.out.println("Selected Property Name: " + guestSession.getSelectedCottageName());
         System.out.println("Selected Location: " + guestSession.getSelectedCottagelocation());
         System.out.println("Capacity: " + guestSession.getSelectedCottageCapacity());
         System.out.println("Price: " + guestSession.getSelectedCottagePrice());
-        System.out.println("Status updated to: Booked");
         System.out.println("================================");
+
 
     }//GEN-LAST:event_button1ActionPerformed
 
@@ -400,14 +397,8 @@ public class propertiesPage extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Please select a property first.");
             return;
         }
-        
-        String currentStatus = roomTable.getValueAt(selectedRow, 6).toString(); 
 
-        if ("Booked".equalsIgnoreCase(currentStatus)) {
-            JOptionPane.showMessageDialog(this, "This property is already booked. Please choose a different one.");
-            return; 
-        }
-
+        // Get room details from table
         String roomId = roomTable.getValueAt(selectedRow, 0).toString();
         String roomName = roomTable.getValueAt(selectedRow, 1).toString();
         String roomType = roomTable.getValueAt(selectedRow, 2).toString();
@@ -415,6 +406,7 @@ public class propertiesPage extends javax.swing.JInternalFrame {
         String roomCapacity = roomTable.getValueAt(selectedRow, 4).toString();
         String roomPrice = roomTable.getValueAt(selectedRow, 5).toString();
 
+        // Store in session
         guestSession.setSelectedRoomName(roomName);
         guestSession.setSelectedRoomId(roomId);
         guestSession.setSelectedRoomCapacity(roomCapacity);
@@ -422,14 +414,13 @@ public class propertiesPage extends javax.swing.JInternalFrame {
         guestSession.setSelectedRoomPrice(roomPrice);
         guestSession.setSelectedBedType(bedType);
 
-        roomTable.setValueAt("Booked", selectedRow, 6);
-
+        // Show confirmation
         JOptionPane.showMessageDialog(this, 
             "Room \"" + roomName + "\" has been successfully booked!", 
             "Booking Confirmed", 
             JOptionPane.INFORMATION_MESSAGE);
 
-        // 🔍 Debug output
+        // Debugging output
         System.out.println("=== Property Selection Debug ===");
         System.out.println("Selected Room ID: " + guestSession.getSelectedRoomId());
         System.out.println("Selected Room Number: " + guestSession.getSelectedRoomName());
@@ -437,7 +428,7 @@ public class propertiesPage extends javax.swing.JInternalFrame {
         System.out.println("Selected Bed Type: " + guestSession.getSelectedBedType());
         System.out.println("Selected Room Capacity: " + guestSession.getSelectedRoomCapacity());
         System.out.println("Selected Room Price: " + guestSession.getSelectedRoomPrice());
-        System.out.println("Room status updated to: Booked");
+
 
     }//GEN-LAST:event_selectButtonActionPerformed
 
@@ -450,30 +441,51 @@ public class propertiesPage extends javax.swing.JInternalFrame {
             return;
         }
 
-        // Save dates into session
-        guestSession.setCheckIn(checkInDate);
-        guestSession.setCheckOut(checkOutDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy"); 
+        LocalDate today = LocalDate.now();
 
-        boolean hasRoom = guestSession.getSelectedRoomId() != null;
-        boolean hasCottage = guestSession.getSelectedCottageId() != null;
+        try {
+            LocalDate checkIn = LocalDate.parse(checkInDate, formatter);
+            LocalDate checkOut = LocalDate.parse(checkOutDate, formatter);
 
-        if (!hasRoom && !hasCottage) {
-            JOptionPane.showMessageDialog(this, "Please select at least a Room or a Cottage.");
-            return;
+            if (checkIn.isBefore(today)) {
+                JOptionPane.showMessageDialog(this, "Check-in date must be in the future.");
+                return;
+            }
+
+            if (checkOut.isBefore(checkIn) || checkOut.equals(checkIn)) {
+                JOptionPane.showMessageDialog(this, "Check-out date must be after check-in date.");
+                return;
+            }
+
+            // Save dates into session
+            guestSession.setCheckIn(checkInDate);
+            guestSession.setCheckOut(checkOutDate);
+
+            boolean hasRoom = guestSession.getSelectedRoomId() != null;
+            boolean hasCottage = guestSession.getSelectedCottageId() != null;
+
+            if (!hasRoom && !hasCottage) {
+                JOptionPane.showMessageDialog(this, "Please select at least a Room or a Cottage.");
+                return;
+            }
+
+            // Optional: Show what was selected
+            if (hasRoom) {
+                System.out.println("Room selected: " + guestSession.getSelectedRoomName());
+            }
+
+            if (hasCottage) {
+                System.out.println("Cottage selected: " + guestSession.getSelectedCottageName());
+            }
+
+            // Proceed to next screen
+            ReviewDetails review = new ReviewDetails(guestSession);
+            Effect.TransitionEffect.fadeOutAndOpen(this, review);
+
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(this, "Please enter dates in the correct format: yyyy-MM-dd");
         }
-
-        // Optional: Show what was selected
-        if (hasRoom) {
-            System.out.println("Room selected: " + guestSession.getSelectedRoomName());
-        }
-
-        if (hasCottage) {
-            System.out.println("Cottage selected: " + guestSession.getSelectedCottageName());
-        }
-
-        // Proceed to next screen
-        ReviewDetails review = new ReviewDetails(guestSession);
-        Effect.TransitionEffect.fadeOutAndOpen(this, review);
 
     }//GEN-LAST:event_submitButtonActionPerformed
 

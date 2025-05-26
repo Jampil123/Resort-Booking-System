@@ -38,6 +38,7 @@ public class editCottage extends javax.swing.JPanel {
         price_field = new Swing.TextField();
         checkOut_validation = new javax.swing.JLabel();
         cottageId = new Swing.TextField();
+        status = new Swing.Combobox();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -116,6 +117,10 @@ public class editCottage extends javax.swing.JPanel {
         cottageId.setLabelText("ID");
         jPanel1.add(cottageId, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 400, -1));
 
+        status.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Available", "Booked", "Maintenance" }));
+        status.setLabeText("");
+        jPanel1.add(status, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 400, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,10 +146,12 @@ public class editCottage extends javax.swing.JPanel {
     }//GEN-LAST:event_updateButtonMouseExited
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+                                            
         String Name = name_field.getText();
         String Capacity = capacity_field.getText();
         String Location = location_field.getText();
         String Price = price_field.getText();
+        String CottageID = cottageId.getText();
 
         Boolean error = true;
 
@@ -187,6 +194,44 @@ public class editCottage extends javax.swing.JPanel {
         } else {
             price_validation.setText("");
         }
+
+        
+
+        if (error) {
+            try {
+                dbConnector cn = new dbConnector(); // your custom DB connector class
+                Connection conn = cn.getConnection(); // ✅ use your method to get the actual connection
+
+                String sql = "UPDATE cottage SET name = ?, capacity = ?, location = ?, price = ?, status = ? WHERE cottage_id = ?";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1, Name);
+                pstmt.setString(2, Capacity);
+                pstmt.setString(3, Location);
+                pstmt.setString(4, Price);
+                pstmt.setString(5, status.getSelectedItem().toString());
+                pstmt.setString(6, CottageID);
+
+                int rowsUpdated = pstmt.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    JOptionPane.showMessageDialog(null, "Cottage updated successfully!");
+                JDialog parentDialog = (JDialog) SwingUtilities.getWindowAncestor(this);
+                    if (parentDialog != null) {
+                        parentDialog.dispose();  // Closes the JDialog
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Cottage ID not found.");
+                }
+
+                pstmt.close();
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error updating cottage: " + ex.getMessage());
+            }
+        }
+
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseClicked
@@ -212,6 +257,7 @@ public class editCottage extends javax.swing.JPanel {
     public Swing.TextField price_field;
     private javax.swing.JLabel price_validation;
     private Swing.RoundedPanel roundedPanel1;
+    private Swing.Combobox status;
     private Swing.Button updateButton;
     // End of variables declaration//GEN-END:variables
 

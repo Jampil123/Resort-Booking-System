@@ -21,15 +21,18 @@ public class panelPrinter implements Printable {
 
         Graphics2D g2d = (Graphics2D) graphics;
 
-        // Set up paper size (Letter)
+        // Set up paper size (4R: 4 x 6 inches)
         Paper paper = new Paper();
-        double width = 8.5 * 72; // 612 points
-        double height = 11 * 72; // 792 points
+        double width = 8.5 * 72;   // 288 points
+        double height = 11 * 72;  // 432 points
         paper.setSize(width, height);
 
-        // Set 0.5 inch margins (36 points)
-        paper.setImageableArea(36, 36, width - 72, height - 72); 
+        // Set margins (0.25 inch = 18 points)
+        double margin = 18;
+        paper.setImageableArea(margin, margin, width - 2 * margin, height - 2 * margin);
+
         pageFormat.setPaper(paper);
+
 
         // Get the printable area
         double imageableX = pageFormat.getImageableX();

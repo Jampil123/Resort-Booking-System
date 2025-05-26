@@ -2,6 +2,8 @@
 package AdminInternalPage;
 
 import FloatedPage.AddRoom;
+import FloatedPage.editCottage;
+import FloatedPage.editRoom;
 import config.dbConnector;
 import javax.swing.*; 
 import java.awt.*;    
@@ -12,6 +14,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 public class Room extends javax.swing.JInternalFrame {
@@ -164,7 +167,12 @@ public class Room extends javax.swing.JInternalFrame {
         home.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 870, 440));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
-        home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, -1, 30));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        home.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 90, 30));
 
         addButton.setBackground(new java.awt.Color(51, 51, 51));
         addButton.setForeground(new java.awt.Color(255, 255, 255));
@@ -209,6 +217,11 @@ public class Room extends javax.swing.JInternalFrame {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 editButtonMouseExited(evt);
+            }
+        });
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
             }
         });
         home.add(editButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, 120, 50));
@@ -292,6 +305,64 @@ public class Room extends javax.swing.JInternalFrame {
     private void editButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMouseExited
         editButton.setBackground(navcolor);
     }//GEN-LAST:event_editButtonMouseExited
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        int rowIndex = room_table.getSelectedRow();
+        
+        if(rowIndex < 0){
+            JOptionPane.showMessageDialog(null, " Please select an Item!!! ");
+        }else{
+            try{
+                dbConnector dbc = new dbConnector();
+                TableModel tbl = room_table.getModel();
+                ResultSet rs = dbc.getData("SELECT * FROM room WHERE room_id = '" + tbl.getValueAt(rowIndex, 0) + "'");
+                if(rs.next()){
+                    JDialog dialog = new JDialog(); // Create a floating window
+                    editRoom newPanel = new editRoom();
+                    
+                    newPanel.roomIdField.setText(""+rs.getString("room_id"));
+                    newPanel.rn.setText(""+rs.getString("room_number"));
+                    newPanel.rt.setText(""+rs.getString("room_type"));
+                    newPanel.bt.setText(""+rs.getString("bed_type"));
+                    newPanel.c.setText(""+rs.getString("capacity"));
+                    newPanel.ppn.setText(""+rs.getString("price_per_night"));
+                    
+                    Font arialFont = new Font("Arial", Font.PLAIN, 12);
+
+                    newPanel.roomIdField.setFont(arialFont);
+                    newPanel.roomIdField.setForeground(Color.BLACK);
+
+                    newPanel.rn.setFont(arialFont);
+                    newPanel.rn.setForeground(Color.BLACK);
+
+                    newPanel.rt.setFont(arialFont);
+                    newPanel.rt.setForeground(Color.BLACK);
+
+                    newPanel.bt.setFont(arialFont);
+                    newPanel.bt.setForeground(Color.BLACK);
+                    
+                    newPanel.c.setFont(arialFont);
+                    newPanel.c.setForeground(Color.BLACK);
+                    
+                    newPanel.ppn.setFont(arialFont);
+                    newPanel.ppn.setForeground(Color.BLACK);
+                    
+                    dialog.add(newPanel); // Add add_user to the dialog
+                    dialog.pack();
+                    dialog.setLocationRelativeTo(null); // Center the window
+                    dialog.setModal(true); // Prevent interactions with the main window until closed
+                    dialog.setVisible(true); // Show the floating add_user
+                    
+                }
+            }catch(SQLException ex){
+                System.out.println(""+ex);
+            }    
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        displayData();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
