@@ -17,11 +17,6 @@ public class ResetPasswordForm extends javax.swing.JFrame {
     public ResetPasswordForm() {
         initComponents();
         
-        show.setVisible(false);
-        hide.setVisible(false);
-        show1.setVisible(false);
-        hide1.setVisible(false);
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -36,14 +31,10 @@ public class ResetPasswordForm extends javax.swing.JFrame {
         submit_button = new javax.swing.JButton();
         cancel_button = new javax.swing.JButton();
         new_pass = new javax.swing.JLabel();
-        show = new javax.swing.JLabel();
-        hide = new javax.swing.JLabel();
         showPass = new javax.swing.JLabel();
         showPass1 = new javax.swing.JLabel();
         newPasswordField = new javax.swing.JPasswordField();
         confirm_pass = new javax.swing.JLabel();
-        show1 = new javax.swing.JLabel();
-        hide1 = new javax.swing.JLabel();
         confirmPasswordField = new javax.swing.JPasswordField();
         logo = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
@@ -96,29 +87,13 @@ public class ResetPasswordForm extends javax.swing.JFrame {
         new_pass.setText("Enter new Password");
         mainPanel.add(new_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
 
-        show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        show.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                showMousePressed(evt);
-            }
-        });
-        mainPanel.add(show, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 220, -1, 50));
-
-        hide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hide.png"))); // NOI18N
-        hide.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                hideMousePressed(evt);
-            }
-        });
-        mainPanel.add(hide, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 220, -1, 50));
-
         showPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
         showPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showPassMouseClicked(evt);
             }
         });
-        mainPanel.add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, 50));
+        mainPanel.add(showPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 220, -1, 50));
 
         showPass1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hidden.png"))); // NOI18N
         showPass1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -126,7 +101,7 @@ public class ResetPasswordForm extends javax.swing.JFrame {
                 showPass1MouseClicked(evt);
             }
         });
-        mainPanel.add(showPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 320, -1, 50));
+        mainPanel.add(showPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, -1, 50));
 
         newPasswordField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         newPasswordField.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,22 +126,6 @@ public class ResetPasswordForm extends javax.swing.JFrame {
         confirm_pass.setForeground(new java.awt.Color(255, 255, 255));
         confirm_pass.setText("Confirm Password");
         mainPanel.add(confirm_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
-
-        show1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/view.png"))); // NOI18N
-        show1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                show1MousePressed(evt);
-            }
-        });
-        mainPanel.add(show1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, -1, 50));
-
-        hide1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hide.png"))); // NOI18N
-        hide1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                hide1MousePressed(evt);
-            }
-        });
-        mainPanel.add(hide1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 320, -1, 50));
 
         confirmPasswordField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         confirmPasswordField.setForeground(new java.awt.Color(255, 255, 255));
@@ -304,8 +263,7 @@ public class ResetPasswordForm extends javax.swing.JFrame {
             newPasswordField.setForeground(Color.WHITE);
             newPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
         }
-        hide.setVisible(true);
-        show.setVisible(false);
+
     }//GEN-LAST:event_newPasswordFieldFocusGained
 
     private void newPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_newPasswordFieldFocusLost
@@ -315,8 +273,6 @@ public class ResetPasswordForm extends javax.swing.JFrame {
             newPasswordField.setForeground(Color.GRAY);
             newPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
 
-            hide.setVisible(false);
-            show.setVisible(false);
         }
     }//GEN-LAST:event_newPasswordFieldFocusLost
 
@@ -327,8 +283,7 @@ public class ResetPasswordForm extends javax.swing.JFrame {
             confirmPasswordField.setForeground(Color.WHITE);
             confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
         }
-        hide1.setVisible(true);
-        show1.setVisible(false);
+
     }//GEN-LAST:event_confirmPasswordFieldFocusGained
 
     private void confirmPasswordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_confirmPasswordFieldFocusLost
@@ -338,34 +293,8 @@ public class ResetPasswordForm extends javax.swing.JFrame {
             confirmPasswordField.setForeground(Color.GRAY);
             confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 18));
 
-            hide1.setVisible(false);
-            show1.setVisible(false);
         }
     }//GEN-LAST:event_confirmPasswordFieldFocusLost
-
-    private void showMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMousePressed
-        hide.setVisible(true);
-        show.setVisible(false);
-        newPasswordField.setEchoChar('*');
-    }//GEN-LAST:event_showMousePressed
-
-    private void hideMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMousePressed
-        show.setVisible(true);
-        hide.setVisible(false);
-        newPasswordField.setEchoChar((char) 0); 
-    }//GEN-LAST:event_hideMousePressed
-
-    private void show1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_show1MousePressed
-        hide1.setVisible(true);
-        show1.setVisible(false);
-        confirmPasswordField.setEchoChar('*');
-    }//GEN-LAST:event_show1MousePressed
-
-    private void hide1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hide1MousePressed
-        show1.setVisible(true);
-        hide1.setVisible(false);
-        confirmPasswordField.setEchoChar((char) 0); 
-    }//GEN-LAST:event_hide1MousePressed
     private boolean pass_visible = false;
     private void showPassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showPassMouseClicked
         pass_visible = !pass_visible;
@@ -440,8 +369,6 @@ public class ResetPasswordForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField confirmPasswordField;
     private javax.swing.JLabel confirm_pass;
     private javax.swing.JPanel header;
-    private javax.swing.JLabel hide;
-    private javax.swing.JLabel hide1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel logo;
@@ -449,8 +376,6 @@ public class ResetPasswordForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField newPasswordField;
     private javax.swing.JLabel new_pass;
     private javax.swing.JPanel panel;
-    private javax.swing.JLabel show;
-    private javax.swing.JLabel show1;
     private javax.swing.JLabel showPass;
     private javax.swing.JLabel showPass1;
     private javax.swing.JButton submit_button;

@@ -76,8 +76,13 @@ public class Settings extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Profile");
-        profileButton.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, 60));
+        jLabel8.setText("Change Password");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
+        profileButton.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, -1, 60));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
         profileButton.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 30, 60));
@@ -241,6 +246,17 @@ public class Settings extends javax.swing.JPanel {
         dialog.setModal(true); // Prevent interactions with the main window until closed
         dialog.setVisible(true); // Show the floating add_user
     }//GEN-LAST:event_logsButtonMouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        JDialog dialog = new JDialog(); 
+        change_pass newPanel = new change_pass();
+
+        dialog.add(newPanel); 
+        dialog.setSize(500, 380); 
+        dialog.setLocationRelativeTo(null); 
+        dialog.setModal(true); 
+        dialog.setVisible(true); 
+    }//GEN-LAST:event_jLabel8MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

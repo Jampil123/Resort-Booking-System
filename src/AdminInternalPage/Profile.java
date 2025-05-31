@@ -131,24 +131,7 @@ public class Profile extends javax.swing.JInternalFrame {
             }
         }
         
-        public void showLargeMessage(Component parent, String message, String title, int messageType) {
-    JTextArea textArea = new JTextArea(message);
-    textArea.setFont(new Font("Arial", Font.PLAIN, 16)); // Larger font
-    textArea.setLineWrap(true);
-    textArea.setWrapStyleWord(true);
-    textArea.setEditable(false);
-    textArea.setBackground(null);
-    textArea.setBorder(null);
-
-    JScrollPane scrollPane = new JScrollPane(textArea);
-    scrollPane.setPreferredSize(new Dimension(400, 200)); // Set custom size
-
-    JOptionPane optionPane = new JOptionPane(scrollPane, messageType);
-    JDialog dialog = optionPane.createDialog(parent, title);
-    dialog.setModal(true);
-    dialog.setResizable(true); // Allow resizing if needed
-    dialog.setVisible(true);
-}
+      
 
 
 

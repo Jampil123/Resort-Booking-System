@@ -72,7 +72,7 @@ public class ManageStaff extends javax.swing.JInternalFrame {
                    rs.getString(4), 
                    rs.getString(5), 
                    rs.getString(6), 
-                   rs.getString(9)});             
+                   rs.getString(8)});             
            }
         }catch(SQLException ex){
             System.out.println("Errors: "+ex.getMessage());

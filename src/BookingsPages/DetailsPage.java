@@ -59,7 +59,7 @@ public class DetailsPage extends javax.swing.JInternalFrame {
 
         nextButton.setBackground(new java.awt.Color(102, 102, 102));
         nextButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        nextButton.setText("Next");
+        nextButton.setText("Proceed");
         nextButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 nextButtonMouseClicked(evt);
@@ -71,7 +71,7 @@ public class DetailsPage extends javax.swing.JInternalFrame {
                 nextButtonMouseExited(evt);
             }
         });
-        jPanel12.add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 530, 60, 40));
+        jPanel12.add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 530, 70, 40));
 
         roundedPanel2.setBackground(new java.awt.Color(102, 102, 102));
         roundedPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

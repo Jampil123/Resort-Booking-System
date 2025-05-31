@@ -93,7 +93,7 @@ public class Bookings extends javax.swing.JInternalFrame {
         printButton = new Swing.Button();
         approvedButton = new Swing.Button();
         rejectButton = new Swing.Button();
-        deleteButton = new Swing.Button();
+        jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(910, 610));
@@ -201,24 +201,9 @@ public class Bookings extends javax.swing.JInternalFrame {
         });
         jPanel1.add(rejectButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, 110, 40));
 
-        deleteButton.setBackground(new java.awt.Color(51, 51, 51));
-        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
-        deleteButton.setText("Delete");
-        deleteButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        deleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                deleteButtonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                deleteButtonMouseExited(evt);
-            }
-        });
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 560, 120, 40));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Add Booking");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 20, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -345,7 +330,7 @@ public class Bookings extends javax.swing.JInternalFrame {
                         Session sess = Session.getInstance();
                         String action = "Approved booking with ID " + selectedUserId;
                         db.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
-                    JOptionPane.showMessageDialog(this, "User approved successfully!");
+                    JOptionPane.showMessageDialog(this, "Booking approved successfully!");
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed to approve booking.");
                 }
@@ -363,7 +348,7 @@ public class Bookings extends javax.swing.JInternalFrame {
         int selectedUserId = getSelectedUserId(); 
 
         if (selectedUserId != -1) {
-            try {
+            try {   
                 dbConnector db = new dbConnector(); 
                 Connection conn = db.getConnection(); 
 
@@ -397,66 +382,6 @@ public class Bookings extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_rejectButtonActionPerformed
 
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        int selectedRow = booking_table.getSelectedRow(); // Get selected row index
-    
-        if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
-            return;
-        }
-
-        // Assuming the ID is in the first column (index 0)
-        int id = Integer.parseInt(booking_table.getValueAt(selectedRow, 0).toString());
-
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this record?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
-            try {
-                dbConnector con = new dbConnector();
-                Connection cn = con.getConnection();
-                
-                String sql = "DELETE FROM booking WHERE booking_id = ?";
-                PreparedStatement pst = cn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                pst.setInt(1, id);
-                
-                
-                int rowsAffected = pst.executeUpdate();
-
-                if (rowsAffected > 0) {
-                    ResultSet generatedKeys = pst.getGeneratedKeys();
-                    int lastInsertedId = 0;
-                    if (generatedKeys.next()) {
-                        lastInsertedId = generatedKeys.getInt(1);
-                    }
-
-                    // Logging the action
-                    Session sess = Session.getInstance();
-                    String action = "Delete booking with ID " + id;
-                    con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
-                    JOptionPane.showMessageDialog(this, "Record deleted successfully.");
-
-                    // Remove from JTable model
-                    DefaultTableModel model = (DefaultTableModel) booking_table.getModel();
-                    model.removeRow(selectedRow);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Error: Record not found.");
-                }
-
-                pst.close();
-                cn.close();
-            } catch (HeadlessException | SQLException e) {
-                JOptionPane.showMessageDialog(this, "Error deleting record: " + e.getMessage());
-            }
-        }
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void deleteButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseEntered
-        deleteButton.setBackground(bodycolor);
-    }//GEN-LAST:event_deleteButtonMouseEntered
-
-    private void deleteButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseExited
-        deleteButton.setBackground(navcolor);
-    }//GEN-LAST:event_deleteButtonMouseExited
-
     private void rejectButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rejectButtonMouseEntered
         rejectButton.setBackground(bodycolor);
     }//GEN-LAST:event_rejectButtonMouseEntered
@@ -486,8 +411,8 @@ public class Bookings extends javax.swing.JInternalFrame {
     private javax.swing.JLabel addButton;
     private Swing.Button approvedButton;
     private javax.swing.JTable booking_table;
-    private Swing.Button deleteButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private Swing.Button printButton;

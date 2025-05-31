@@ -351,86 +351,86 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_forgotpassMouseClicked
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        boolean valid = true;
-    
-        String username = username_input.getText().trim();
-        String password = new String(password_input.getPassword()).trim();
+            boolean valid = true;
 
-        if (username.isEmpty()) {
-            setInvalidTitledBorder(username_input, "Username");
-            displayError(username_validation, "Username is empty!");
-            valid = false;
-        }
+            String username = username_input.getText().trim();
+            String password = new String(password_input.getPassword()).trim();
 
-        if (password.isEmpty()) {
-            setInvalidTitledBorder(password_input, "Password");
-            displayError(password_validation, "Password is empty!");
-            valid = false;
-        }
+            if (username.isEmpty()) {
+                setInvalidTitledBorder(username_input, "Username");
+                displayError(username_validation, "Username is empty!");
+                valid = false;
+            }
 
-        if (!valid) {
-            return;
-        }
-        
-        dbConnector con = new dbConnector();
-        Connection cn = con.getConnection();
+            if (password.isEmpty()) {
+                setInvalidTitledBorder(password_input, "Password");
+                displayError(password_validation, "Password is empty!");
+                valid = false;
+            }
 
-        if (loginAcc(username, password)) {
-
-            Session sess = Session.getInstance();
-            String roleFromDB = sess.getRole();
-            String status = sess.getStatus();
-            String user = sess.getUser_id();
-
-            if (user == null || roleFromDB == null || status == null) {
-                JOptionPane.showMessageDialog(this, "Session error: Incomplete session data.", "Error", JOptionPane.ERROR_MESSAGE);
+            if (!valid) {
                 return;
             }
 
-            // Insert log
-            String action = "User logged in with ID " + user;
-            con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + user + "', '" + action + "', '" + LocalDateTime.now() + "')");
+            dbConnector con = new dbConnector();
+            Connection cn = con.getConnection();
 
-            // Check if the account is pending
-            if ("Pending".equalsIgnoreCase(status)) {
-                JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            if (loginAcc(username, password)) {
 
-            // Check for security question
-            String sql = "SELECT question FROM securityQuestion WHERE user_id = ?";
-            String securityQuestion = con.getSingleData(sql, user);
+                Session sess = Session.getInstance();
+                String roleFromDB = sess.getRole();
+                String status = sess.getStatus();
+                String user = sess.getUser_id();
 
-            if (securityQuestion == null || securityQuestion.trim().isEmpty()) {
-                int choice = JOptionPane.showConfirmDialog(
-                    this,
-                    "You have not set a security question yet. Do you want to set it now?",
-                    "Set Security Question",
-                    JOptionPane.YES_NO_OPTION
-                );
+                if (user == null || roleFromDB == null || status == null) {
+                    JOptionPane.showMessageDialog(this, "Session error: Incomplete session data.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-                if (choice == JOptionPane.YES_OPTION) {
-                    LoginSecurityQuestion sqPanel = new LoginSecurityQuestion();
-                    sqPanel.setVisible(true);
+                // Insert log
+                String action = "User logged in with ID " + user;
+                con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + user + "', '" + action + "', '" + LocalDateTime.now() + "')");
+
+                // Check if the account is pending
+                if ("Pending".equalsIgnoreCase(status)) {
+                    JOptionPane.showMessageDialog(this, "Your account is pending approval.", "Login Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                // Check for security question
+                String sql = "SELECT question FROM securityQuestion WHERE user_id = ?";
+                String securityQuestion = con.getSingleData(sql, user);
+
+                if (securityQuestion == null || securityQuestion.trim().isEmpty()) {
+                    int choice = JOptionPane.showConfirmDialog(
+                        this,
+                        "You have not set a security question yet. Do you want to set it now?",
+                        "Set Security Question",
+                        JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (choice == JOptionPane.YES_OPTION) {
+                        LoginSecurityQuestion sqPanel = new LoginSecurityQuestion();
+                        sqPanel.setVisible(true);
+                    } else {
+                        proceedToDashboard(roleFromDB);
+                    }
                 } else {
                     proceedToDashboard(roleFromDB);
                 }
+
+                // Dispose login window
+                this.dispose();
+
             } else {
-                proceedToDashboard(roleFromDB);
+                // Login failed
+                setInvalidTitledBorder(password_input, "Password");
+                setInvalidTitledBorder(username_input, "Username");
+
+                validation.setText("Invalid Account!!!");
+                validation.setForeground(new Color(255, 0, 0));
+                validation.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 14));
             }
-
-            // Dispose login window
-            this.dispose();
-
-        } else {
-            // Login failed
-            setInvalidTitledBorder(password_input, "Password");
-            setInvalidTitledBorder(username_input, "Username");
-
-            validation.setText("Invalid Account!!!");
-            validation.setForeground(new Color(255, 0, 0));
-            validation.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 14));
-        }
  
 
     }//GEN-LAST:event_loginButtonActionPerformed

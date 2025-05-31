@@ -4,11 +4,17 @@ package AdminInternalPage;
 import FloatedPage.addCottage;
 import FloatedPage.editCottage;
 import FloatedPage.editUser;
+import config.Session;
 import config.dbConnector;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -186,6 +192,11 @@ public class Cottage extends javax.swing.JInternalFrame {
                 deleteButtonMouseExited(evt);
             }
         });
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
         home.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 530, 120, 50));
 
         editButton.setBackground(new java.awt.Color(51, 51, 51));
@@ -343,6 +354,79 @@ public class Cottage extends javax.swing.JInternalFrame {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         displayData();
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        int selectedRow = cottage_table.getSelectedRow(); 
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+            return;
+        }
+
+        // Assuming the ID is in the first column (index 0)
+        int id = Integer.parseInt(cottage_table.getValueAt(selectedRow, 0).toString());
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this record?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                dbConnector con = new dbConnector();
+                Connection cn = con.getConnection();
+
+                // 1. Check if the cottage is booked or reserved
+                String checkSql = "SELECT status FROM cottage WHERE cottage_id = ?";
+                PreparedStatement checkPst = cn.prepareStatement(checkSql);
+                checkPst.setInt(1, id);
+                ResultSet rs = checkPst.executeQuery();
+
+                if (rs.next()) {
+                    String status = rs.getString("status");
+                    if (status.equalsIgnoreCase("booked") || status.equalsIgnoreCase("reserved")) {
+                        JOptionPane.showMessageDialog(this, "Cannot delete cottage. It is currently " + status + ".");
+                        rs.close();
+                        checkPst.close();
+                        cn.close();
+                        return;
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cottage not found.");
+                    rs.close();
+                    checkPst.close();
+                    cn.close();
+                    return;
+                }
+
+                rs.close();
+                checkPst.close();
+
+                // 2. Proceed to delete if not booked/reserved
+                String sql = "DELETE FROM cottage WHERE cottage_id = ?";
+                PreparedStatement pst = cn.prepareStatement(sql);
+                pst.setInt(1, id);
+
+                int rowsAffected = pst.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    // Logging the action
+                    Session sess = Session.getInstance();
+                    String action = "Delete cottage with ID " + id;
+                    con.InsertData("INSERT INTO logs (user_id, action, date_time) VALUES ('" + sess.getUser_id() + "', '" + action + "', '" + LocalDateTime.now() + "')");
+                    JOptionPane.showMessageDialog(this, "Record deleted successfully.");
+
+                    // Remove from JTable model
+                    DefaultTableModel model = (DefaultTableModel) cottage_table.getModel();
+                    model.removeRow(selectedRow);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error: Record not found.");
+                }
+
+                pst.close();
+                cn.close();
+            } catch (HeadlessException | SQLException e) {
+                JOptionPane.showMessageDialog(this, "Error deleting record: " + e.getMessage());
+            }
+        }
+
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
